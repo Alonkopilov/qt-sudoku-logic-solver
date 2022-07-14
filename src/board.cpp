@@ -19,7 +19,7 @@ bool Board::isBoardCompleted() const
     {
         for (int j = 0; j < 9; j++)
         {
-            if (this->_squares[i, j]->getDigit() == 0)
+            if (this->_squares[i][j].getDigit() == 0)
             {
                 return false;
             }
@@ -81,7 +81,7 @@ bool Board::checkSafe(const Square &square, const int &digitToCheck) const
 {
     for (int i = 0; i < 9; i++) //Check row
     {
-        if (_squares[square.getRow(), i]->getDigit() == digitToCheck)
+        if (_squares[square.getRow()][i].getDigit() == digitToCheck)
         {
             return false;
         }
@@ -89,7 +89,7 @@ bool Board::checkSafe(const Square &square, const int &digitToCheck) const
 
     for (int i = 0; i < 9; i++) //Check column
     {
-        if (_squares[i, square.getCol()]->getDigit() == digitToCheck)
+        if (_squares[i][square.getCol()].getDigit() == digitToCheck)
         {
             return false;
         }
