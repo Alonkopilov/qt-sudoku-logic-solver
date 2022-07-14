@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     board.cpp \
+    main.cpp \
     mainwindow.cpp \
     square.cpp
 
