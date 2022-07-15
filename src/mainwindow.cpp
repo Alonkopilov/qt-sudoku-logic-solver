@@ -1,14 +1,12 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "QLabel"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
-
+    generateBoard();
 
 }
 
@@ -17,49 +15,40 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::showEvent(QShowEvent *ev)
-{
-    QMainWindow::showEvent(ev);
-    QMetaObject::invokeMethod(this, "afterWindowShown", Qt::ConnectionType::QueuedConnection);
-}
-
 void MainWindow::generateBoard()
 {
-    for (int i = 0; i < 81; i++)
+    for (int i = 0; i < ui->glMainBoard->children().length(); i++)
     {
-        std::cout << "Hello" << std::endl;
-        QLayout* sqaureMarkupsLayout = new QGridLayout();
+        QGridLayout* layout = (QGridLayout*)ui->glMainBoard->children()[i];
 
-        for (int j = 0; j < 9; j++)
-        {
-            QLabel* markup = new QLabel("1");
-            sqaureMarkupsLayout->addWidget(markup);
+        for (int j = 0; j < 9; j++) {
+            QLabel* num = new QLabel("0");
+            num->setAlignment(Qt::AlignCenter);
+            num->setStyleSheet("QLabel {color: #B4BBC4;}");
+
+            layout->addWidget(num, j/3, j%3);
         }
 
-        ui->gridLayout->addLayout(sqaureMarkupsLayout,);
     }
-}
 
-void MainWindow::afterWindowShown()
-{
-    std::cout << "START" << std::endl;
-    generateBoard();
-    // Hide markups
-    //for (int i = 0; i < ui->gridLayout_2->count(); ++i) {
-    //    QWidget *w = ui->gridLayout_2->itemAt(i)->widget();
-    //    if(w != NULL)
-    //        w->hide();
-    //}
+    //TESTING
+    QGridLayout* layoutTest = (QGridLayout*)ui->glMainBoard->children()[2];
 
-    // Delete all markups
-    //while (ui->gridLayout_2->takeAt(0) != NULL)
-    //{
-    //    delete ui->gridLayout_2->takeAt(0)->widget();
-    //    delete ui->gridLayout_2->takeAt(0);
-    //}
+    if ( layoutTest != NULL )
+    {
+        QLayoutItem* item;
+        while ( ( item = layoutTest->takeAt( 0 ) ) != NULL )
+        {
+            delete item->widget();
+            delete item;
+        }
+    }
 
-    //// Show final digit
-    //QLabel* wid = new QLabel("1");
-    //ui->gridLayout_2->addWidget(wid);
+    QLabel* num = new QLabel("0");
+    QFont* font = new QFont();
+    font->setPointSize(30);
+    num->setAlignment(Qt::AlignCenter);
+    num->setFont(*font);
+    layoutTest->addWidget(num);
 }
 

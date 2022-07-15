@@ -6,32 +6,781 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>971</width>
-    <height>588</height>
+    <width>826</width>
+    <height>778</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="layoutDirection">
+   <enum>Qt::LeftToRight</enum>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(255, 255, 255);
+border-color: rgb(193, 125, 17);</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>30</y>
-      <width>521</width>
-      <height>464</height>
+      <x>100</x>
+      <y>50</y>
+      <width>611</width>
+      <height>611</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="gridLayout"/>
+    <layout class="QGridLayout" name="glMainBoard">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <item row="9" column="12">
+      <layout class="QGridLayout" name="gridLayout_63"/>
+     </item>
+     <item row="3" column="13">
+      <layout class="QGridLayout" name="gridLayout_25"/>
+     </item>
+     <item row="2" column="10">
+      <layout class="QGridLayout" name="gridLayout_14"/>
+     </item>
+     <item row="3" column="10">
+      <layout class="QGridLayout" name="gridLayout_23"/>
+     </item>
+     <item row="1" column="9">
+      <layout class="QGridLayout" name="gridLayout_4"/>
+     </item>
+     <item row="9" column="13">
+      <layout class="QGridLayout" name="gridLayout_66"/>
+     </item>
+     <item row="2" column="8">
+      <layout class="QGridLayout" name="gridLayout"/>
+     </item>
+     <item row="9" column="11">
+      <layout class="QGridLayout" name="gridLayout_60"/>
+     </item>
+     <item row="6" column="12">
+      <layout class="QGridLayout" name="gridLayout_79"/>
+     </item>
+     <item row="6" column="10">
+      <layout class="QGridLayout" name="gridLayout_77"/>
+     </item>
+     <item row="5" column="8">
+      <layout class="QGridLayout" name="gridLayout_39"/>
+     </item>
+     <item row="9" column="15">
+      <layout class="QGridLayout" name="gridLayout_74"/>
+     </item>
+     <item row="9" column="16">
+      <layout class="QGridLayout" name="gridLayout_75"/>
+     </item>
+     <item row="7" column="8">
+      <layout class="QGridLayout" name="gridLayout_49"/>
+     </item>
+     <item row="5" column="14">
+      <layout class="QGridLayout" name="gridLayout_45"/>
+     </item>
+     <item row="4" column="15">
+      <layout class="QGridLayout" name="gridLayout_37"/>
+     </item>
+     <item row="6" column="9">
+      <layout class="QGridLayout" name="gridLayout_76"/>
+     </item>
+     <item row="2" column="9">
+      <layout class="QGridLayout" name="gridLayout_5"/>
+     </item>
+     <item row="1" column="11">
+      <layout class="QGridLayout" name="gridLayout_7"/>
+     </item>
+     <item row="1" column="10">
+      <layout class="QGridLayout" name="gridLayout_6"/>
+     </item>
+     <item row="8" column="13">
+      <layout class="QGridLayout" name="gridLayout_65"/>
+     </item>
+     <item row="5" column="16">
+      <layout class="QGridLayout" name="gridLayout_47"/>
+     </item>
+     <item row="7" column="10">
+      <layout class="QGridLayout" name="gridLayout_55"/>
+     </item>
+     <item row="1" column="12">
+      <layout class="QGridLayout" name="gridLayout_8"/>
+     </item>
+     <item row="4" column="10">
+      <layout class="QGridLayout" name="gridLayout_32"/>
+     </item>
+     <item row="7" column="15">
+      <layout class="QGridLayout" name="gridLayout_70"/>
+     </item>
+     <item row="6" column="11">
+      <layout class="QGridLayout" name="gridLayout_78"/>
+     </item>
+     <item row="3" column="12">
+      <layout class="QGridLayout" name="gridLayout_26"/>
+     </item>
+     <item row="3" column="15">
+      <layout class="QGridLayout" name="gridLayout_28"/>
+     </item>
+     <item row="6" column="16">
+      <layout class="QGridLayout" name="gridLayout_83"/>
+     </item>
+     <item row="2" column="13">
+      <layout class="QGridLayout" name="gridLayout_17"/>
+     </item>
+     <item row="4" column="16">
+      <layout class="QGridLayout" name="gridLayout_38"/>
+     </item>
+     <item row="8" column="12">
+      <layout class="QGridLayout" name="gridLayout_62"/>
+     </item>
+     <item row="9" column="8">
+      <layout class="QGridLayout" name="gridLayout_51"/>
+     </item>
+     <item row="3" column="8">
+      <layout class="QGridLayout" name="gridLayout_21"/>
+     </item>
+     <item row="6" column="15">
+      <layout class="QGridLayout" name="gridLayout_82"/>
+     </item>
+     <item row="9" column="9">
+      <layout class="QGridLayout" name="gridLayout_54"/>
+     </item>
+     <item row="4" column="13">
+      <layout class="QGridLayout" name="gridLayout_35"/>
+     </item>
+     <item row="4" column="9">
+      <layout class="QGridLayout" name="gridLayout_31"/>
+     </item>
+     <item row="9" column="14">
+      <layout class="QGridLayout" name="gridLayout_69"/>
+     </item>
+     <item row="7" column="16">
+      <layout class="QGridLayout" name="gridLayout_71"/>
+     </item>
+     <item row="8" column="16">
+      <layout class="QGridLayout" name="gridLayout_73"/>
+     </item>
+     <item row="3" column="16">
+      <layout class="QGridLayout" name="gridLayout_29"/>
+     </item>
+     <item row="2" column="11">
+      <layout class="QGridLayout" name="gridLayout_15"/>
+     </item>
+     <item row="2" column="16">
+      <layout class="QGridLayout" name="gridLayout_20"/>
+     </item>
+     <item row="9" column="10">
+      <layout class="QGridLayout" name="gridLayout_57"/>
+     </item>
+     <item row="5" column="9">
+      <layout class="QGridLayout" name="gridLayout_40"/>
+     </item>
+     <item row="7" column="13">
+      <layout class="QGridLayout" name="gridLayout_64"/>
+     </item>
+     <item row="6" column="8">
+      <layout class="QGridLayout" name="gridLayout_48"/>
+     </item>
+     <item row="7" column="14">
+      <layout class="QGridLayout" name="gridLayout_67"/>
+     </item>
+     <item row="1" column="13">
+      <layout class="QGridLayout" name="gridLayout_9"/>
+     </item>
+     <item row="1" column="14">
+      <layout class="QGridLayout" name="gridLayout_10"/>
+     </item>
+     <item row="5" column="12">
+      <layout class="QGridLayout" name="gridLayout_43"/>
+     </item>
+     <item row="6" column="14">
+      <layout class="QGridLayout" name="gridLayout_81"/>
+     </item>
+     <item row="5" column="11">
+      <layout class="QGridLayout" name="gridLayout_42"/>
+     </item>
+     <item row="4" column="14">
+      <layout class="QGridLayout" name="gridLayout_36"/>
+     </item>
+     <item row="7" column="9">
+      <layout class="QGridLayout" name="gridLayout_52"/>
+     </item>
+     <item row="3" column="11">
+      <layout class="QGridLayout" name="gridLayout_24"/>
+     </item>
+     <item row="6" column="13">
+      <layout class="QGridLayout" name="gridLayout_80"/>
+     </item>
+     <item row="8" column="9">
+      <layout class="QGridLayout" name="gridLayout_53"/>
+     </item>
+     <item row="2" column="15">
+      <layout class="QGridLayout" name="gridLayout_19"/>
+     </item>
+     <item row="8" column="10">
+      <layout class="QGridLayout" name="gridLayout_56"/>
+     </item>
+     <item row="7" column="11">
+      <layout class="QGridLayout" name="gridLayout_58"/>
+     </item>
+     <item row="5" column="10">
+      <layout class="QGridLayout" name="gridLayout_41"/>
+     </item>
+     <item row="8" column="14">
+      <layout class="QGridLayout" name="gridLayout_68"/>
+     </item>
+     <item row="2" column="12">
+      <layout class="QGridLayout" name="gridLayout_16"/>
+     </item>
+     <item row="3" column="14">
+      <layout class="QGridLayout" name="gridLayout_27"/>
+     </item>
+     <item row="8" column="11">
+      <layout class="QGridLayout" name="gridLayout_59"/>
+     </item>
+     <item row="4" column="8">
+      <layout class="QGridLayout" name="gridLayout_30"/>
+     </item>
+     <item row="4" column="11">
+      <layout class="QGridLayout" name="gridLayout_33"/>
+     </item>
+     <item row="2" column="14">
+      <layout class="QGridLayout" name="gridLayout_18"/>
+     </item>
+     <item row="5" column="13">
+      <layout class="QGridLayout" name="gridLayout_44"/>
+     </item>
+     <item row="1" column="16">
+      <layout class="QGridLayout" name="gridLayout_12"/>
+     </item>
+     <item row="7" column="12">
+      <layout class="QGridLayout" name="gridLayout_61"/>
+     </item>
+     <item row="1" column="15">
+      <layout class="QGridLayout" name="gridLayout_11"/>
+     </item>
+     <item row="4" column="12">
+      <layout class="QGridLayout" name="gridLayout_34"/>
+     </item>
+     <item row="5" column="15">
+      <layout class="QGridLayout" name="gridLayout_46"/>
+     </item>
+     <item row="8" column="8">
+      <layout class="QGridLayout" name="gridLayout_50"/>
+     </item>
+     <item row="8" column="15">
+      <layout class="QGridLayout" name="gridLayout_72"/>
+     </item>
+     <item row="3" column="9">
+      <layout class="QGridLayout" name="gridLayout_22"/>
+     </item>
+     <item row="1" column="8">
+      <layout class="QGridLayout" name="gridLayout_3"/>
+     </item>
+    </layout>
    </widget>
+   <widget class="Line" name="line_1">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>243</y>
+      <width>611</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 0, 0);
+background-color: rgba(255, 255, 0, 0);</string>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>3</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_2">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>446</y>
+      <width>611</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 0, 0);
+background-color: rgba(255, 255, 0, 0);</string>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>3</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_3">
+    <property name="geometry">
+     <rect>
+      <x>294</x>
+      <y>50</y>
+      <width>20</width>
+      <height>611</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 0, 0);
+background-color: rgba(255, 255, 0, 0);</string>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>3</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_4">
+    <property name="geometry">
+     <rect>
+      <x>496</x>
+      <y>50</y>
+      <width>20</width>
+      <height>611</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 0, 0);
+background-color: rgba(255, 255, 0, 0);</string>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>3</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>670</y>
+      <width>611</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>SOLVE</string>
+    </property>
+   </widget>
+   <widget class="Line" name="line_5">
+    <property name="geometry">
+     <rect>
+      <x>158</x>
+      <y>50</y>
+      <width>20</width>
+      <height>611</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #BECCDC;
+background-color: rgba(255, 255, 0, 0);</string>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>1</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_6">
+    <property name="geometry">
+     <rect>
+      <x>91</x>
+      <y>50</y>
+      <width>20</width>
+      <height>611</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 0, 0);
+background-color: rgba(255, 255, 0, 0);</string>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>3</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_7">
+    <property name="geometry">
+     <rect>
+      <x>225</x>
+      <y>50</y>
+      <width>20</width>
+      <height>611</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #BECCDC;
+background-color: rgba(255, 255, 0, 0);</string>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>1</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_8">
+    <property name="geometry">
+     <rect>
+      <x>361</x>
+      <y>50</y>
+      <width>20</width>
+      <height>611</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #BECCDC;
+background-color: rgba(255, 255, 0, 0);</string>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>1</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_9">
+    <property name="geometry">
+     <rect>
+      <x>428</x>
+      <y>50</y>
+      <width>20</width>
+      <height>611</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #BECCDC;
+background-color: rgba(255, 255, 0, 0);</string>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>1</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_10">
+    <property name="geometry">
+     <rect>
+      <x>564</x>
+      <y>50</y>
+      <width>20</width>
+      <height>611</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #BECCDC;
+background-color: rgba(255, 255, 0, 0);</string>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>1</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_11">
+    <property name="geometry">
+     <rect>
+      <x>631</x>
+      <y>50</y>
+      <width>20</width>
+      <height>611</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #BECCDC;
+background-color: rgba(255, 255, 0, 0);</string>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>1</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_12">
+    <property name="geometry">
+     <rect>
+      <x>699</x>
+      <y>50</y>
+      <width>20</width>
+      <height>611</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 0, 0);
+background-color: rgba(255, 255, 0, 0);</string>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>3</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_13">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>582</y>
+      <width>611</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #BECCDC;
+background-color: rgba(255, 255, 0, 0);</string>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>1</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_14">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>650</y>
+      <width>611</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 0, 0);
+background-color: rgba(255, 255, 0, 0);</string>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>3</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_15">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>515</y>
+      <width>611</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #BECCDC;
+background-color: rgba(255, 255, 0, 0);</string>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>1</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_16">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>379</y>
+      <width>611</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #BECCDC;
+background-color: rgba(255, 255, 0, 0);</string>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>1</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_17">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>312</y>
+      <width>611</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #BECCDC;
+background-color: rgba(255, 255, 0, 0);</string>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>1</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_18">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>176</y>
+      <width>611</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #BECCDC;
+background-color: rgba(255, 255, 0, 0);</string>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>1</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_19">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>109</y>
+      <width>611</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #BECCDC;
+background-color: rgba(255, 255, 0, 0);</string>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>1</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_20">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>40</y>
+      <width>611</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 0, 0);
+background-color: rgba(255, 255, 0, 0);</string>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>3</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <zorder>gridLayoutWidget</zorder>
+   <zorder>pushButton</zorder>
+   <zorder>line_7</zorder>
+   <zorder>line_19</zorder>
+   <zorder>line_8</zorder>
+   <zorder>line_18</zorder>
+   <zorder>line_16</zorder>
+   <zorder>line_15</zorder>
+   <zorder>line_9</zorder>
+   <zorder>line_10</zorder>
+   <zorder>line_17</zorder>
+   <zorder>line_13</zorder>
+   <zorder>line_11</zorder>
+   <zorder>line_5</zorder>
+   <zorder>line_1</zorder>
+   <zorder>line_2</zorder>
+   <zorder>line_3</zorder>
+   <zorder>line_20</zorder>
+   <zorder>line_12</zorder>
+   <zorder>line_6</zorder>
+   <zorder>line_4</zorder>
+   <zorder>line_14</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>971</width>
+     <width>826</width>
      <height>23</height>
     </rect>
    </property>
