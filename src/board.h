@@ -16,7 +16,7 @@ public:
     void performInitialBoardCheck();
 
 private slots:
-    void checkForFinalDigit(Square& square);
+    int checkForFinalDigit(Square& square);
     void checkForMarkups(Square& square);
     void setBoardDigit(const int& col, const int& row, const int& digit, const bool& isPreset);
 

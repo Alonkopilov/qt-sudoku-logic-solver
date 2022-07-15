@@ -59,20 +59,37 @@ void Board::performSquareGroupCheck(const int &squareGroupRow, const int &square
             if (getBoardDigit(i, j) == 0)
             {
                 checkForMarkups(_squares[i][j]);
-                checkForFinalDigit(_squares[i][j]);
+                int finalDigit = checkForFinalDigit(_squares[i][j]);
+
+                if (finalDigit > 0) {
+
+                }
             }
         }
     }
 }
 
-void Board::checkForFinalDigit(Square &square)
+int Board::checkForFinalDigit(Square &square)
 {
+    int markupsFound = 0;
+    int markup = 0;
 
+    for (int i = 1; i < 10; i++)
+    {
+        if (square.digitMarkupExists(i)) {
+            markupsFound++;
+            markup = i;
+        }
+        if (markupsFound > 1){
+            return 0;
+        }
+    }
+    return markup;
 }
 
 void Board::checkForMarkups(Square &square)
 {
-    for (int i = 0; i < 9; i++)
+    for (int i = 1; i < 10; i++)
     {
         checkSafe(square, i) ? square.setMarkup(i) : square.removeMarkup(i);
     }
