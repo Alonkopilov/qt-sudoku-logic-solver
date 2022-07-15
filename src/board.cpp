@@ -59,12 +59,13 @@ void Board::performSquareGroupCheck(const int &squareGroupRow, const int &square
             if (getBoardDigit(i, j) == 0)
             {
                 checkForMarkups(_squares[i][j]);
+                checkForFinalDigit(_squares[i][j]);
             }
         }
     }
 }
 
-void Board::checkForFinalDigits(Square &square)
+void Board::checkForFinalDigit(Square &square)
 {
 
 }
