@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "board.h"
 #include <QMainWindow>
 #include <iostream>
 #include <QLabel>
@@ -17,6 +18,9 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void generateBoard();
+
+signals:
+    void uiSetBoardDigit(const int& col, const int& row, const int& digit, const bool& isPreset);
 
 private:
     Ui::MainWindow *ui;

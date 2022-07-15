@@ -9,7 +9,6 @@ Board::Board(int arr[81])
         int digit = arr[i];
 
         this->_squares[row][col] = Square(digit, true, row, col);
-        this->setBoardDigit(col, row, digit, true);
     }
 }
 
@@ -31,7 +30,8 @@ bool Board::isBoardCompleted() const
 
 void Board::setBoardDigit(const int &col, const int &row, const int &digit, const bool &isPreset)
 {
-    this->_squares[col][row].setDigit(digit, isPreset);
+    this->_squares[col][row].setDigit(digit, isPreset); // Set in memory
+    // Set in GUI
 }
 
 int Board::getBoardDigit(const int &col, const int &row)
@@ -45,13 +45,19 @@ void Board::performInitialBoardCheck()
     {
         for (int j = 0; j < 3; j++)
         {
-            performSquareGroupCheck(i, j);
+            if (performSquareGroupCheck(i, j))
+            {
+                i = 0;
+                j = 0;
+            }
         }
     }
+    std::cout << "INITIAL CHECK IS DONE" << std::endl;
 }
 
-void Board::performSquareGroupCheck(const int &squareGroupRow, const int &squareGroupCol)
+int Board::performSquareGroupCheck(const int &squareGroupRow, const int &squareGroupCol)
 {
+    int recheckGroups = 0;
     for (int i = squareGroupRow * 3; i < squareGroupRow * 3 + 2; i++)
     {
         for (int j = squareGroupCol * 3; j < squareGroupCol * 3 + 2; j++)
@@ -62,11 +68,13 @@ void Board::performSquareGroupCheck(const int &squareGroupRow, const int &square
                 int finalDigit = checkForFinalDigit(_squares[i][j]);
 
                 if (finalDigit > 0) {
-
+                    this->setBoardDigit(i, j, finalDigit, false);
+                    recheckGroups = 1;
                 }
             }
         }
     }
+    return recheckGroups;
 }
 
 int Board::checkForFinalDigit(Square &square)
