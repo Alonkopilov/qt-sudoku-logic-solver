@@ -17,10 +17,10 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    void generateBoard();
+    void uiGenerateBoard();
 
-signals:
-    void uiSetBoardDigit(const int& col, const int& row, const int& digit, const bool& isPreset);
+public slots:
+    void uiSetBoardDigit(const int &row, const int &col, const int &digit, const bool &isPreset);
 
 private:
     Ui::MainWindow *ui;

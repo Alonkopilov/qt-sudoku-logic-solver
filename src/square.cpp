@@ -6,7 +6,7 @@ Square::Square()
 
 }
 
-Square::Square(const int &digit, const bool &isPreset, const int &row, const int &col)
+Square::Square(const int &row, const int &col, const int &digit, const bool &isPreset)
     : _digit(digit), _isPreset(isPreset), _row(row), _col(col) {}
 
 

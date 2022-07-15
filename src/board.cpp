@@ -8,7 +8,9 @@ Board::Board(int arr[81])
         int col = i % 9;
         int digit = arr[i];
 
-        this->_squares[row][col] = Square(digit, true, row, col);
+        this->_squares[row][col] = Square();
+        this->setBoardDigit(row, col, digit, true);
+
     }
 }
 
@@ -28,15 +30,15 @@ bool Board::isBoardCompleted() const
     return true;
 }
 
-void Board::setBoardDigit(const int &col, const int &row, const int &digit, const bool &isPreset)
+void Board::setBoardDigit(const int &row, const int &col, const int &digit, const bool &isPreset)
 {
-    this->_squares[col][row].setDigit(digit, isPreset); // Set in memory
-    // Set in GUI
+    this->_squares[row][col].setDigit(digit, isPreset); // Set in memory
+    emit this->uiSetBoardDigit(row, col, digit, isPreset); // Set in GUI
 }
 
-int Board::getBoardDigit(const int &col, const int &row)
+int Board::getBoardDigit(const int &row, const int &col)
 {
-    return this->_squares[col][row].getDigit();
+    return this->_squares[row][col].getDigit();
 }
 
 void Board::performInitialBoardCheck()
