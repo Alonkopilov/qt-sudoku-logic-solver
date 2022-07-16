@@ -10,9 +10,10 @@ class Board : public QObject
     Q_OBJECT
 
 public:
-    Board(int arr[81]);
+    Board();
     bool isBoardCompleted() const;
     void performInitialBoardCheck();
+    void initializeBoard(int arr[81]);
 
 signals:
     void uiSetBoardDigit(const int &row, const int &col, const int &digit, const bool &isPreset);

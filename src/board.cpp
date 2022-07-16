@@ -1,17 +1,7 @@
 #include "board.h"
 
-Board::Board(int arr[81])
+Board::Board()
 {
-    for (int i = 0; i < 81; i++)
-    {
-        int row = i / 9;
-        int col = i % 9;
-        int digit = arr[i];
-
-        this->_squares[row][col] = Square();
-        this->setBoardDigit(row, col, digit, true);
-
-    }
 }
 
 bool Board::isBoardCompleted() const
@@ -55,6 +45,18 @@ void Board::performInitialBoardCheck()
         }
     }
     std::cout << "INITIAL CHECK IS DONE" << std::endl;
+}
+
+void Board::initializeBoard(int arr[81])
+{
+    for (int i = 0; i < 81; i++)
+    {
+        int row = i / 9;
+        int col = i % 9;
+        int digit = arr[i];
+
+        this->setBoardDigit(row, col, digit, true);
+    }
 }
 
 int Board::performSquareGroupCheck(const int &squareGroupRow, const int &squareGroupCol)

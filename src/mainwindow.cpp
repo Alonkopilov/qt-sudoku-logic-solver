@@ -7,11 +7,14 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     int arr[81] = {0,0,4,1,0,3,8,0,0,7,0,8,0,0,0,6,0,1,0,3,0,0,8,0,0,4,0,3,9,0,0,5,0,0,6,2,0,0,5,0,3,0,9,0,0,2,8,0,0,9,0,0,7,3,0,1,0,0,6,0,0,8,0,8,0,3,0,0,0,1,0,4,0,0,7,9,0,8,3,0,0};
-    Board b(arr);
+    Board b;
+
     bool success = QObject::connect(&b, &Board::uiSetBoardDigit, this, &MainWindow::uiSetBoardDigit);
     std::cout << success << std::endl;
 
     uiGenerateBoard();
+    b.initializeBoard(arr);
+
 }
 
 MainWindow::~MainWindow()
@@ -38,15 +41,15 @@ void MainWindow::uiGenerateBoard()
 
 void MainWindow::uiSetBoardDigit(const int &row, const int &col, const int &digit, const bool &isPreset)
 {
-
-    std::cout << "here" << std::endl;
-    QGridLayout* layoutTest = (QGridLayout*)ui->glMainBoard->children()[col * 9 + row * 9];
+    QGridLayout* layoutTest = (QGridLayout*)ui->glMainBoard->children()[row * 9 + col];
+    std::cout << "Setting layout: " + layoutTest->objectName().toStdString() << std::endl;
 
     if ( layoutTest != NULL )
     {
         QLayoutItem* item;
         while ( ( item = layoutTest->takeAt( 0 ) ) != NULL )
         {
+            std::cout << "deleted" << std::endl;
             delete item->widget();
             delete item;
         }
@@ -58,5 +61,6 @@ void MainWindow::uiSetBoardDigit(const int &row, const int &col, const int &digi
     num->setAlignment(Qt::AlignCenter);
     num->setFont(*font);
     layoutTest->addWidget(num);
+
 }
 
