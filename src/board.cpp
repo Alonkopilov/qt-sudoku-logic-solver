@@ -102,7 +102,16 @@ void Board::checkForMarkups(Square &square)
 {
     for (int i = 1; i < 10; i++)
     {
-        checkSafe(square, i) ? square.setMarkup(i) : square.removeMarkup(i);
+        if (checkSafe(square, i))
+        {
+            square.setMarkup(i);
+            emit this->uiAddMarkup(square.getRow(), square.getCol(), square.getDigit());
+        }
+        else
+        {
+            square.removeMarkup(i);
+            emit this->uiRemoveMarkup(square.getRow(), square.getCol(), square.getDigit());
+        }
     }
 }
 

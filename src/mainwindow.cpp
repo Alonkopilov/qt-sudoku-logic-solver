@@ -9,12 +9,12 @@ MainWindow::MainWindow(QWidget *parent)
     int arr[81] = {0,0,4,1,0,3,8,0,0,7,0,8,0,0,0,6,0,1,0,3,0,0,8,0,0,4,0,3,9,0,0,5,0,0,6,2,0,0,5,0,3,0,9,0,0,2,8,0,0,9,0,0,7,3,0,1,0,0,6,0,0,8,0,8,0,3,0,0,0,1,0,4,0,0,7,9,0,8,3,0,0};
     Board b;
 
-    bool success = QObject::connect(&b, &Board::uiSetBoardDigit, this, &MainWindow::uiSetBoardDigit);
-    std::cout << success << std::endl;
+    QObject::connect(&b, &Board::uiSetBoardDigit, this, &MainWindow::uiSetBoardDigit);
+    QObject::connect(&b, &Board::uiAddMarkup, this, &MainWindow::uiAddMarkup);
+    QObject::connect(&b, &Board::uiRemoveMarkup, this, &MainWindow::uiRemoveMarkup);
 
     uiGenerateBoard();
     b.initializeBoard(arr);
-
 }
 
 MainWindow::~MainWindow()
@@ -30,12 +30,26 @@ void MainWindow::uiGenerateBoard()
         int row = i / 9;
         int col = i % 9;
 
+        for (int j = 0; j < 9; j++)
+        {
+            QLabel* num = new QLabel(" ");
+
+            num->setAlignment(Qt::AlignCenter);
+            num->setStyleSheet("QLabel {color: #939EAA;}");
+            layout->addWidget(num, j / 3, j % 3);
+        }
+
         ui->glMainBoard->addLayout(layout, row, col);
     }
 }
 
 void MainWindow::uiSetBoardDigit(const int &row, const int &col, const int &digit, const bool &isPreset)
 {
+    if (digit == 0)
+    {
+        return;
+    }
+
     QGridLayout* squareLayout = (QGridLayout*)ui->glMainBoard->itemAtPosition(row, col);
     QLabel* num;
 
@@ -56,12 +70,26 @@ void MainWindow::uiSetBoardDigit(const int &row, const int &col, const int &digi
     }
 
     // Create the final digit widget and add it to the square
-    num = new QLabel(digit ? QString::number(digit): " ");
+    num = new QLabel(QString::number(digit));
 
     QFont* font = new QFont();
     font->setPointSize(30);
     num->setAlignment(Qt::AlignCenter);
     num->setFont(*font);
     squareLayout->addWidget(num);
+}
+
+void MainWindow::uiAddMarkup(const int &row, const int &col, const int &digit)
+{
+    QGridLayout* squareLayout = (QGridLayout*)ui->glMainBoard->itemAtPosition(row, col);
+    QLabel* markup = (QLabel*)squareLayout->itemAt(digit - 1)->widget();
+    markup->setText(QString::number(digit));
+}
+
+void MainWindow::uiRemoveMarkup(const int &row, const int &col, const int &digit)
+{
+    QGridLayout* squareLayout = (QGridLayout*)ui->glMainBoard->itemAtPosition(row, col);
+    QLabel* markup = (QLabel*)squareLayout->itemAt(digit - 1)->widget();
+    markup->setText(" ");
 }
 
