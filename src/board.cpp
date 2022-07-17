@@ -54,7 +54,6 @@ void Board::initializeBoard(int arr[81])
         int row = i / 9;
         int col = i % 9;
         int digit = arr[i];
-
         this->setBoardDigit(row, col, digit, true);
     }
 }

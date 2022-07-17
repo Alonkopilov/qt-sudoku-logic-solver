@@ -24,43 +24,44 @@ MainWindow::~MainWindow()
 
 void MainWindow::uiGenerateBoard()
 {
-    for (int i = 0; i < ui->glMainBoard->children().length(); i++)
+    for (int i = 0; i < 81; i++)
     {
-        QGridLayout* layout = (QGridLayout*)ui->glMainBoard->children()[i];
+        QGridLayout* layout = new QGridLayout();
+        int row = i / 9;
+        int col = i % 9;
 
-        for (int j = 0; j < 9; j++) {
-            QLabel* num = new QLabel("0");
-            num->setAlignment(Qt::AlignCenter);
-            num->setStyleSheet("QLabel {color: #B4BBC4;}");
-
-            layout->addWidget(num, j/3, j%3);
-        }
-
+        ui->glMainBoard->addLayout(layout, row, col);
     }
 }
 
 void MainWindow::uiSetBoardDigit(const int &row, const int &col, const int &digit, const bool &isPreset)
 {
-    QGridLayout* layoutTest = (QGridLayout*)ui->glMainBoard->children()[row * 9 + col];
-    std::cout << "Setting layout: " + layoutTest->objectName().toStdString() << std::endl;
+    QGridLayout* squareLayout = (QGridLayout*)ui->glMainBoard->itemAtPosition(row, col);
+    QLabel* num;
 
-    if ( layoutTest != NULL )
+    if (squareLayout == nullptr) {
+        std::cout << "[ERROR: squareLayout is null, incorrect index]" << std::endl;
+        return;
+    }
+
+    // Remove all the markup widgets from the square layout
+    if ( squareLayout != NULL )
     {
         QLayoutItem* item;
-        while ( ( item = layoutTest->takeAt( 0 ) ) != NULL )
+        while ( ( item = squareLayout->takeAt( 0 ) ) != NULL )
         {
-            std::cout << "deleted" << std::endl;
             delete item->widget();
             delete item;
         }
     }
 
-    QLabel* num = new QLabel(QString::number(digit));
+    // Create the final digit widget and add it to the square
+    num = new QLabel(digit ? QString::number(digit): " ");
+
     QFont* font = new QFont();
     font->setPointSize(30);
     num->setAlignment(Qt::AlignCenter);
     num->setFont(*font);
-    layoutTest->addWidget(num);
-
+    squareLayout->addWidget(num);
 }
 
