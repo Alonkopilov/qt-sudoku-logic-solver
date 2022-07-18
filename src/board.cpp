@@ -54,6 +54,7 @@ void Board::initializeBoard(int arr[81])
         int row = i / 9;
         int col = i % 9;
         int digit = arr[i];
+        this->_squares[row][col] = Square(row, col);
         this->setBoardDigit(row, col, digit, true);
     }
 }
@@ -61,9 +62,9 @@ void Board::initializeBoard(int arr[81])
 int Board::performSquareGroupCheck(const int &squareGroupRow, const int &squareGroupCol)
 {
     int recheckGroups = 0;
-    for (int i = squareGroupRow * 3; i < squareGroupRow * 3 + 2; i++)
+    for (int i = squareGroupRow * 3; i < squareGroupRow * 3 + 3; i++)
     {
-        for (int j = squareGroupCol * 3; j < squareGroupCol * 3 + 2; j++)
+        for (int j = squareGroupCol * 3; j < squareGroupCol * 3 + 3; j++)
         {
             if (getBoardDigit(i, j) == 0)
             {
@@ -105,12 +106,15 @@ void Board::checkForMarkups(Square &square)
         if (checkSafe(square, i))
         {
             square.setMarkup(i);
-            emit this->uiAddMarkup(square.getRow(), square.getCol(), square.getDigit());
+            emit this->uiAddMarkup(square.getRow(), square.getCol(), i);
         }
         else
         {
-            square.removeMarkup(i);
-            emit this->uiRemoveMarkup(square.getRow(), square.getCol(), square.getDigit());
+            if (square.digitMarkupExists(i))
+            {
+                square.removeMarkup(i);
+                emit this->uiRemoveMarkup(square.getRow(), square.getCol(), i);
+            }
         }
     }
 }

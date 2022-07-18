@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     uiGenerateBoard();
     b.initializeBoard(arr);
+    b.performInitialBoardCheck();
 }
 
 MainWindow::~MainWindow()
