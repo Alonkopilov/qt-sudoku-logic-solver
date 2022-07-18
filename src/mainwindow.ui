@@ -140,6 +140,15 @@ background-color: rgba(255, 255, 0, 0);</string>
     <property name="text">
      <string>SOLVE</string>
     </property>
+    <property name="checkable">
+     <bool>false</bool>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+    <property name="autoDefault">
+     <bool>false</bool>
+    </property>
    </widget>
    <widget class="Line" name="line_5">
     <property name="geometry">

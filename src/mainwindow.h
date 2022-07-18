@@ -24,7 +24,11 @@ public slots:
     void uiAddMarkup(const int& row, const int& col, const int& digit);
     void uiRemoveMarkup(const int& row, const int& col, const int& digit);
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
+    Board sudokuBoard;
 };
 #endif // MAINWINDOW_H

@@ -7,15 +7,14 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     int arr[81] = {0,0,4,1,0,3,8,0,0,7,0,8,0,0,0,6,0,1,0,3,0,0,8,0,0,4,0,3,9,0,0,5,0,0,6,2,0,0,5,0,3,0,9,0,0,2,8,0,0,9,0,0,7,3,0,1,0,0,6,0,0,8,0,8,0,3,0,0,0,1,0,4,0,0,7,9,0,8,3,0,0};
-    Board b;
 
-    QObject::connect(&b, &Board::uiSetBoardDigit, this, &MainWindow::uiSetBoardDigit);
-    QObject::connect(&b, &Board::uiAddMarkup, this, &MainWindow::uiAddMarkup);
-    QObject::connect(&b, &Board::uiRemoveMarkup, this, &MainWindow::uiRemoveMarkup);
+
+    QObject::connect(&this->sudokuBoard, &Board::uiSetBoardDigit, this, &MainWindow::uiSetBoardDigit);
+    QObject::connect(&this->sudokuBoard, &Board::uiAddMarkup, this, &MainWindow::uiAddMarkup);
+    QObject::connect(&this->sudokuBoard, &Board::uiRemoveMarkup, this, &MainWindow::uiRemoveMarkup);
 
     uiGenerateBoard();
-    b.initializeBoard(arr);
-    b.performInitialBoardCheck();
+    this->sudokuBoard.initializeBoard(arr);
 }
 
 MainWindow::~MainWindow()
@@ -92,5 +91,12 @@ void MainWindow::uiRemoveMarkup(const int &row, const int &col, const int &digit
     QGridLayout* squareLayout = (QGridLayout*)ui->glMainBoard->itemAtPosition(row, col);
     QLabel* markup = (QLabel*)squareLayout->itemAt(digit - 1)->widget();
     markup->setText(" ");
+}
+
+
+void MainWindow::on_pushButton_clicked()
+{
+    this->sudokuBoard.performInitialBoardCheck();
+    ui->pushButton->setDisabled(true);
 }
 
