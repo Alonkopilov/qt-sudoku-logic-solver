@@ -33,19 +33,6 @@ int Board::getBoardDigit(const int &row, const int &col)
 
 void Board::performInitialBoardCheck()
 {
-    /*
-    for (int i = 0; i < 3; i++)
-    {
-        for (int j = 0; j < 3; j++)
-        {
-            if (performSquareGroupCheck(i, j))
-            {
-                i = 0;
-                j = 2;
-            }
-        }
-    }
-    */
     makeCheck(0, 0);
     std::cout << "INITIAL CHECK IS DONE" << std::endl;
 }

@@ -71,6 +71,8 @@ void MainWindow::uiSetBoardDigit(const int &row, const int &col, const int &digi
 
     // Create the final digit widget and add it to the square
     num = new QLabel(QString::number(digit));
+    QString fontColor = isPreset ? "black" : "#073C72";
+    num->setStyleSheet("QLabel { color : " + fontColor + "; }");
 
     QFont* font = new QFont();
     font->setPointSize(30);
