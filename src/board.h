@@ -27,6 +27,7 @@ private:
     int performSquareGroupCheck(const int& squareGroupRow, const int& squareGroupCol);
     bool checkSafe(const Square& square, const int& digitToCheck) const;
     int getBoardDigit(const int &row, const int &col);
+    void makeCheck(int i, int j);
     Square _squares[9][9];
 };
 

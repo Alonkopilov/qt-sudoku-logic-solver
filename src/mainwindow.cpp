@@ -54,7 +54,7 @@ void MainWindow::uiSetBoardDigit(const int &row, const int &col, const int &digi
     QLabel* num;
 
     if (squareLayout == nullptr) {
-        std::cout << "[ERROR: squareLayout is null, incorrect index]" << std::endl;
+        std::cout << "[ERROR: squareLayout is null, incorrect index {" + std::to_string(row) + ", " + std::to_string(col) + "}" << std::endl;
         return;
     }
 

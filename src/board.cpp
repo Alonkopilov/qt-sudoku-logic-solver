@@ -33,6 +33,7 @@ int Board::getBoardDigit(const int &row, const int &col)
 
 void Board::performInitialBoardCheck()
 {
+    /*
     for (int i = 0; i < 3; i++)
     {
         for (int j = 0; j < 3; j++)
@@ -40,12 +41,40 @@ void Board::performInitialBoardCheck()
             if (performSquareGroupCheck(i, j))
             {
                 i = 0;
-                j = 0;
+                j = 2;
             }
         }
     }
+    */
+    makeCheck(0, 0);
     std::cout << "INITIAL CHECK IS DONE" << std::endl;
 }
+
+void Board::makeCheck(int j, int i)
+{
+    if (j == 2 && i == 2 && performSquareGroupCheck(i, j) == 0) {
+        std::cout << "DONE" << std::endl;
+        return;
+    }
+    if (performSquareGroupCheck(i, j) == 1)
+    {
+        makeCheck(0, 0);
+    }
+    else
+    {
+        if (j < 2)
+        {
+            makeCheck(j + 1, i);
+        }
+        if (i < 2)
+        {
+            makeCheck(j, i + 1);
+        }
+    }
+
+}
+
+
 
 void Board::initializeBoard(int arr[81])
 {
@@ -140,9 +169,9 @@ bool Board::checkSafe(const Square &square, const int &digitToCheck) const
     int groupRow = square.getRow() / 3;
     int groupCol = square.getCol() / 3;
 
-    for (int i = groupRow * 3; i < 3; i++) //Check square group
+    for (int i = groupRow * 3; i < groupRow * 3 + 3; i++) //Check square group
     {
-        for (int j = groupCol * 3; j < 3; j++)
+        for (int j = groupCol * 3; j < groupCol * 3 + 3; j++)
         {
             if (_squares[i][j].getDigit() == digitToCheck)
             {
