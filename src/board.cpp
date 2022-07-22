@@ -39,8 +39,7 @@ void Board::performInitialBoardCheck()
 
 void Board::makeCheck(int j, int i)
 {
-    if (j == 2 && i == 2 && performSquareGroupCheck(i, j) == 0) {
-        std::cout << "DONE" << std::endl;
+    if (j == 3 && i == 3 && performSquareGroupCheck(i, j) == 0) {
         return;
     }
     if (performSquareGroupCheck(i, j) == 1)
@@ -61,8 +60,6 @@ void Board::makeCheck(int j, int i)
 
 }
 
-
-
 void Board::initializeBoard(int arr[81])
 {
     for (int i = 0; i < 81; i++)
@@ -78,6 +75,8 @@ void Board::initializeBoard(int arr[81])
 int Board::performSquareGroupCheck(const int &squareGroupRow, const int &squareGroupCol)
 {
     int recheckGroups = 0;
+
+    // Check all group squares for markups, and final digits
     for (int i = squareGroupRow * 3; i < squareGroupRow * 3 + 3; i++)
     {
         for (int j = squareGroupCol * 3; j < squareGroupCol * 3 + 3; j++)
@@ -87,13 +86,61 @@ int Board::performSquareGroupCheck(const int &squareGroupRow, const int &squareG
                 checkForMarkups(_squares[i][j]);
                 int finalDigit = checkForFinalDigit(_squares[i][j]);
 
-                if (finalDigit > 0) {
+                if (finalDigit > 0)
+                {
                     this->setBoardDigit(i, j, finalDigit, false);
                     recheckGroups = 1;
                 }
             }
         }
     }
+
+    // Check for markups that only appear once in the square group
+
+    int arr[9] = { 0 };
+    int digit = -1;
+    for (int i = squareGroupRow * 3; i < squareGroupRow * 3 + 3; i++)
+    {
+        for (int j = squareGroupCol * 3; j < squareGroupCol * 3 + 3; j++)
+        {
+            if (getBoardDigit(i, j) == 0)
+            {
+                for (int m = 0; m < 9; m++)
+                {
+                    if (this->_squares[i][j].digitMarkupExists(m + 1))
+                    {
+                       arr[m]++;
+                    }
+                }
+            }
+        }
+    }
+
+    for (int i = 0; i < 9 && digit == -1; i++)
+    {
+        if (arr[i] == 1)
+        {
+            digit = i + 1;
+        }
+    }
+    if (digit == -1)
+    {
+        return recheckGroups;
+    }
+
+    for (int i = squareGroupRow * 3; i < squareGroupRow * 3 + 3; i++)
+    {
+        for (int j = squareGroupCol * 3; j < squareGroupCol * 3 + 3; j++)
+        {
+            if (getBoardDigit(i, j) == 0 && checkSafe(this->_squares[i][j], digit) && this->_squares[i][j].digitMarkupExists(digit))
+            {
+                std::cout << "GOT " + std::to_string(digit) + " AT [" + std::to_string(i) + ", " + std::to_string(j) + "]" << std::endl;
+                setBoardDigit(i, j, digit, false);
+                recheckGroups = 1;
+            }
+        }
+    }
+
     return recheckGroups;
 }
 

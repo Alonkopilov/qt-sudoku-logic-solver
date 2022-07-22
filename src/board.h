@@ -4,6 +4,7 @@
 #include "square.h"
 #include <QObject>
 #include <iostream>
+#include <algorithm>
 
 class Board : public QObject
 {

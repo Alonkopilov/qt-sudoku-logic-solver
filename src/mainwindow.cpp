@@ -49,6 +49,7 @@ void MainWindow::uiSetBoardDigit(const int &row, const int &col, const int &digi
     {
         return;
     }
+    std::cout << "setting ui digit " + std::to_string(digit) + " at [" + std::to_string(row) + ", " + std::to_string(col) + "]" << std::endl;
 
     QGridLayout* squareLayout = (QGridLayout*)ui->glMainBoard->itemAtPosition(row, col);
     QLabel* num;
