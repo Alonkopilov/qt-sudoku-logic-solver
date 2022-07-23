@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>826</width>
-    <height>778</height>
+    <height>791</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -34,249 +34,6 @@ border-color: rgb(193, 125, 17);</string>
      <property name="spacing">
       <number>0</number>
      </property>
-     <item row="9" column="12">
-      <layout class="QGridLayout" name="gridLayout_63"/>
-     </item>
-     <item row="3" column="13">
-      <layout class="QGridLayout" name="gridLayout_25"/>
-     </item>
-     <item row="2" column="10">
-      <layout class="QGridLayout" name="gridLayout_14"/>
-     </item>
-     <item row="3" column="10">
-      <layout class="QGridLayout" name="gridLayout_23"/>
-     </item>
-     <item row="1" column="9">
-      <layout class="QGridLayout" name="gridLayout_4"/>
-     </item>
-     <item row="9" column="13">
-      <layout class="QGridLayout" name="gridLayout_66"/>
-     </item>
-     <item row="2" column="8">
-      <layout class="QGridLayout" name="gridLayout"/>
-     </item>
-     <item row="9" column="11">
-      <layout class="QGridLayout" name="gridLayout_60"/>
-     </item>
-     <item row="6" column="12">
-      <layout class="QGridLayout" name="gridLayout_79"/>
-     </item>
-     <item row="6" column="10">
-      <layout class="QGridLayout" name="gridLayout_77"/>
-     </item>
-     <item row="5" column="8">
-      <layout class="QGridLayout" name="gridLayout_39"/>
-     </item>
-     <item row="9" column="15">
-      <layout class="QGridLayout" name="gridLayout_74"/>
-     </item>
-     <item row="9" column="16">
-      <layout class="QGridLayout" name="gridLayout_75"/>
-     </item>
-     <item row="7" column="8">
-      <layout class="QGridLayout" name="gridLayout_49"/>
-     </item>
-     <item row="5" column="14">
-      <layout class="QGridLayout" name="gridLayout_45"/>
-     </item>
-     <item row="4" column="15">
-      <layout class="QGridLayout" name="gridLayout_37"/>
-     </item>
-     <item row="6" column="9">
-      <layout class="QGridLayout" name="gridLayout_76"/>
-     </item>
-     <item row="2" column="9">
-      <layout class="QGridLayout" name="gridLayout_5"/>
-     </item>
-     <item row="1" column="11">
-      <layout class="QGridLayout" name="gridLayout_7"/>
-     </item>
-     <item row="1" column="10">
-      <layout class="QGridLayout" name="gridLayout_6"/>
-     </item>
-     <item row="8" column="13">
-      <layout class="QGridLayout" name="gridLayout_65"/>
-     </item>
-     <item row="5" column="16">
-      <layout class="QGridLayout" name="gridLayout_47"/>
-     </item>
-     <item row="7" column="10">
-      <layout class="QGridLayout" name="gridLayout_55"/>
-     </item>
-     <item row="1" column="12">
-      <layout class="QGridLayout" name="gridLayout_8"/>
-     </item>
-     <item row="4" column="10">
-      <layout class="QGridLayout" name="gridLayout_32"/>
-     </item>
-     <item row="7" column="15">
-      <layout class="QGridLayout" name="gridLayout_70"/>
-     </item>
-     <item row="6" column="11">
-      <layout class="QGridLayout" name="gridLayout_78"/>
-     </item>
-     <item row="3" column="12">
-      <layout class="QGridLayout" name="gridLayout_26"/>
-     </item>
-     <item row="3" column="15">
-      <layout class="QGridLayout" name="gridLayout_28"/>
-     </item>
-     <item row="6" column="16">
-      <layout class="QGridLayout" name="gridLayout_83"/>
-     </item>
-     <item row="2" column="13">
-      <layout class="QGridLayout" name="gridLayout_17"/>
-     </item>
-     <item row="4" column="16">
-      <layout class="QGridLayout" name="gridLayout_38"/>
-     </item>
-     <item row="8" column="12">
-      <layout class="QGridLayout" name="gridLayout_62"/>
-     </item>
-     <item row="9" column="8">
-      <layout class="QGridLayout" name="gridLayout_51"/>
-     </item>
-     <item row="3" column="8">
-      <layout class="QGridLayout" name="gridLayout_21"/>
-     </item>
-     <item row="6" column="15">
-      <layout class="QGridLayout" name="gridLayout_82"/>
-     </item>
-     <item row="9" column="9">
-      <layout class="QGridLayout" name="gridLayout_54"/>
-     </item>
-     <item row="4" column="13">
-      <layout class="QGridLayout" name="gridLayout_35"/>
-     </item>
-     <item row="4" column="9">
-      <layout class="QGridLayout" name="gridLayout_31"/>
-     </item>
-     <item row="9" column="14">
-      <layout class="QGridLayout" name="gridLayout_69"/>
-     </item>
-     <item row="7" column="16">
-      <layout class="QGridLayout" name="gridLayout_71"/>
-     </item>
-     <item row="8" column="16">
-      <layout class="QGridLayout" name="gridLayout_73"/>
-     </item>
-     <item row="3" column="16">
-      <layout class="QGridLayout" name="gridLayout_29"/>
-     </item>
-     <item row="2" column="11">
-      <layout class="QGridLayout" name="gridLayout_15"/>
-     </item>
-     <item row="2" column="16">
-      <layout class="QGridLayout" name="gridLayout_20"/>
-     </item>
-     <item row="9" column="10">
-      <layout class="QGridLayout" name="gridLayout_57"/>
-     </item>
-     <item row="5" column="9">
-      <layout class="QGridLayout" name="gridLayout_40"/>
-     </item>
-     <item row="7" column="13">
-      <layout class="QGridLayout" name="gridLayout_64"/>
-     </item>
-     <item row="6" column="8">
-      <layout class="QGridLayout" name="gridLayout_48"/>
-     </item>
-     <item row="7" column="14">
-      <layout class="QGridLayout" name="gridLayout_67"/>
-     </item>
-     <item row="1" column="13">
-      <layout class="QGridLayout" name="gridLayout_9"/>
-     </item>
-     <item row="1" column="14">
-      <layout class="QGridLayout" name="gridLayout_10"/>
-     </item>
-     <item row="5" column="12">
-      <layout class="QGridLayout" name="gridLayout_43"/>
-     </item>
-     <item row="6" column="14">
-      <layout class="QGridLayout" name="gridLayout_81"/>
-     </item>
-     <item row="5" column="11">
-      <layout class="QGridLayout" name="gridLayout_42"/>
-     </item>
-     <item row="4" column="14">
-      <layout class="QGridLayout" name="gridLayout_36"/>
-     </item>
-     <item row="7" column="9">
-      <layout class="QGridLayout" name="gridLayout_52"/>
-     </item>
-     <item row="3" column="11">
-      <layout class="QGridLayout" name="gridLayout_24"/>
-     </item>
-     <item row="6" column="13">
-      <layout class="QGridLayout" name="gridLayout_80"/>
-     </item>
-     <item row="8" column="9">
-      <layout class="QGridLayout" name="gridLayout_53"/>
-     </item>
-     <item row="2" column="15">
-      <layout class="QGridLayout" name="gridLayout_19"/>
-     </item>
-     <item row="8" column="10">
-      <layout class="QGridLayout" name="gridLayout_56"/>
-     </item>
-     <item row="7" column="11">
-      <layout class="QGridLayout" name="gridLayout_58"/>
-     </item>
-     <item row="5" column="10">
-      <layout class="QGridLayout" name="gridLayout_41"/>
-     </item>
-     <item row="8" column="14">
-      <layout class="QGridLayout" name="gridLayout_68"/>
-     </item>
-     <item row="2" column="12">
-      <layout class="QGridLayout" name="gridLayout_16"/>
-     </item>
-     <item row="3" column="14">
-      <layout class="QGridLayout" name="gridLayout_27"/>
-     </item>
-     <item row="8" column="11">
-      <layout class="QGridLayout" name="gridLayout_59"/>
-     </item>
-     <item row="4" column="8">
-      <layout class="QGridLayout" name="gridLayout_30"/>
-     </item>
-     <item row="4" column="11">
-      <layout class="QGridLayout" name="gridLayout_33"/>
-     </item>
-     <item row="2" column="14">
-      <layout class="QGridLayout" name="gridLayout_18"/>
-     </item>
-     <item row="5" column="13">
-      <layout class="QGridLayout" name="gridLayout_44"/>
-     </item>
-     <item row="1" column="16">
-      <layout class="QGridLayout" name="gridLayout_12"/>
-     </item>
-     <item row="7" column="12">
-      <layout class="QGridLayout" name="gridLayout_61"/>
-     </item>
-     <item row="1" column="15">
-      <layout class="QGridLayout" name="gridLayout_11"/>
-     </item>
-     <item row="4" column="12">
-      <layout class="QGridLayout" name="gridLayout_34"/>
-     </item>
-     <item row="5" column="15">
-      <layout class="QGridLayout" name="gridLayout_46"/>
-     </item>
-     <item row="8" column="8">
-      <layout class="QGridLayout" name="gridLayout_50"/>
-     </item>
-     <item row="8" column="15">
-      <layout class="QGridLayout" name="gridLayout_72"/>
-     </item>
-     <item row="3" column="9">
-      <layout class="QGridLayout" name="gridLayout_22"/>
-     </item>
-     <item row="1" column="8">
-      <layout class="QGridLayout" name="gridLayout_3"/>
-     </item>
     </layout>
    </widget>
    <widget class="Line" name="line_1">
@@ -371,7 +128,7 @@ background-color: rgba(255, 255, 0, 0);</string>
      <enum>Qt::Vertical</enum>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="btnSolve">
     <property name="geometry">
      <rect>
       <x>100</x>
@@ -382,6 +139,15 @@ background-color: rgba(255, 255, 0, 0);</string>
     </property>
     <property name="text">
      <string>SOLVE</string>
+    </property>
+    <property name="checkable">
+     <bool>false</bool>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+    <property name="autoDefault">
+     <bool>false</bool>
     </property>
    </widget>
    <widget class="Line" name="line_5">
@@ -752,8 +518,47 @@ background-color: rgba(255, 255, 0, 0);</string>
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
+   <widget class="QPushButton" name="btnLoadEasy">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>700</y>
+      <width>201</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Load Easy Sudoku</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnLoadMedium">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>700</y>
+      <width>211</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Load Medium Sudoku</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnLoadHard">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>700</y>
+      <width>201</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Load Hard Sudoku</string>
+    </property>
+   </widget>
    <zorder>gridLayoutWidget</zorder>
-   <zorder>pushButton</zorder>
+   <zorder>btnSolve</zorder>
    <zorder>line_7</zorder>
    <zorder>line_19</zorder>
    <zorder>line_8</zorder>
@@ -774,6 +579,9 @@ background-color: rgba(255, 255, 0, 0);</string>
    <zorder>line_6</zorder>
    <zorder>line_4</zorder>
    <zorder>line_14</zorder>
+   <zorder>btnLoadEasy</zorder>
+   <zorder>btnLoadMedium</zorder>
+   <zorder>btnLoadHard</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

@@ -17,12 +17,22 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    void generateBoard();
 
-signals:
-    void uiSetBoardDigit(const int& col, const int& row, const int& digit, const bool& isPreset);
+public slots:
+    void uiSetBoardDigit(const int &row, const int &col, const int &digit, const bool &isPreset);
+    void uiAddMarkup(const int& row, const int& col, const int& digit);
+    void uiRemoveMarkup(const int& row, const int& col, const int& digit);
+
+private slots:
+    void on_btnSolve_clicked();
+
+    void on_btnLoadEasy_clicked();
 
 private:
+    void uiGenerateBoard();
+    void cleanLayout(QLayout* layout);
+    QLabel* createFinalDigit(const int& digit, const bool& isPreset);
     Ui::MainWindow *ui;
+    Board sudokuBoard;
 };
 #endif // MAINWINDOW_H

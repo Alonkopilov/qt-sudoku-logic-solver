@@ -1,12 +1,14 @@
 #ifndef SQUARE_H
 #define SQUARE_H
 
+#include <iostream>
 
 class Square
 {
 public:
     Square();
-    Square(const int& digit, const bool& isPreset, const int& row, const int& col);
+    Square(const int &row, const int &col);
+    Square(const int &row, const int &col, const int &digit, const bool &isPreset);
     bool digitMarkupExists(const int& digit) const;
     int getDigit() const;
     void setDigit(const int& digit, const bool& isPreset);
