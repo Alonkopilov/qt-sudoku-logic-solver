@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>826</width>
-    <height>791</height>
+    <height>802</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -527,6 +527,9 @@ background-color: rgba(255, 255, 0, 0);</string>
       <height>26</height>
      </rect>
     </property>
+    <property name="accessibleName">
+     <string>btnLoadEasy</string>
+    </property>
     <property name="text">
      <string>Load Easy Sudoku</string>
     </property>
@@ -539,6 +542,9 @@ background-color: rgba(255, 255, 0, 0);</string>
       <width>211</width>
       <height>26</height>
      </rect>
+    </property>
+    <property name="accessibleName">
+     <string>btnLoadMedium</string>
     </property>
     <property name="text">
      <string>Load Medium Sudoku</string>
@@ -553,8 +559,24 @@ background-color: rgba(255, 255, 0, 0);</string>
       <height>26</height>
      </rect>
     </property>
+    <property name="accessibleName">
+     <string>btnLoadHard</string>
+    </property>
     <property name="text">
      <string>Load Hard Sudoku</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBox">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>730</y>
+      <width>201</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Show solving process</string>
     </property>
    </widget>
    <zorder>gridLayoutWidget</zorder>
@@ -582,6 +604,7 @@ background-color: rgba(255, 255, 0, 0);</string>
    <zorder>btnLoadEasy</zorder>
    <zorder>btnLoadMedium</zorder>
    <zorder>btnLoadHard</zorder>
+   <zorder>checkBox</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

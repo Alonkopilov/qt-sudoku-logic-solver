@@ -22,6 +22,7 @@ public slots:
     void uiSetBoardDigit(const int &row, const int &col, const int &digit, const bool &isPreset);
     void uiAddMarkup(const int& row, const int& col, const int& digit);
     void uiRemoveMarkup(const int& row, const int& col, const int& digit);
+    void loadSudoku();
 
 private slots:
     void on_btnSolve_clicked();

@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 
 #define EASY_SUDOKU {0,0,4,1,0,3,8,0,0,7,0,8,0,0,0,6,0,1,0,3,0,0,8,0,0,4,0,3,9,0,0,5,0,0,6,2,0,0,5,0,3,0,9,0,0,2,8,0,0,9,0,0,7,3,0,1,0,0,6,0,0,8,0,8,0,3,0,0,0,1,0,4,0,0,7,9,0,8,3,0,0};
+#define MEDIUM_SUDOKU {0,0,0,3,0,7,4,0,0,9,0,0,0,0,4,0,0,8,3,7,0,0,0,0,0,6,0,8,2,0,9,0,0,6,0,0,0,0,1,2,0,0,9,0,4,0,4,0,0,3,8,0,5,0,2,0,8,6,9,0,7,0,0,0,9,0,0,0,0,0,0,0,7,5,0,0,0,0,0,0,6};
+#define HARD_SUDOKU {4,0,0,6,0,8,0,0,0,9,1,0,0,3,2,8,0,6,0,8,3,0,1,0,0,0,2,0,0,0,8,0,0,0,0,0,0,0,0,1,0,0,3,0,5,5,0,8,0,7,4,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,2,0,0,0,7,0,0,9,6,4,0,3}
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -10,10 +12,13 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     int arr[81] = EASY_SUDOKU;
 
-
     QObject::connect(&this->sudokuBoard, &Board::uiSetBoardDigit, this, &MainWindow::uiSetBoardDigit);
     QObject::connect(&this->sudokuBoard, &Board::uiAddMarkup, this, &MainWindow::uiAddMarkup);
     QObject::connect(&this->sudokuBoard, &Board::uiRemoveMarkup, this, &MainWindow::uiRemoveMarkup);
+
+    QObject::connect(this->ui->btnLoadEasy, &QAbstractButton::clicked, this, &MainWindow::loadSudoku);
+    QObject::connect(this->ui->btnLoadMedium, &QAbstractButton::clicked, this, &MainWindow::loadSudoku);
+    QObject::connect(this->ui->btnLoadHard, &QAbstractButton::clicked, this, &MainWindow::loadSudoku);
 
     uiGenerateBoard();
     this->sudokuBoard.initializeBoard(arr);
@@ -79,11 +84,7 @@ void MainWindow::uiSetBoardDigit(const int &row, const int &col, const int &digi
     if (digit == 0) return;
 
     QGridLayout* squareLayout = (QGridLayout*)ui->glMainBoard->itemAtPosition(row, col);
-
-
     std::cout << "setting ui digit " + std::to_string(digit) + " at [" + std::to_string(row) + ", " + std::to_string(col) + "]" << std::endl;
-
-
 
     if (squareLayout == nullptr) {
         std::cout << "[ERROR: squareLayout is null, incorrect index {" + std::to_string(row) + ", " + std::to_string(col) + "}" << std::endl;
@@ -112,6 +113,12 @@ void MainWindow::uiRemoveMarkup(const int &row, const int &col, const int &digit
     markup->setText(" ");
 }
 
+void MainWindow::loadSudoku()
+{
+     QWidget* buttonWidget = qobject_cast<QWidget*>(sender());
+     std::cout << buttonWidget->accessibleName().toStdString() << std::endl;
+}
+
 void MainWindow::on_btnSolve_clicked()
 {
     this->sudokuBoard.performInitialBoardCheck();
@@ -124,7 +131,7 @@ void MainWindow::on_btnSolve_clicked()
 
 void MainWindow::on_btnLoadEasy_clicked()
 {
-    int arr[81] = EASY_SUDOKU;
+    int arr[81] = MEDIUM_SUDOKU;
 
     uiGenerateBoard();
     this->sudokuBoard.initializeBoard(arr);
