@@ -60,17 +60,30 @@ void MainWindow::cleanLayout(QLayout *layout)
     }
 }
 
+QLabel *MainWindow::createFinalDigit(const int &digit, const bool &isPreset)
+{
+    QLabel* num = new QLabel(QString::number(digit));
+    QString fontColor = isPreset ? "black" : "#4D8DEC";
+    num->setStyleSheet("QLabel { color : " + fontColor + "; }");
+
+    QFont* font = new QFont();
+    font->setPointSize(30);
+    num->setAlignment(Qt::AlignCenter);
+    num->setFont(*font);
+
+    return num;
+}
+
 void MainWindow::uiSetBoardDigit(const int &row, const int &col, const int &digit, const bool &isPreset)
 {
-    if (digit == 0)
-    {
-        return;
-    }
+    if (digit == 0) return;
+
+    QGridLayout* squareLayout = (QGridLayout*)ui->glMainBoard->itemAtPosition(row, col);
+
 
     std::cout << "setting ui digit " + std::to_string(digit) + " at [" + std::to_string(row) + ", " + std::to_string(col) + "]" << std::endl;
 
-    QGridLayout* squareLayout = (QGridLayout*)ui->glMainBoard->itemAtPosition(row, col);
-    QLabel* num;
+
 
     if (squareLayout == nullptr) {
         std::cout << "[ERROR: squareLayout is null, incorrect index {" + std::to_string(row) + ", " + std::to_string(col) + "}" << std::endl;
@@ -81,15 +94,8 @@ void MainWindow::uiSetBoardDigit(const int &row, const int &col, const int &digi
     this->cleanLayout(squareLayout);
 
     // Create the final digit widget and add it to the square
-    num = new QLabel(QString::number(digit));
-    QString fontColor = isPreset ? "black" : "#073C72";
-    num->setStyleSheet("QLabel { color : " + fontColor + "; }");
-
-    QFont* font = new QFont();
-    font->setPointSize(30);
-    num->setAlignment(Qt::AlignCenter);
-    num->setFont(*font);
-    squareLayout->addWidget(num);
+    QLabel* digitLabel = this->createFinalDigit(digit, isPreset);
+    squareLayout->addWidget(digitLabel);
 }
 
 void MainWindow::uiAddMarkup(const int &row, const int &col, const int &digit)
@@ -106,32 +112,15 @@ void MainWindow::uiRemoveMarkup(const int &row, const int &col, const int &digit
     markup->setText(" ");
 }
 
-/*
-void MainWindow::on_pushButton_clicked()
-{
-    this->sudokuBoard.performInitialBoardCheck();
-    ui->btnSolve->setDisabled(true);
-}
-
-void MainWindow::on_pushButton_2_clicked()
-{
-    int arr[81] = EASY_SUDOKU;
-
-    uiGenerateBoard();
-    this->sudokuBoard.initializeBoard(arr);
-
-    ui->btnSolve->setDisabled(false);
-}
-*/
-
-
 void MainWindow::on_btnSolve_clicked()
 {
     this->sudokuBoard.performInitialBoardCheck();
     ui->btnSolve->setDisabled(true);
-    ui->btnLoadEasy->setDisabled(false);
-}
 
+    ui->btnLoadEasy->setDisabled(false);
+    ui->btnLoadMedium->setDisabled(false);
+    ui->btnLoadHard->setDisabled(false);
+}
 
 void MainWindow::on_btnLoadEasy_clicked()
 {

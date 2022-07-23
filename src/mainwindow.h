@@ -31,6 +31,7 @@ private slots:
 private:
     void uiGenerateBoard();
     void cleanLayout(QLayout* layout);
+    QLabel* createFinalDigit(const int& digit, const bool& isPreset);
     Ui::MainWindow *ui;
     Board sudokuBoard;
 };
