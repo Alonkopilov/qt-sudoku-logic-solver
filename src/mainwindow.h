@@ -17,7 +17,6 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    void uiGenerateBoard();
 
 public slots:
     void uiSetBoardDigit(const int &row, const int &col, const int &digit, const bool &isPreset);
@@ -25,9 +24,13 @@ public slots:
     void uiRemoveMarkup(const int& row, const int& col, const int& digit);
 
 private slots:
-    void on_pushButton_clicked();
+    void on_btnSolve_clicked();
+
+    void on_btnLoadEasy_clicked();
 
 private:
+    void uiGenerateBoard();
+    void cleanLayout(QLayout* layout);
     Ui::MainWindow *ui;
     Board sudokuBoard;
 };

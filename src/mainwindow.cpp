@@ -1,12 +1,14 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#define EASY_SUDOKU {0,0,4,1,0,3,8,0,0,7,0,8,0,0,0,6,0,1,0,3,0,0,8,0,0,4,0,3,9,0,0,5,0,0,6,2,0,0,5,0,3,0,9,0,0,2,8,0,0,9,0,0,7,3,0,1,0,0,6,0,0,8,0,8,0,3,0,0,0,1,0,4,0,0,7,9,0,8,3,0,0};
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    int arr[81] = {0,0,4,1,0,3,8,0,0,7,0,8,0,0,0,6,0,1,0,3,0,0,8,0,0,4,0,3,9,0,0,5,0,0,6,2,0,0,5,0,3,0,9,0,0,2,8,0,0,9,0,0,7,3,0,1,0,0,6,0,0,8,0,8,0,3,0,0,0,1,0,4,0,0,7,9,0,8,3,0,0};
+    int arr[81] = EASY_SUDOKU;
 
 
     QObject::connect(&this->sudokuBoard, &Board::uiSetBoardDigit, this, &MainWindow::uiSetBoardDigit);
@@ -24,6 +26,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::uiGenerateBoard()
 {
+    this->cleanLayout(ui->glMainBoard);
+
     for (int i = 0; i < 81; i++)
     {
         QGridLayout* layout = new QGridLayout();
@@ -43,12 +47,26 @@ void MainWindow::uiGenerateBoard()
     }
 }
 
+void MainWindow::cleanLayout(QLayout *layout)
+{
+    if ( layout != NULL )
+    {
+        QLayoutItem* item;
+        while ( ( item = layout->takeAt( 0 ) ) != NULL )
+        {
+            delete item->widget();
+            delete item;
+        }
+    }
+}
+
 void MainWindow::uiSetBoardDigit(const int &row, const int &col, const int &digit, const bool &isPreset)
 {
     if (digit == 0)
     {
         return;
     }
+
     std::cout << "setting ui digit " + std::to_string(digit) + " at [" + std::to_string(row) + ", " + std::to_string(col) + "]" << std::endl;
 
     QGridLayout* squareLayout = (QGridLayout*)ui->glMainBoard->itemAtPosition(row, col);
@@ -60,15 +78,7 @@ void MainWindow::uiSetBoardDigit(const int &row, const int &col, const int &digi
     }
 
     // Remove all the markup widgets from the square layout
-    if ( squareLayout != NULL )
-    {
-        QLayoutItem* item;
-        while ( ( item = squareLayout->takeAt( 0 ) ) != NULL )
-        {
-            delete item->widget();
-            delete item;
-        }
-    }
+    this->cleanLayout(squareLayout);
 
     // Create the final digit widget and add it to the square
     num = new QLabel(QString::number(digit));
@@ -96,10 +106,41 @@ void MainWindow::uiRemoveMarkup(const int &row, const int &col, const int &digit
     markup->setText(" ");
 }
 
-
+/*
 void MainWindow::on_pushButton_clicked()
 {
     this->sudokuBoard.performInitialBoardCheck();
-    ui->pushButton->setDisabled(true);
+    ui->btnSolve->setDisabled(true);
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    int arr[81] = EASY_SUDOKU;
+
+    uiGenerateBoard();
+    this->sudokuBoard.initializeBoard(arr);
+
+    ui->btnSolve->setDisabled(false);
+}
+*/
+
+
+void MainWindow::on_btnSolve_clicked()
+{
+    this->sudokuBoard.performInitialBoardCheck();
+    ui->btnSolve->setDisabled(true);
+    ui->btnLoadEasy->setDisabled(false);
+}
+
+
+void MainWindow::on_btnLoadEasy_clicked()
+{
+    int arr[81] = EASY_SUDOKU;
+
+    uiGenerateBoard();
+    this->sudokuBoard.initializeBoard(arr);
+
+    ui->btnSolve->setDisabled(false);
+    ui->btnLoadEasy->setDisabled(true);
 }
 

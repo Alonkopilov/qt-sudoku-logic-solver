@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>826</width>
-    <height>778</height>
+    <height>791</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -128,7 +128,7 @@ background-color: rgba(255, 255, 0, 0);</string>
      <enum>Qt::Vertical</enum>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="btnSolve">
     <property name="geometry">
      <rect>
       <x>100</x>
@@ -518,8 +518,47 @@ background-color: rgba(255, 255, 0, 0);</string>
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
+   <widget class="QPushButton" name="btnLoadEasy">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>700</y>
+      <width>201</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Load Easy Sudoku</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnLoadMedium">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>700</y>
+      <width>211</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Load Medium Sudoku</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnLoadHard">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>700</y>
+      <width>201</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Load Hard Sudoku</string>
+    </property>
+   </widget>
    <zorder>gridLayoutWidget</zorder>
-   <zorder>pushButton</zorder>
+   <zorder>btnSolve</zorder>
    <zorder>line_7</zorder>
    <zorder>line_19</zorder>
    <zorder>line_8</zorder>
@@ -540,6 +579,9 @@ background-color: rgba(255, 255, 0, 0);</string>
    <zorder>line_6</zorder>
    <zorder>line_4</zorder>
    <zorder>line_14</zorder>
+   <zorder>btnLoadEasy</zorder>
+   <zorder>btnLoadMedium</zorder>
+   <zorder>btnLoadHard</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
