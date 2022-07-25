@@ -20,6 +20,9 @@
    <string notr="true">background-color: rgb(255, 255, 255);
 border-color: rgb(193, 125, 17);</string>
   </property>
+  <property name="windowFilePath">
+   <string/>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
@@ -612,7 +615,7 @@ background-color: rgba(255, 255, 0, 0);</string>
      <x>0</x>
      <y>0</y>
      <width>826</width>
-     <height>23</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

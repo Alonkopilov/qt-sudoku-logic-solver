@@ -27,8 +27,6 @@ public slots:
 private slots:
     void on_btnSolve_clicked();
 
-    void on_btnLoadEasy_clicked();
-
 private:
     void uiGenerateBoard();
     void cleanLayout(QLayout* layout);

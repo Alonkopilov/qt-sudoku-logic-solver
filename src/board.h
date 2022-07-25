@@ -14,7 +14,7 @@ public:
     Board();
     bool isBoardCompleted() const;
     void performInitialBoardCheck();
-    void initializeBoard(int arr[81]);
+    void initializeBoard(const int arr[81]);
 
 signals:
     void uiSetBoardDigit(const int &row, const int &col, const int &digit, const bool &isPreset);

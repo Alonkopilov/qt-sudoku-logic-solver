@@ -1,16 +1,16 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#define EASY_SUDOKU {0,0,4,1,0,3,8,0,0,7,0,8,0,0,0,6,0,1,0,3,0,0,8,0,0,4,0,3,9,0,0,5,0,0,6,2,0,0,5,0,3,0,9,0,0,2,8,0,0,9,0,0,7,3,0,1,0,0,6,0,0,8,0,8,0,3,0,0,0,1,0,4,0,0,7,9,0,8,3,0,0};
-#define MEDIUM_SUDOKU {0,0,0,3,0,7,4,0,0,9,0,0,0,0,4,0,0,8,3,7,0,0,0,0,0,6,0,8,2,0,9,0,0,6,0,0,0,0,1,2,0,0,9,0,4,0,4,0,0,3,8,0,5,0,2,0,8,6,9,0,7,0,0,0,9,0,0,0,0,0,0,0,7,5,0,0,0,0,0,0,6};
-#define HARD_SUDOKU {4,0,0,6,0,8,0,0,0,9,1,0,0,3,2,8,0,6,0,8,3,0,1,0,0,0,2,0,0,0,8,0,0,0,0,0,0,0,0,1,0,0,3,0,5,5,0,8,0,7,4,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,2,0,0,0,7,0,0,9,6,4,0,3}
+const int EASY_SUDOKU[81] = {0,0,4,1,0,3,8,0,0,7,0,8,0,0,0,6,0,1,0,3,0,0,8,0,0,4,0,3,9,0,0,5,0,0,6,2,0,0,5,0,3,0,9,0,0,2,8,0,0,9,0,0,7,3,0,1,0,0,6,0,0,8,0,8,0,3,0,0,0,1,0,4,0,0,7,9,0,8,3,0,0};
+const int MEDIUM_SUDOKU[81] = {0,0,0,3,0,7,4,0,0,9,0,0,0,0,4,0,0,8,3,7,0,0,0,0,0,6,0,8,2,0,9,0,0,6,0,0,0,0,1,2,0,0,9,0,4,0,4,0,0,3,8,0,5,0,2,0,8,6,9,0,7,0,0,0,9,0,0,0,0,0,0,0,7,5,0,0,0,0,0,0,6};
+const int HARD_SUDOKU[81] = {4,0,0,6,0,8,0,0,0,9,1,0,0,3,2,8,0,6,0,8,3,0,1,0,0,0,2,0,0,0,8,0,0,0,0,0,0,0,0,1,0,0,3,0,5,5,0,8,0,7,4,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,2,0,0,0,7,0,0,9,6,4,0,3};
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    int arr[81] = EASY_SUDOKU;
+    setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
 
     QObject::connect(&this->sudokuBoard, &Board::uiSetBoardDigit, this, &MainWindow::uiSetBoardDigit);
     QObject::connect(&this->sudokuBoard, &Board::uiAddMarkup, this, &MainWindow::uiAddMarkup);
@@ -21,7 +21,8 @@ MainWindow::MainWindow(QWidget *parent)
     QObject::connect(this->ui->btnLoadHard, &QAbstractButton::clicked, this, &MainWindow::loadSudoku);
 
     uiGenerateBoard();
-    this->sudokuBoard.initializeBoard(arr);
+    ui->btnLoadEasy->setDisabled(true);
+    this->sudokuBoard.initializeBoard(EASY_SUDOKU);
 }
 
 MainWindow::~MainWindow()
@@ -116,7 +117,31 @@ void MainWindow::uiRemoveMarkup(const int &row, const int &col, const int &digit
 void MainWindow::loadSudoku()
 {
      QWidget* buttonWidget = qobject_cast<QWidget*>(sender());
-     std::cout << buttonWidget->accessibleName().toStdString() << std::endl;
+     uiGenerateBoard();
+
+     if (buttonWidget->accessibleName() == "btnLoadEasy")
+     {
+        this->sudokuBoard.initializeBoard(EASY_SUDOKU);
+        ui->btnLoadEasy->setDisabled(true);
+        ui->btnLoadMedium->setDisabled(false);
+        ui->btnLoadHard->setDisabled(false);
+     }
+     if (buttonWidget->accessibleName() == "btnLoadMedium")
+     {
+        this->sudokuBoard.initializeBoard(MEDIUM_SUDOKU);
+        ui->btnLoadEasy->setDisabled(false);
+        ui->btnLoadMedium->setDisabled(true);
+        ui->btnLoadHard->setDisabled(false);
+     }
+     if (buttonWidget->accessibleName() == "btnLoadHard")
+     {
+        this->sudokuBoard.initializeBoard(HARD_SUDOKU);
+        ui->btnLoadEasy->setDisabled(false);
+        ui->btnLoadMedium->setDisabled(false);
+        ui->btnLoadHard->setDisabled(true);
+     }
+
+     ui->btnSolve->setDisabled(false);
 }
 
 void MainWindow::on_btnSolve_clicked()
@@ -128,15 +153,3 @@ void MainWindow::on_btnSolve_clicked()
     ui->btnLoadMedium->setDisabled(false);
     ui->btnLoadHard->setDisabled(false);
 }
-
-void MainWindow::on_btnLoadEasy_clicked()
-{
-    int arr[81] = MEDIUM_SUDOKU;
-
-    uiGenerateBoard();
-    this->sudokuBoard.initializeBoard(arr);
-
-    ui->btnSolve->setDisabled(false);
-    ui->btnLoadEasy->setDisabled(true);
-}
-

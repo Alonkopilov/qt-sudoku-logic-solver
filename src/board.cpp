@@ -60,7 +60,7 @@ void Board::makeCheck(int j, int i)
 
 }
 
-void Board::initializeBoard(int arr[81])
+void Board::initializeBoard(const int arr[81])
 {
     for (int i = 0; i < 81; i++)
     {
