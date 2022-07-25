@@ -117,29 +117,25 @@ void MainWindow::uiRemoveMarkup(const int &row, const int &col, const int &digit
 void MainWindow::loadSudoku()
 {
      QWidget* buttonWidget = qobject_cast<QWidget*>(sender());
+     QString chosenDifficulty = buttonWidget->accessibleName();
      uiGenerateBoard();
 
-     if (buttonWidget->accessibleName() == "btnLoadEasy")
+     if (chosenDifficulty == "btnLoadEasy")
      {
         this->sudokuBoard.initializeBoard(EASY_SUDOKU);
-        ui->btnLoadEasy->setDisabled(true);
-        ui->btnLoadMedium->setDisabled(false);
-        ui->btnLoadHard->setDisabled(false);
      }
-     if (buttonWidget->accessibleName() == "btnLoadMedium")
+     if (chosenDifficulty == "btnLoadMedium")
      {
         this->sudokuBoard.initializeBoard(MEDIUM_SUDOKU);
-        ui->btnLoadEasy->setDisabled(false);
-        ui->btnLoadMedium->setDisabled(true);
-        ui->btnLoadHard->setDisabled(false);
      }
-     if (buttonWidget->accessibleName() == "btnLoadHard")
+     if (chosenDifficulty == "btnLoadHard")
      {
         this->sudokuBoard.initializeBoard(HARD_SUDOKU);
-        ui->btnLoadEasy->setDisabled(false);
-        ui->btnLoadMedium->setDisabled(false);
-        ui->btnLoadHard->setDisabled(true);
      }
+
+     ui->btnLoadEasy->setDisabled(chosenDifficulty == "btnLoadEasy");
+     ui->btnLoadMedium->setDisabled(chosenDifficulty == "btnLoadMedium");
+     ui->btnLoadHard->setDisabled(chosenDifficulty == "btnLoadHard");
 
      ui->btnSolve->setDisabled(false);
 }
