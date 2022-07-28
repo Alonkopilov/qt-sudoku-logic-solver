@@ -170,6 +170,7 @@ void Board::checkForMarkups(Square &square)
         {
             square.setMarkup(i);
             emit this->uiAddMarkup(square.getRow(), square.getCol(), i);
+            QThread::msleep(10);
         }
         else
         {
@@ -177,6 +178,7 @@ void Board::checkForMarkups(Square &square)
             {
                 square.removeMarkup(i);
                 emit this->uiRemoveMarkup(square.getRow(), square.getCol(), i);
+                QThread::msleep(10);
             }
         }
     }
