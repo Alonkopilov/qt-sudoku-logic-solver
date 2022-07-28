@@ -87,10 +87,10 @@ void MainWindow::uiSetBoardDigit(const int &row, const int &col, const int &digi
     if (digit == 0) return;
 
     QGridLayout* squareLayout = (QGridLayout*)ui->glMainBoard->itemAtPosition(row, col);
-    std::cout << "setting ui digit " + std::to_string(digit) + " at [" + std::to_string(row) + ", " + std::to_string(col) + "]" << std::endl;
+    DEBUG_PRNT(Helper::string_format("setting ui digit %d at [%d,%d]", digit, row, col));
 
     if (squareLayout == nullptr) {
-        std::cout << "[ERROR: squareLayout is null, incorrect index {" + std::to_string(row) + ", " + std::to_string(col) + "}" << std::endl;
+        ERR_PRNT(Helper::string_format("squareLayout is null in index [%d,%d]", row, col));
         return;
     }
 
@@ -144,6 +144,7 @@ void MainWindow::loadSudoku()
 
 void MainWindow::finishSudoku()
 {
+    std::cout << "--Solving Completed--" << std::endl;
     ui->btnLoadEasy->setDisabled(false);
     ui->btnLoadMedium->setDisabled(false);
     ui->btnLoadHard->setDisabled(false);
@@ -152,7 +153,7 @@ void MainWindow::finishSudoku()
 void MainWindow::on_btnSolve_clicked()
 {
     this->sudokuBoard.start();
-    //this->sudokuBoard.performInitialBoardCheck();
+
     ui->btnSolve->setDisabled(true);
 
     ui->btnLoadEasy->setDisabled(true);

@@ -2,9 +2,18 @@
 #define MAINWINDOW_H
 
 #include "board.h"
+#include "helper.h"
 #include <QMainWindow>
 #include <iostream>
 #include <QLabel>
+
+#ifdef DEBUG
+#define DEBUG_PRNT(str) do { std::cout << "[debug] " + str << std::endl; } while( false )
+#define ERR_PRNT(str) do { std::cout << "[error] " + str << std::endl; } while( false )
+#else
+#define DEBUG_PRNT(str) do { } while ( false )
+#define ERR_PRNT(str) do { } while ( false )
+#endif
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -24,8 +33,6 @@ public slots:
     void uiRemoveMarkup(const int& row, const int& col, const int& digit);
     void loadSudoku();
     void finishSudoku();
-
-private slots:
     void on_btnSolve_clicked();
 
 private:

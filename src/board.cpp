@@ -34,7 +34,6 @@ int Board::getBoardDigit(const int &row, const int &col)
 void Board::performInitialBoardCheck()
 {
     makeCheck(0, 0);
-    std::cout << "INITIAL CHECK IS DONE" << std::endl;
 }
 
 void Board::makeCheck(int j, int i)
@@ -134,7 +133,6 @@ int Board::performSquareGroupCheck(const int &squareGroupRow, const int &squareG
         {
             if (getBoardDigit(i, j) == 0 && checkSafe(this->_squares[i][j], digit) && this->_squares[i][j].digitMarkupExists(digit))
             {
-                std::cout << "GOT " + std::to_string(digit) + " AT [" + std::to_string(i) + ", " + std::to_string(j) + "]" << std::endl;
                 setBoardDigit(i, j, digit, false);
                 recheckGroups = 1;
             }
@@ -170,6 +168,7 @@ void Board::checkForMarkups(Square &square)
         {
             square.setMarkup(i);
             emit this->uiAddMarkup(square.getRow(), square.getCol(), i);
+            QThread::msleep(10);
         }
         else
         {
@@ -177,6 +176,7 @@ void Board::checkForMarkups(Square &square)
             {
                 square.removeMarkup(i);
                 emit this->uiRemoveMarkup(square.getRow(), square.getCol(), i);
+                QThread::msleep(10);
             }
         }
     }

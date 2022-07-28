@@ -4,9 +4,10 @@
 #include "square.h"
 #include <QObject>
 #include <iostream>
-#include <algorithm>
+#include <QThread>
 
-class Board : public QObject
+
+class Board : public QThread
 {
     Q_OBJECT
 
@@ -15,6 +16,10 @@ public:
     bool isBoardCompleted() const;
     void performInitialBoardCheck();
     void initializeBoard(const int arr[81]);
+    void run() override {
+        std::cout << "--Solving Started--" << std::endl;
+        this->performInitialBoardCheck();
+    }
 
 signals:
     void uiSetBoardDigit(const int &row, const int &col, const int &digit, const bool &isPreset);
