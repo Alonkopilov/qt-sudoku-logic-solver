@@ -152,6 +152,7 @@ void MainWindow::finishSudoku()
 
 void MainWindow::on_btnSolve_clicked()
 {
+    this->sudokuBoard.toggleSlowSolve(this->ui->cbSlowSolve->isChecked());
     this->sudokuBoard.start();
 
     ui->btnSolve->setDisabled(true);
