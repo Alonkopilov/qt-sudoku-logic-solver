@@ -6,7 +6,6 @@
 #include <iostream>
 #include <QThread>
 
-
 class Board : public QThread
 {
     Q_OBJECT
