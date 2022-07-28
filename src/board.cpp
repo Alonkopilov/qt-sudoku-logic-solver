@@ -59,6 +59,14 @@ void Board::makeCheck(int j, int i)
 
 }
 
+void Board::wait()
+{
+    if (this->isSlowSolver)
+    {
+        QThread::msleep(10);
+    }
+}
+
 void Board::initializeBoard(const int arr[81])
 {
     for (int i = 0; i < 81; i++)
@@ -69,6 +77,11 @@ void Board::initializeBoard(const int arr[81])
         this->_squares[row][col] = Square(row, col);
         this->setBoardDigit(row, col, digit, true);
     }
+}
+
+void Board::toggleSlowSolve(const bool &isSlow)
+{
+    this->isSlowSolver = isSlow;
 }
 
 void Board::run() {
@@ -173,7 +186,7 @@ void Board::checkForMarkups(Square &square)
         {
             square.setMarkup(i);
             emit this->uiAddMarkup(square.getRow(), square.getCol(), i);
-            QThread::msleep(10);
+            this->wait();
         }
         else
         {
@@ -181,7 +194,7 @@ void Board::checkForMarkups(Square &square)
             {
                 square.removeMarkup(i);
                 emit this->uiRemoveMarkup(square.getRow(), square.getCol(), i);
-                QThread::msleep(10);
+                this->wait();
             }
         }
     }

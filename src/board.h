@@ -14,6 +14,7 @@ public:
     Board();
     bool isBoardCompleted() const;
     void initializeBoard(const int arr[81]);
+    void toggleSlowSolve(const bool& isSlow);
     void run() override; // Start solver
 
 signals:
@@ -30,7 +31,10 @@ private:
     bool checkSafe(const Square& square, const int& digitToCheck) const;
     int getBoardDigit(const int &row, const int &col);
     void makeCheck(int i, int j);
+    void wait();
+
     Square _squares[9][9];
+    bool isSlowSolver;
 };
 
 #endif // BOARD_H
