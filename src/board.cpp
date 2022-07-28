@@ -71,6 +71,11 @@ void Board::initializeBoard(const int arr[81])
     }
 }
 
+void Board::run() {
+    std::cout << "--Solving Started--" << std::endl;
+    this->performInitialBoardCheck();
+}
+
 int Board::performSquareGroupCheck(const int &squareGroupRow, const int &squareGroupCol)
 {
     int recheckGroups = 0;

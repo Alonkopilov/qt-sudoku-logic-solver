@@ -13,12 +13,8 @@ class Board : public QThread
 public:
     Board();
     bool isBoardCompleted() const;
-    void performInitialBoardCheck();
     void initializeBoard(const int arr[81]);
-    void run() override {
-        std::cout << "--Solving Started--" << std::endl;
-        this->performInitialBoardCheck();
-    }
+    void run() override; // Start solver
 
 signals:
     void uiSetBoardDigit(const int &row, const int &col, const int &digit, const bool &isPreset);
@@ -26,6 +22,7 @@ signals:
     void uiRemoveMarkup(const int& row, const int& col, const int& digit);
 
 private:
+    void performInitialBoardCheck();
     int checkForFinalDigit(Square& square);
     void checkForMarkups(Square& square);
     void setBoardDigit(const int &row, const int &col, const int &digit, const bool &isPreset);
