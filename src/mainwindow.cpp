@@ -15,6 +15,8 @@ MainWindow::MainWindow(QWidget *parent)
     QObject::connect(&this->sudokuBoard, &Board::uiSetBoardDigit, this, &MainWindow::uiSetBoardDigit);
     QObject::connect(&this->sudokuBoard, &Board::uiAddMarkup, this, &MainWindow::uiAddMarkup);
     QObject::connect(&this->sudokuBoard, &Board::uiRemoveMarkup, this, &MainWindow::uiRemoveMarkup);
+    QObject::connect(&this->sudokuBoard, &QThread::finished, this, &MainWindow::finishSudoku);
+
 
     QObject::connect(this->ui->btnLoadEasy, &QAbstractButton::clicked, this, &MainWindow::loadSudoku);
     QObject::connect(this->ui->btnLoadMedium, &QAbstractButton::clicked, this, &MainWindow::loadSudoku);
@@ -85,10 +87,10 @@ void MainWindow::uiSetBoardDigit(const int &row, const int &col, const int &digi
     if (digit == 0) return;
 
     QGridLayout* squareLayout = (QGridLayout*)ui->glMainBoard->itemAtPosition(row, col);
-    std::cout << "setting ui digit " + std::to_string(digit) + " at [" + std::to_string(row) + ", " + std::to_string(col) + "]" << std::endl;
+    DEBUG_PRNT(Helper::string_format("setting ui digit %d at [%d,%d]", digit, row, col));
 
     if (squareLayout == nullptr) {
-        std::cout << "[ERROR: squareLayout is null, incorrect index {" + std::to_string(row) + ", " + std::to_string(col) + "}" << std::endl;
+        ERR_PRNT(Helper::string_format("squareLayout is null in index [%d,%d]", row, col));
         return;
     }
 
@@ -140,12 +142,22 @@ void MainWindow::loadSudoku()
      ui->btnSolve->setDisabled(false);
 }
 
-void MainWindow::on_btnSolve_clicked()
+void MainWindow::finishSudoku()
 {
-    this->sudokuBoard.performInitialBoardCheck();
-    ui->btnSolve->setDisabled(true);
-
+    std::cout << "--Solving Completed--" << std::endl;
     ui->btnLoadEasy->setDisabled(false);
     ui->btnLoadMedium->setDisabled(false);
     ui->btnLoadHard->setDisabled(false);
+}
+
+void MainWindow::on_btnSolve_clicked()
+{
+    this->sudokuBoard.toggleSlowSolve(this->ui->cbSlowSolve->isChecked());
+    this->sudokuBoard.start();
+
+    ui->btnSolve->setDisabled(true);
+
+    ui->btnLoadEasy->setDisabled(true);
+    ui->btnLoadMedium->setDisabled(true);
+    ui->btnLoadHard->setDisabled(true);
 }

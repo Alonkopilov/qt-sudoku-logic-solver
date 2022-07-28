@@ -4,17 +4,18 @@
 #include "square.h"
 #include <QObject>
 #include <iostream>
-#include <algorithm>
+#include <QThread>
 
-class Board : public QObject
+class Board : public QThread
 {
     Q_OBJECT
 
 public:
     Board();
     bool isBoardCompleted() const;
-    void performInitialBoardCheck();
     void initializeBoard(const int arr[81]);
+    void toggleSlowSolve(const bool& isSlow);
+    void run() override; // Start solver
 
 signals:
     void uiSetBoardDigit(const int &row, const int &col, const int &digit, const bool &isPreset);
@@ -22,6 +23,7 @@ signals:
     void uiRemoveMarkup(const int& row, const int& col, const int& digit);
 
 private:
+    void performInitialBoardCheck();
     int checkForFinalDigit(Square& square);
     void checkForMarkups(Square& square);
     void setBoardDigit(const int &row, const int &col, const int &digit, const bool &isPreset);
@@ -29,7 +31,10 @@ private:
     bool checkSafe(const Square& square, const int& digitToCheck) const;
     int getBoardDigit(const int &row, const int &col);
     void makeCheck(int i, int j);
+    void wait();
+
     Square _squares[9][9];
+    bool isSlowSolver;
 };
 
 #endif // BOARD_H
