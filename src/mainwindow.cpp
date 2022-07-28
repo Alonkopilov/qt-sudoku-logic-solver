@@ -15,6 +15,8 @@ MainWindow::MainWindow(QWidget *parent)
     QObject::connect(&this->sudokuBoard, &Board::uiSetBoardDigit, this, &MainWindow::uiSetBoardDigit);
     QObject::connect(&this->sudokuBoard, &Board::uiAddMarkup, this, &MainWindow::uiAddMarkup);
     QObject::connect(&this->sudokuBoard, &Board::uiRemoveMarkup, this, &MainWindow::uiRemoveMarkup);
+    QObject::connect(&this->sudokuBoard, &QThread::finished, this, &MainWindow::finishSudoku);
+
 
     QObject::connect(this->ui->btnLoadEasy, &QAbstractButton::clicked, this, &MainWindow::loadSudoku);
     QObject::connect(this->ui->btnLoadMedium, &QAbstractButton::clicked, this, &MainWindow::loadSudoku);
@@ -140,12 +142,20 @@ void MainWindow::loadSudoku()
      ui->btnSolve->setDisabled(false);
 }
 
-void MainWindow::on_btnSolve_clicked()
+void MainWindow::finishSudoku()
 {
-    this->sudokuBoard.performInitialBoardCheck();
-    ui->btnSolve->setDisabled(true);
-
     ui->btnLoadEasy->setDisabled(false);
     ui->btnLoadMedium->setDisabled(false);
     ui->btnLoadHard->setDisabled(false);
+}
+
+void MainWindow::on_btnSolve_clicked()
+{
+    this->sudokuBoard.start();
+    //this->sudokuBoard.performInitialBoardCheck();
+    ui->btnSolve->setDisabled(true);
+
+    ui->btnLoadEasy->setDisabled(true);
+    ui->btnLoadMedium->setDisabled(true);
+    ui->btnLoadHard->setDisabled(true);
 }

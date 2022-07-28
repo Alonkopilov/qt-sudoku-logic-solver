@@ -23,6 +23,7 @@ public slots:
     void uiAddMarkup(const int& row, const int& col, const int& digit);
     void uiRemoveMarkup(const int& row, const int& col, const int& digit);
     void loadSudoku();
+    void finishSudoku();
 
 private slots:
     void on_btnSolve_clicked();
