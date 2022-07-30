@@ -71,11 +71,13 @@ void MainWindow::cleanLayout(QLayout *layout)
 QLabel *MainWindow::createFinalDigit(const int &digit, const bool &isPreset)
 {
     QLabel* num = new QLabel(QString::number(digit));
-    QString fontColor = isPreset ? "black" : "#4D8DEC";
+    QString fontColor = isPreset ? "#787878" : "#4D8DEC";
     num->setStyleSheet("QLabel { color : " + fontColor + "; }");
 
     QFont* font = new QFont();
+    font->setFamily("Rubik Light");
     font->setPointSize(30);
+    font->setBold(true);
     num->setAlignment(Qt::AlignCenter);
     num->setFont(*font);
 

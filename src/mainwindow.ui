@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>826</width>
-    <height>802</height>
+    <width>1238</width>
+    <height>730</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,18 +17,21 @@
    <enum>Qt::LeftToRight</enum>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(255, 255, 255);
+   <string notr="true">background-color: rgb(51, 51, 51);
 border-color: rgb(193, 125, 17);</string>
   </property>
   <property name="windowFilePath">
    <string/>
   </property>
+  <property name="inputMethodHints">
+   <set>Qt::ImhDigitsOnly</set>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>50</y>
+      <x>56</x>
+      <y>80</y>
       <width>611</width>
       <height>611</height>
      </rect>
@@ -42,8 +45,8 @@ border-color: rgb(193, 125, 17);</string>
    <widget class="Line" name="line_1">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>243</y>
+      <x>56</x>
+      <y>273</y>
       <width>611</width>
       <height>20</height>
      </rect>
@@ -65,8 +68,8 @@ background-color: rgba(255, 255, 0, 0);</string>
    <widget class="Line" name="line_2">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>446</y>
+      <x>56</x>
+      <y>476</y>
       <width>611</width>
       <height>20</height>
      </rect>
@@ -88,8 +91,8 @@ background-color: rgba(255, 255, 0, 0);</string>
    <widget class="Line" name="line_3">
     <property name="geometry">
      <rect>
-      <x>294</x>
-      <y>50</y>
+      <x>250</x>
+      <y>80</y>
       <width>20</width>
       <height>611</height>
      </rect>
@@ -111,8 +114,8 @@ background-color: rgba(255, 255, 0, 0);</string>
    <widget class="Line" name="line_4">
     <property name="geometry">
      <rect>
-      <x>496</x>
-      <y>50</y>
+      <x>452</x>
+      <y>80</y>
       <width>20</width>
       <height>611</height>
      </rect>
@@ -134,11 +137,15 @@ background-color: rgba(255, 255, 0, 0);</string>
    <widget class="QPushButton" name="btnSolve">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>670</y>
-      <width>611</width>
-      <height>26</height>
+      <x>690</x>
+      <y>540</y>
+      <width>491</width>
+      <height>61</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+font: 12pt &quot;Montserrat&quot;;</string>
     </property>
     <property name="text">
      <string>SOLVE</string>
@@ -156,14 +163,14 @@ background-color: rgba(255, 255, 0, 0);</string>
    <widget class="Line" name="line_5">
     <property name="geometry">
      <rect>
-      <x>158</x>
-      <y>50</y>
+      <x>114</x>
+      <y>80</y>
       <width>20</width>
       <height>611</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: #BECCDC;
+     <string notr="true">color: #2D2D2D;
 background-color: rgba(255, 255, 0, 0);</string>
     </property>
     <property name="frameShadow">
@@ -179,8 +186,8 @@ background-color: rgba(255, 255, 0, 0);</string>
    <widget class="Line" name="line_6">
     <property name="geometry">
      <rect>
-      <x>91</x>
-      <y>50</y>
+      <x>47</x>
+      <y>80</y>
       <width>20</width>
       <height>611</height>
      </rect>
@@ -202,14 +209,14 @@ background-color: rgba(255, 255, 0, 0);</string>
    <widget class="Line" name="line_7">
     <property name="geometry">
      <rect>
-      <x>225</x>
-      <y>50</y>
+      <x>181</x>
+      <y>80</y>
       <width>20</width>
       <height>611</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: #BECCDC;
+     <string notr="true">color: #2D2D2D;
 background-color: rgba(255, 255, 0, 0);</string>
     </property>
     <property name="frameShadow">
@@ -225,14 +232,14 @@ background-color: rgba(255, 255, 0, 0);</string>
    <widget class="Line" name="line_8">
     <property name="geometry">
      <rect>
-      <x>361</x>
-      <y>50</y>
+      <x>317</x>
+      <y>80</y>
       <width>20</width>
       <height>611</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: #BECCDC;
+     <string notr="true">color: #2D2D2D;
 background-color: rgba(255, 255, 0, 0);</string>
     </property>
     <property name="frameShadow">
@@ -248,14 +255,14 @@ background-color: rgba(255, 255, 0, 0);</string>
    <widget class="Line" name="line_9">
     <property name="geometry">
      <rect>
-      <x>428</x>
-      <y>50</y>
+      <x>384</x>
+      <y>80</y>
       <width>20</width>
       <height>611</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: #BECCDC;
+     <string notr="true">color: #2D2D2D;
 background-color: rgba(255, 255, 0, 0);</string>
     </property>
     <property name="frameShadow">
@@ -271,14 +278,14 @@ background-color: rgba(255, 255, 0, 0);</string>
    <widget class="Line" name="line_10">
     <property name="geometry">
      <rect>
-      <x>564</x>
-      <y>50</y>
+      <x>520</x>
+      <y>80</y>
       <width>20</width>
       <height>611</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: #BECCDC;
+     <string notr="true">color: #2D2D2D;
 background-color: rgba(255, 255, 0, 0);</string>
     </property>
     <property name="frameShadow">
@@ -294,14 +301,14 @@ background-color: rgba(255, 255, 0, 0);</string>
    <widget class="Line" name="line_11">
     <property name="geometry">
      <rect>
-      <x>631</x>
-      <y>50</y>
+      <x>587</x>
+      <y>80</y>
       <width>20</width>
       <height>611</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: #BECCDC;
+     <string notr="true">color: #2D2D2D;
 background-color: rgba(255, 255, 0, 0);</string>
     </property>
     <property name="frameShadow">
@@ -317,8 +324,8 @@ background-color: rgba(255, 255, 0, 0);</string>
    <widget class="Line" name="line_12">
     <property name="geometry">
      <rect>
-      <x>699</x>
-      <y>50</y>
+      <x>655</x>
+      <y>80</y>
       <width>20</width>
       <height>611</height>
      </rect>
@@ -340,14 +347,14 @@ background-color: rgba(255, 255, 0, 0);</string>
    <widget class="Line" name="line_13">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>582</y>
+      <x>56</x>
+      <y>612</y>
       <width>611</width>
       <height>20</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: #BECCDC;
+     <string notr="true">color: #2D2D2D;
 background-color: rgba(255, 255, 0, 0);</string>
     </property>
     <property name="frameShadow">
@@ -363,8 +370,8 @@ background-color: rgba(255, 255, 0, 0);</string>
    <widget class="Line" name="line_14">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>650</y>
+      <x>56</x>
+      <y>680</y>
       <width>611</width>
       <height>20</height>
      </rect>
@@ -386,14 +393,14 @@ background-color: rgba(255, 255, 0, 0);</string>
    <widget class="Line" name="line_15">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>515</y>
+      <x>56</x>
+      <y>545</y>
       <width>611</width>
       <height>20</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: #BECCDC;
+     <string notr="true">color: #2D2D2D;
 background-color: rgba(255, 255, 0, 0);</string>
     </property>
     <property name="frameShadow">
@@ -409,14 +416,14 @@ background-color: rgba(255, 255, 0, 0);</string>
    <widget class="Line" name="line_16">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>379</y>
+      <x>56</x>
+      <y>409</y>
       <width>611</width>
       <height>20</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: #BECCDC;
+     <string notr="true">color: #2D2D2D;
 background-color: rgba(255, 255, 0, 0);</string>
     </property>
     <property name="frameShadow">
@@ -432,14 +439,14 @@ background-color: rgba(255, 255, 0, 0);</string>
    <widget class="Line" name="line_17">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>312</y>
+      <x>56</x>
+      <y>342</y>
       <width>611</width>
       <height>20</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: #BECCDC;
+     <string notr="true">color: #2D2D2D;
 background-color: rgba(255, 255, 0, 0);</string>
     </property>
     <property name="frameShadow">
@@ -455,14 +462,14 @@ background-color: rgba(255, 255, 0, 0);</string>
    <widget class="Line" name="line_18">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>176</y>
+      <x>56</x>
+      <y>206</y>
       <width>611</width>
       <height>20</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: #BECCDC;
+     <string notr="true">color: #2D2D2D;
 background-color: rgba(255, 255, 0, 0);</string>
     </property>
     <property name="frameShadow">
@@ -478,14 +485,14 @@ background-color: rgba(255, 255, 0, 0);</string>
    <widget class="Line" name="line_19">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>109</y>
+      <x>56</x>
+      <y>139</y>
       <width>611</width>
       <height>20</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: #BECCDC;
+     <string notr="true">color: #2D2D2D;
 background-color: rgba(255, 255, 0, 0);</string>
     </property>
     <property name="frameShadow">
@@ -501,8 +508,8 @@ background-color: rgba(255, 255, 0, 0);</string>
    <widget class="Line" name="line_20">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>40</y>
+      <x>56</x>
+      <y>70</y>
       <width>611</width>
       <height>20</height>
      </rect>
@@ -522,58 +529,103 @@ background-color: rgba(255, 255, 0, 0);</string>
     </property>
    </widget>
    <widget class="QPushButton" name="btnLoadEasy">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>700</y>
-      <width>201</width>
-      <height>26</height>
+      <x>690</x>
+      <y>80</y>
+      <width>151</width>
+      <height>451</height>
      </rect>
     </property>
     <property name="accessibleName">
      <string>btnLoadEasy</string>
     </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+image: url(:/icons/icons/iconeasy.png);
+font: 12pt &quot;Montserrat&quot;;</string>
+    </property>
     <property name="text">
-     <string>Load Easy Sudoku</string>
+     <string>
+
+
+
+Load Easy</string>
+    </property>
+    <property name="checkable">
+     <bool>false</bool>
+    </property>
+    <property name="autoDefault">
+     <bool>false</bool>
+    </property>
+    <property name="default">
+     <bool>false</bool>
+    </property>
+    <property name="flat">
+     <bool>false</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="btnLoadMedium">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>700</y>
-      <width>211</width>
-      <height>26</height>
+      <x>850</x>
+      <y>80</y>
+      <width>161</width>
+      <height>451</height>
      </rect>
     </property>
     <property name="accessibleName">
      <string>btnLoadMedium</string>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+image: url(:/icons/icons/iconmedium.png);
+font: 12pt &quot;Montserrat&quot;;</string>
+    </property>
     <property name="text">
-     <string>Load Medium Sudoku</string>
+     <string>
+
+
+
+Load Medium</string>
     </property>
    </widget>
    <widget class="QPushButton" name="btnLoadHard">
     <property name="geometry">
      <rect>
-      <x>510</x>
-      <y>700</y>
-      <width>201</width>
-      <height>26</height>
+      <x>1020</x>
+      <y>80</y>
+      <width>161</width>
+      <height>451</height>
      </rect>
     </property>
     <property name="accessibleName">
      <string>btnLoadHard</string>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+image: url(:/icons/icons/iconhard.png);
+font: 12pt &quot;Montserrat&quot;;</string>
+    </property>
     <property name="text">
-     <string>Load Hard Sudoku</string>
+     <string>
+
+
+
+Load Hard</string>
     </property>
    </widget>
    <widget class="QCheckBox" name="cbSlowSolve">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>730</y>
+      <x>690</x>
+      <y>670</y>
       <width>201</width>
       <height>24</height>
      </rect>
@@ -581,10 +633,141 @@ background-color: rgba(255, 255, 0, 0);</string>
     <property name="accessibleName">
      <string>cbSlowSolve</string>
     </property>
+    <property name="styleSheet">
+     <string notr="true">font: 10pt &quot;Montserrat&quot;;
+color: rgb(255, 255, 255);</string>
+    </property>
     <property name="text">
      <string>Show solving process</string>
     </property>
    </widget>
+   <widget class="QTextEdit" name="textEdit">
+    <property name="geometry">
+     <rect>
+      <x>690</x>
+      <y>630</y>
+      <width>391</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 10pt &quot;Montserrat&quot;;
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="inputMethodHints">
+     <set>Qt::ImhDigitsOnly</set>
+    </property>
+    <property name="verticalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
+    <property name="horizontalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
+    <property name="lineWrapMode">
+     <enum>QTextEdit::WidgetWidth</enum>
+    </property>
+    <property name="readOnly">
+     <bool>false</bool>
+    </property>
+    <property name="markdown">
+     <string/>
+    </property>
+    <property name="html">
+     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Montserrat'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Open Sans'; font-size:12pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="placeholderText">
+     <string notr="true">004103800...</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>690</x>
+      <y>610</y>
+      <width>141</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 10pt &quot;Montserrat&quot;;
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>Load Sudoku String:</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+    <property name="margin">
+     <number>0</number>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>1090</x>
+      <y>630</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 10pt &quot;Montserrat&quot;;
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>Load</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>10</y>
+      <width>1141</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 22pt &quot;Montserrat&quot;;
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>Sudoku Solver - Solve your Sudoku !</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="Line" name="line_21">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>50</y>
+      <width>1141</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>3</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <zorder>line_21</zorder>
    <zorder>gridLayoutWidget</zorder>
    <zorder>btnSolve</zorder>
    <zorder>line_7</zorder>
@@ -611,13 +794,17 @@ background-color: rgba(255, 255, 0, 0);</string>
    <zorder>btnLoadMedium</zorder>
    <zorder>btnLoadHard</zorder>
    <zorder>cbSlowSolve</zorder>
+   <zorder>textEdit</zorder>
+   <zorder>label</zorder>
+   <zorder>pushButton</zorder>
+   <zorder>label_2</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>826</width>
+     <width>1238</width>
      <height>21</height>
     </rect>
    </property>
