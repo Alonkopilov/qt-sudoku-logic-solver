@@ -624,8 +624,8 @@ Load Hard</string>
    <widget class="QCheckBox" name="cbSlowSolve">
     <property name="geometry">
      <rect>
-      <x>690</x>
-      <y>670</y>
+      <x>1020</x>
+      <y>630</y>
       <width>201</width>
       <height>24</height>
      </rect>
@@ -641,56 +641,13 @@ color: rgb(255, 255, 255);</string>
      <string>Show solving process</string>
     </property>
    </widget>
-   <widget class="QTextEdit" name="textEdit">
-    <property name="geometry">
-     <rect>
-      <x>690</x>
-      <y>630</y>
-      <width>391</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">font: 10pt &quot;Montserrat&quot;;
-color: rgb(255, 255, 255);</string>
-    </property>
-    <property name="inputMethodHints">
-     <set>Qt::ImhDigitsOnly</set>
-    </property>
-    <property name="verticalScrollBarPolicy">
-     <enum>Qt::ScrollBarAlwaysOff</enum>
-    </property>
-    <property name="horizontalScrollBarPolicy">
-     <enum>Qt::ScrollBarAlwaysOff</enum>
-    </property>
-    <property name="lineWrapMode">
-     <enum>QTextEdit::WidgetWidth</enum>
-    </property>
-    <property name="readOnly">
-     <bool>false</bool>
-    </property>
-    <property name="markdown">
-     <string/>
-    </property>
-    <property name="html">
-     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-hr { height: 1px; border-width: 0; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Montserrat'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Open Sans'; font-size:12pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-    <property name="placeholderText">
-     <string notr="true">004103800...</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QPushButton" name="btnLoadSudoku">
     <property name="geometry">
      <rect>
       <x>690</x>
       <y>610</y>
-      <width>141</width>
-      <height>20</height>
+      <width>311</width>
+      <height>61</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -698,30 +655,7 @@ hr { height: 1px; border-width: 0; }
 color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>Load Sudoku String:</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-    </property>
-    <property name="margin">
-     <number>0</number>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>1090</x>
-      <y>630</y>
-      <width>91</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">font: 10pt &quot;Montserrat&quot;;
-color: rgb(255, 255, 255);</string>
-    </property>
-    <property name="text">
-     <string>Load</string>
+     <string>Load Custom Sudoku</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
@@ -794,9 +728,7 @@ color: rgb(255, 255, 255);</string>
    <zorder>btnLoadMedium</zorder>
    <zorder>btnLoadHard</zorder>
    <zorder>cbSlowSolve</zorder>
-   <zorder>textEdit</zorder>
-   <zorder>label</zorder>
-   <zorder>pushButton</zorder>
+   <zorder>btnLoadSudoku</zorder>
    <zorder>label_2</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">

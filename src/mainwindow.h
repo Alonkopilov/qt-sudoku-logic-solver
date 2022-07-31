@@ -34,6 +34,7 @@ public slots:
     void loadSudoku();
     void finishSudoku();
     void on_btnSolve_clicked();
+    void on_btnLoadSudoku_clicked();
 
 private:
     void uiGenerateBoard();

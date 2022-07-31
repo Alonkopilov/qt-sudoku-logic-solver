@@ -163,3 +163,18 @@ void MainWindow::on_btnSolve_clicked()
     ui->btnLoadMedium->setDisabled(true);
     ui->btnLoadHard->setDisabled(true);
 }
+
+void MainWindow::on_btnLoadSudoku_clicked()
+{
+    if (this->ui->btnLoadSudoku->text() == "Load Custom Sudoku")
+    {
+        this->ui->btnLoadSudoku->setText("Load Sudoku by difficulty");
+        // Show small editable sudoku board
+    }
+    else
+    {
+        this->ui->btnLoadSudoku->setText("Load Custom Sudoku");
+        // Show difficulty buttons
+    }
+}
+
