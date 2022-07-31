@@ -169,12 +169,28 @@ void MainWindow::on_btnLoadSudoku_clicked()
     if (this->ui->btnLoadSudoku->text() == "Load Custom Sudoku")
     {
         this->ui->btnLoadSudoku->setText("Load Sudoku by difficulty");
+        showDiffLoad();
         // Show small editable sudoku board
     }
     else
     {
         this->ui->btnLoadSudoku->setText("Load Custom Sudoku");
+        showCustomLoad();
         // Show difficulty buttons
     }
+}
+
+void MainWindow::showDiffLoad()
+{
+    this->ui->btnLoadEasy->setVisible(false);
+    this->ui->btnLoadMedium->setVisible(false);
+    this->ui->btnLoadHard->setVisible(false);
+}
+
+void MainWindow::showCustomLoad()
+{
+    this->ui->btnLoadEasy->setVisible(true);
+    this->ui->btnLoadMedium->setVisible(true);
+    this->ui->btnLoadHard->setVisible(true);
 }
 

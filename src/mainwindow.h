@@ -37,6 +37,9 @@ public slots:
     void on_btnLoadSudoku_clicked();
 
 private:
+    void showDiffLoad();
+    void showCustomLoad();
+
     void uiGenerateBoard();
     void cleanLayout(QLayout* layout);
     QLabel* createFinalDigit(const int& digit, const bool& isPreset);
