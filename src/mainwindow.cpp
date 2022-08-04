@@ -4,8 +4,7 @@
 const int EASY_SUDOKU[81] = {0,0,4,1,0,3,8,0,0,7,0,8,0,0,0,6,0,1,0,3,0,0,8,0,0,4,0,3,9,0,0,5,0,0,6,2,0,0,5,0,3,0,9,0,0,2,8,0,0,9,0,0,7,3,0,1,0,0,6,0,0,8,0,8,0,3,0,0,0,1,0,4,0,0,7,9,0,8,3,0,0};
 const int MEDIUM_SUDOKU[81] = {0,0,0,3,0,7,4,0,0,9,0,0,0,0,4,0,0,8,3,7,0,0,0,0,0,6,0,8,2,0,9,0,0,6,0,0,0,0,1,2,0,0,9,0,4,0,4,0,0,3,8,0,5,0,2,0,8,6,9,0,7,0,0,0,9,0,0,0,0,0,0,0,7,5,0,0,0,0,0,0,6};
 const int HARD_SUDOKU[81] = {4,0,0,6,0,8,0,0,0,9,1,0,0,3,2,8,0,6,0,8,3,0,1,0,0,0,2,0,0,0,8,0,0,0,0,0,0,0,0,1,0,0,3,0,5,5,0,8,0,7,4,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,2,0,0,0,7,0,0,9,6,4,0,3};
-
-const int COMP_SUDOKU[81] = {0, 4, 2, 6, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 7, 0, 0, 5, 3, 8, 0, 0, 1, 6, 0, 2, 0, 0, 5, 0, 0, 9, 0, 7, 0, 0, 0, 0, 8, 0, 6, 0, 0, 0,0, 2, 0, 7, 0, 0, 1, 0, 0, 8, 0, 4, 1, 0, 0, 2, 3, 6, 0, 0, 1, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 2, 8, 9, 0};
+//const int COMP_SUDOKU[81] = {0, 4, 2, 6, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 7, 0, 0, 5, 3, 8, 0, 0, 1, 6, 0, 2, 0, 0, 5, 0, 0, 9, 0, 7, 0, 0, 0, 0, 8, 0, 6, 0, 0, 0,0, 2, 0, 7, 0, 0, 1, 0, 0, 8, 0, 4, 1, 0, 0, 2, 3, 6, 0, 0, 1, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 2, 8, 9, 0};
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -67,13 +66,18 @@ void MainWindow::uiGenerateEditBoard()
         int row = i / 9;
         int col = i % 9;
 
-        QLabel* num = new QLabel("0");
-        num->setAlignment(Qt::AlignCenter);
+        EditingTableLabel* num = new EditingTableLabel();
+        //num->setAlignment(Qt::AlignCenter);
+        num->resize(50, 50);
         num->setStyleSheet("QLabel {color: #939EAA;}");
+        num->setText("0");
+        num->setAlignment(Qt::AlignCenter);
 
         QFont* font = new QFont();
         font->setFamily("Rubik Light");
         font->setPointSize(20);
+
+        //QObject::connect(&num, &QLabel::clicked, this, &MainWindow::on_btnLoadByCustomDiff_clicked);
 
         num->setFont(*font);
         ui->glEditBoard->addWidget(num, row, col);

@@ -3,6 +3,7 @@
 
 #include "board.h"
 #include "helper.h"
+#include "editingtablelabel.h"
 #include <QMainWindow>
 #include <iostream>
 #include <QLabel>
@@ -36,7 +37,6 @@ public slots:
     void loadSudoku();
     void finishSudoku();
     void on_btnSolve_clicked();
-    void on_btnLoadSudoku_clicked();
 
 private slots:
     void on_btnLoadByCustomDiff_clicked();

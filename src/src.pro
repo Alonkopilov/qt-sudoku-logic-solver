@@ -12,6 +12,7 @@ DEFINES += DEBUG
 
 SOURCES += \
     board.cpp \
+    editingtablelabel.cpp \
     helper.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -19,6 +20,7 @@ SOURCES += \
 
 HEADERS += \
     board.h \
+    editingtablelabel.h \
     helper.h \
     mainwindow.h \
     square.h
