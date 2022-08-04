@@ -6,6 +6,8 @@
 #include <QMainWindow>
 #include <iostream>
 #include <QLabel>
+#include <QLine>
+#include <QRegularExpression>
 
 #ifdef DEBUG
 #define DEBUG_PRNT(str) do { std::cout << "[debug] " + str << std::endl; } while( false )
@@ -36,11 +38,16 @@ public slots:
     void on_btnSolve_clicked();
     void on_btnLoadSudoku_clicked();
 
+private slots:
+    void on_btnLoadByCustomDiff_clicked();
+
 private:
     void showDiffLoad();
     void showCustomLoad();
 
     void uiGenerateBoard();
+    void uiGenerateEditBoard();
+    void setEditBoardVisibility(const bool& isVisible);
     void cleanLayout(QLayout* layout);
     QLabel* createFinalDigit(const int& digit, const bool& isPreset);
     Ui::MainWindow *ui;

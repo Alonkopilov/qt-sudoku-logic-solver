@@ -5,6 +5,7 @@
 #include <QObject>
 #include <iostream>
 #include <QThread>
+#include <chrono>
 
 class Board : public QThread
 {

@@ -5,6 +5,8 @@ const int EASY_SUDOKU[81] = {0,0,4,1,0,3,8,0,0,7,0,8,0,0,0,6,0,1,0,3,0,0,8,0,0,4
 const int MEDIUM_SUDOKU[81] = {0,0,0,3,0,7,4,0,0,9,0,0,0,0,4,0,0,8,3,7,0,0,0,0,0,6,0,8,2,0,9,0,0,6,0,0,0,0,1,2,0,0,9,0,4,0,4,0,0,3,8,0,5,0,2,0,8,6,9,0,7,0,0,0,9,0,0,0,0,0,0,0,7,5,0,0,0,0,0,0,6};
 const int HARD_SUDOKU[81] = {4,0,0,6,0,8,0,0,0,9,1,0,0,3,2,8,0,6,0,8,3,0,1,0,0,0,2,0,0,0,8,0,0,0,0,0,0,0,0,1,0,0,3,0,5,5,0,8,0,7,4,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,2,0,0,0,7,0,0,9,6,4,0,3};
 
+const int COMP_SUDOKU[81] = {0, 4, 2, 6, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 7, 0, 0, 5, 3, 8, 0, 0, 1, 6, 0, 2, 0, 0, 5, 0, 0, 9, 0, 7, 0, 0, 0, 0, 8, 0, 6, 0, 0, 0,0, 2, 0, 7, 0, 0, 1, 0, 0, 8, 0, 4, 1, 0, 0, 2, 3, 6, 0, 0, 1, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 2, 8, 9, 0};
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -17,12 +19,15 @@ MainWindow::MainWindow(QWidget *parent)
     QObject::connect(&this->sudokuBoard, &Board::uiRemoveMarkup, this, &MainWindow::uiRemoveMarkup);
     QObject::connect(&this->sudokuBoard, &QThread::finished, this, &MainWindow::finishSudoku);
 
-
     QObject::connect(this->ui->btnLoadEasy, &QAbstractButton::clicked, this, &MainWindow::loadSudoku);
     QObject::connect(this->ui->btnLoadMedium, &QAbstractButton::clicked, this, &MainWindow::loadSudoku);
     QObject::connect(this->ui->btnLoadHard, &QAbstractButton::clicked, this, &MainWindow::loadSudoku);
+    QObject::connect(this->ui->btnLoadByCustomDiff, &QAbstractButton::clicked, this, &MainWindow::on_btnLoadByCustomDiff_clicked);
 
     uiGenerateBoard();
+    uiGenerateEditBoard();
+    setEditBoardVisibility(false);
+
     ui->btnLoadEasy->setDisabled(true);
     this->sudokuBoard.initializeBoard(EASY_SUDOKU);
 }
@@ -53,6 +58,47 @@ void MainWindow::uiGenerateBoard()
 
         ui->glMainBoard->addLayout(layout, row, col);
     }
+}
+
+void MainWindow::uiGenerateEditBoard()
+{
+    for (int i = 0; i < 81; i++)
+    {
+        int row = i / 9;
+        int col = i % 9;
+
+        QLabel* num = new QLabel("0");
+        num->setAlignment(Qt::AlignCenter);
+        num->setStyleSheet("QLabel {color: #939EAA;}");
+
+        QFont* font = new QFont();
+        font->setFamily("Rubik Light");
+        font->setPointSize(20);
+
+        num->setFont(*font);
+        ui->glEditBoard->addWidget(num, row, col);
+    }
+}
+
+void MainWindow::setEditBoardVisibility(const bool &isVisible)
+{
+    QRegularExpression exp("line_2[2-9]|line_3[0-9]|line_4[0-2]"); // Range of line_22 to line_42 -> edit board line IDs
+    QList<QWidget*> editBoardLines = ui->centralwidget->findChildren<QWidget*>(exp);
+    for (int i = 0; i < editBoardLines.size(); i++)
+    {
+        editBoardLines[i]->setVisible(isVisible);
+    }
+
+    for (int i = 0; i < 81; i++)
+    {
+        int row = i / 9;
+        int col = i % 9;
+        QLabel* editSquare = (QLabel*)ui->glEditBoard->itemAtPosition(row, col);
+
+        editSquare->setVisible(isVisible);
+    }
+
+
 }
 
 void MainWindow::cleanLayout(QLayout *layout)
@@ -164,33 +210,38 @@ void MainWindow::on_btnSolve_clicked()
     ui->btnLoadHard->setDisabled(true);
 }
 
-void MainWindow::on_btnLoadSudoku_clicked()
-{
-    if (this->ui->btnLoadSudoku->text() == "Load Custom Sudoku")
-    {
-        this->ui->btnLoadSudoku->setText("Load Sudoku by difficulty");
-        showDiffLoad();
-        // Show small editable sudoku board
-    }
-    else
-    {
-        this->ui->btnLoadSudoku->setText("Load Custom Sudoku");
-        showCustomLoad();
-        // Show difficulty buttons
-    }
-}
-
 void MainWindow::showDiffLoad()
-{
-    this->ui->btnLoadEasy->setVisible(false);
-    this->ui->btnLoadMedium->setVisible(false);
-    this->ui->btnLoadHard->setVisible(false);
-}
-
-void MainWindow::showCustomLoad()
 {
     this->ui->btnLoadEasy->setVisible(true);
     this->ui->btnLoadMedium->setVisible(true);
     this->ui->btnLoadHard->setVisible(true);
+    setEditBoardVisibility(false);
+}
+
+void MainWindow::showCustomLoad()
+{
+    this->ui->btnLoadEasy->setVisible(false);
+    this->ui->btnLoadMedium->setVisible(false);
+    this->ui->btnLoadHard->setVisible(false);
+    setEditBoardVisibility(true);
+}
+
+
+void MainWindow::on_btnLoadByCustomDiff_clicked()
+{
+    if (this->ui->btnLoadByCustomDiff->text() == "Load Custom Sudoku")    //If the program is in "Difficulty Load" mode, switch to "Custom Load" mode
+    {
+        this->ui->btnLoadByCustomDiff->setText("Load Sudoku by difficulty");
+        showCustomLoad();
+        this->ui->btnSolve->setText("LOAD TO MAIN BOARD");
+        QObject::connect(this->ui->btnSolve, &QAbstractButton::clicked, this, &MainWindow::on_btnSolve_clicked);
+    }
+    else                                                                //If the program is in "Custom Load" mode, switch to "Difficulty Load" mode
+    {
+        this->ui->btnLoadByCustomDiff->setText("Load Custom Sudoku");
+        showDiffLoad();
+        this->ui->btnSolve->setText("SOLVE");
+        QObject::connect(this->ui->btnSolve, &QAbstractButton::clicked, this, &MainWindow::on_btnSolve_clicked);
+    }
 }
 
