@@ -34,17 +34,15 @@ public slots:
     void uiSetBoardDigit(const int &row, const int &col, const int &digit, const bool &isPreset);
     void uiAddMarkup(const int& row, const int& col, const int& digit);
     void uiRemoveMarkup(const int& row, const int& col, const int& digit);
+    void uiFocusNextEditingSquare(EditingTableLabel* editLabel);
     void loadSudoku();
     void finishSudoku();
     void on_btnSolve_clicked();
-
-private slots:
     void on_btnLoadByCustomDiff_clicked();
 
 private:
     void showDiffLoad();
     void showCustomLoad();
-
     void uiGenerateBoard();
     void uiGenerateEditBoard();
     void setEditBoardVisibility(const bool& isVisible);

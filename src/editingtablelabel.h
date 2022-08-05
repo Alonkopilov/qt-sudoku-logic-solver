@@ -18,6 +18,7 @@ public:
 signals:
     void highlightLabel();
     void editLabelFromKeyValue(const QString& digitPressed);
+    void highlightNextLabel(EditingTableLabel* editLabel);
 
 public slots:
     void uiHighlightLabel();

@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
     QObject::connect(this->ui->btnLoadEasy, &QAbstractButton::clicked, this, &MainWindow::loadSudoku);
     QObject::connect(this->ui->btnLoadMedium, &QAbstractButton::clicked, this, &MainWindow::loadSudoku);
     QObject::connect(this->ui->btnLoadHard, &QAbstractButton::clicked, this, &MainWindow::loadSudoku);
-    QObject::connect(this->ui->btnLoadByCustomDiff, &QAbstractButton::clicked, this, &MainWindow::on_btnLoadByCustomDiff_clicked);
+    //QObject::connect(this->ui->btnLoadByCustomDiff, &QAbstractButton::clicked, this, &MainWindow::on_btnLoadByCustomDiff_clicked);
 
     uiGenerateBoard();
     uiGenerateEditBoard();
@@ -67,17 +67,16 @@ void MainWindow::uiGenerateEditBoard()
         int col = i % 9;
 
         EditingTableLabel* num = new EditingTableLabel();
-        //num->setAlignment(Qt::AlignCenter);
+        QObject::connect(num, &EditingTableLabel::highlightNextLabel, this, &MainWindow::uiFocusNextEditingSquare);
+        num->setObjectName(QString::fromStdString("lEdit" + std::to_string(i)));
         num->resize(50, 50);
         num->setStyleSheet("QLabel {color: #939EAA;}");
-        num->setText("0");
+        num->setText(" ");
         num->setAlignment(Qt::AlignCenter);
 
         QFont* font = new QFont();
         font->setFamily("Rubik Light");
         font->setPointSize(20);
-
-        //QObject::connect(&num, &QLabel::clicked, this, &MainWindow::on_btnLoadByCustomDiff_clicked);
 
         num->setFont(*font);
         ui->glEditBoard->addWidget(num, row, col);
@@ -168,6 +167,18 @@ void MainWindow::uiRemoveMarkup(const int &row, const int &col, const int &digit
     markup->setText(" ");
 }
 
+void MainWindow::uiFocusNextEditingSquare(EditingTableLabel* editLabel)
+{
+    int index = editLabel->objectName().mid(5,2).toInt();
+
+    if (index < 80)
+    {
+        EditingTableLabel* nextLabel = (EditingTableLabel*)ui->glEditBoard->itemAt(index + 1)->widget();
+        nextLabel->setFocus();
+        nextLabel->uiHighlightLabel();
+    }
+}
+
 void MainWindow::loadSudoku()
 {
      QWidget* buttonWidget = qobject_cast<QWidget*>(sender());
@@ -229,7 +240,6 @@ void MainWindow::showCustomLoad()
     this->ui->btnLoadHard->setVisible(false);
     setEditBoardVisibility(true);
 }
-
 
 void MainWindow::on_btnLoadByCustomDiff_clicked()
 {

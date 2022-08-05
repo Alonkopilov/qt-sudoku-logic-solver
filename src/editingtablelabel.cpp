@@ -14,26 +14,33 @@ EditingTableLabel::EditingTableLabel(QWidget *parent) : QLabel(parent)
 
 void EditingTableLabel::uiHighlightLabel()
 {
+    //Set styling
     this->setStyleSheet("QLabel {background-color: #A2C1E0;}");
+
 }
 
 void EditingTableLabel::uiEditLabelFromKeyValue(const QString& digitPressed)
 {
+    //Check character validity
+    if (!std::isdigit(digitPressed.toStdString()[0])) return;
+
     //Set new digit
-    this->setText(digitPressed);
+    digitPressed == "0" ? this->setText(" ") : this->setText(digitPressed);
 
     //Remove styling
     this->setStyleSheet("QLabel {background-color: #333333; color: #939EAA;}");
+
+    //Set focus to next square
+    emit this->highlightNextLabel(this);
 }
 
 bool EditingTableLabel::event(QEvent *myEvent)
 {
-    //std::cout << myEvent->type() << std::endl;
-    if (myEvent->type() == QEvent::MouseButtonRelease)
+    if (myEvent->type() == QEvent::MouseButtonPress)
     {
         std::cout << "Click event!" << std::endl;
         emit this->highlightLabel();
-        this->setFocus(Qt::FocusReason::NoFocusReason);
+        this->setFocus();
     }
 
     return QWidget::event(myEvent);
