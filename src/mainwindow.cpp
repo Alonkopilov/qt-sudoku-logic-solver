@@ -172,6 +172,7 @@ void MainWindow::uiFocusNextEditingSquare(EditingTableLabel* editLabel)
 {
     int index = editLabel->objectName().mid(5,2).toInt();
 
+    this->ui->btnSolve->setEnabled(true);
     if (index < 80)
     {
         EditingTableLabel* nextLabel = (EditingTableLabel*)ui->glEditBoard->itemAt(index + 1)->widget();
@@ -183,7 +184,7 @@ void MainWindow::uiFocusNextEditingSquare(EditingTableLabel* editLabel)
 
 void MainWindow::uiRemoveFocusFromPrevEditingSquare(EditingTableLabel* editLabel)
 {
-    if (this->lastHighlighted != nullptr)
+    if (this->lastHighlighted != nullptr && editLabel->objectName() != this->lastHighlighted->objectName())
     {
         this->lastHighlighted->uiUnhighlightLabel();
     }
