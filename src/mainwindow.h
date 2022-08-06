@@ -35,12 +35,14 @@ public slots:
     void uiAddMarkup(const int& row, const int& col, const int& digit);
     void uiRemoveMarkup(const int& row, const int& col, const int& digit);
     void uiFocusNextEditingSquare(EditingTableLabel* editLabel);
+    void uiRemoveFocusFromPrevEditingSquare(EditingTableLabel* editLabel);
     void loadSudoku();
     void finishSudoku();
     void on_btnSolve_clicked();
     void on_btnLoadByCustomDiff_clicked();
 
 private:
+    void transferFromEditingToMainBoard();
     void showDiffLoad();
     void showCustomLoad();
     void uiGenerateBoard();
@@ -48,7 +50,9 @@ private:
     void setEditBoardVisibility(const bool& isVisible);
     void cleanLayout(QLayout* layout);
     QLabel* createFinalDigit(const int& digit, const bool& isPreset);
+
     Ui::MainWindow *ui;
+    EditingTableLabel* lastHighlighted;
     Board sudokuBoard;
 };
 #endif // MAINWINDOW_H
