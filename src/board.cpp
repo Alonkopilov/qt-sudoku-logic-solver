@@ -86,7 +86,18 @@ void Board::toggleSlowSolve(const bool &isSlow)
 
 void Board::run() {
     std::cout << "--Solving Started--" << std::endl;
+
+    auto t1 = std::chrono::high_resolution_clock::now();
     this->performInitialBoardCheck();
+    auto t2 = std::chrono::high_resolution_clock::now();
+
+    /* Getting number of milliseconds as an integer. */
+    auto ms_int = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
+
+    /* Getting number of milliseconds as a double. */
+    std::chrono::duration<double, std::milli> ms_double = t2 - t1;
+
+    std::cout << ms_double.count() << "ms\n";
 }
 
 int Board::performSquareGroupCheck(const int &squareGroupRow, const int &squareGroupCol)

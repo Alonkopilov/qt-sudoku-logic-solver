@@ -3,9 +3,12 @@
 
 #include "board.h"
 #include "helper.h"
+#include "editingtablelabel.h"
 #include <QMainWindow>
 #include <iostream>
 #include <QLabel>
+#include <QLine>
+#include <QRegularExpression>
 
 #ifdef DEBUG
 #define DEBUG_PRNT(str) do { std::cout << "[debug] " + str << std::endl; } while( false )
@@ -31,15 +34,25 @@ public slots:
     void uiSetBoardDigit(const int &row, const int &col, const int &digit, const bool &isPreset);
     void uiAddMarkup(const int& row, const int& col, const int& digit);
     void uiRemoveMarkup(const int& row, const int& col, const int& digit);
+    void uiFocusNextEditingSquare(EditingTableLabel* editLabel);
+    void uiRemoveFocusFromPrevEditingSquare(EditingTableLabel* editLabel);
     void loadSudoku();
     void finishSudoku();
     void on_btnSolve_clicked();
+    void on_btnLoadByCustomDiff_clicked();
 
 private:
+    void transferFromEditingToMainBoard();
+    void showDiffLoad();
+    void showCustomLoad();
     void uiGenerateBoard();
+    void uiGenerateEditBoard();
+    void setEditBoardVisibility(const bool& isVisible);
     void cleanLayout(QLayout* layout);
     QLabel* createFinalDigit(const int& digit, const bool& isPreset);
+
     Ui::MainWindow *ui;
+    EditingTableLabel* lastHighlighted;
     Board sudokuBoard;
 };
 #endif // MAINWINDOW_H

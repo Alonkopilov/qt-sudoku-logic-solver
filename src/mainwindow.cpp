@@ -4,6 +4,7 @@
 const int EASY_SUDOKU[81] = {0,0,4,1,0,3,8,0,0,7,0,8,0,0,0,6,0,1,0,3,0,0,8,0,0,4,0,3,9,0,0,5,0,0,6,2,0,0,5,0,3,0,9,0,0,2,8,0,0,9,0,0,7,3,0,1,0,0,6,0,0,8,0,8,0,3,0,0,0,1,0,4,0,0,7,9,0,8,3,0,0};
 const int MEDIUM_SUDOKU[81] = {0,0,0,3,0,7,4,0,0,9,0,0,0,0,4,0,0,8,3,7,0,0,0,0,0,6,0,8,2,0,9,0,0,6,0,0,0,0,1,2,0,0,9,0,4,0,4,0,0,3,8,0,5,0,2,0,8,6,9,0,7,0,0,0,9,0,0,0,0,0,0,0,7,5,0,0,0,0,0,0,6};
 const int HARD_SUDOKU[81] = {4,0,0,6,0,8,0,0,0,9,1,0,0,3,2,8,0,6,0,8,3,0,1,0,0,0,2,0,0,0,8,0,0,0,0,0,0,0,0,1,0,0,3,0,5,5,0,8,0,7,4,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,2,0,0,0,7,0,0,9,6,4,0,3};
+//const int COMP_SUDOKU[81] = {0, 4, 2, 6, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 7, 0, 0, 5, 3, 8, 0, 0, 1, 6, 0, 2, 0, 0, 5, 0, 0, 9, 0, 7, 0, 0, 0, 0, 8, 0, 6, 0, 0, 0,0, 2, 0, 7, 0, 0, 1, 0, 0, 8, 0, 4, 1, 0, 0, 2, 3, 6, 0, 0, 1, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 2, 8, 9, 0};
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -17,13 +18,16 @@ MainWindow::MainWindow(QWidget *parent)
     QObject::connect(&this->sudokuBoard, &Board::uiRemoveMarkup, this, &MainWindow::uiRemoveMarkup);
     QObject::connect(&this->sudokuBoard, &QThread::finished, this, &MainWindow::finishSudoku);
 
-
     QObject::connect(this->ui->btnLoadEasy, &QAbstractButton::clicked, this, &MainWindow::loadSudoku);
     QObject::connect(this->ui->btnLoadMedium, &QAbstractButton::clicked, this, &MainWindow::loadSudoku);
     QObject::connect(this->ui->btnLoadHard, &QAbstractButton::clicked, this, &MainWindow::loadSudoku);
 
     uiGenerateBoard();
+    uiGenerateEditBoard();
+    setEditBoardVisibility(false);
+
     ui->btnLoadEasy->setDisabled(true);
+    this->lastHighlighted = nullptr;
     this->sudokuBoard.initializeBoard(EASY_SUDOKU);
 }
 
@@ -53,6 +57,52 @@ void MainWindow::uiGenerateBoard()
 
         ui->glMainBoard->addLayout(layout, row, col);
     }
+}
+
+void MainWindow::uiGenerateEditBoard()
+{
+    for (int i = 0; i < 81; i++)
+    {
+        int row = i / 9;
+        int col = i % 9;
+
+        EditingTableLabel* num = new EditingTableLabel();
+        QObject::connect(num, &EditingTableLabel::highlightNextLabel, this, &MainWindow::uiFocusNextEditingSquare);
+        QObject::connect(num, &EditingTableLabel::unhighlightPrevLabel, this, &MainWindow::uiRemoveFocusFromPrevEditingSquare);
+        num->setObjectName(QString::fromStdString("lEdit" + std::to_string(i)));
+        num->resize(50, 50);
+        num->setStyleSheet("QLabel {color: #939EAA;}");
+        num->setText(" ");
+        num->setAlignment(Qt::AlignCenter);
+
+        QFont* font = new QFont();
+        font->setFamily("Rubik Light");
+        font->setPointSize(20);
+
+        num->setFont(*font);
+        ui->glEditBoard->addWidget(num, row, col);
+    }
+}
+
+void MainWindow::setEditBoardVisibility(const bool &isVisible)
+{
+    QRegularExpression exp("line_2[2-9]|line_3[0-9]|line_4[0-2]"); // Range of line_22 to line_42 -> edit board line IDs
+    QList<QWidget*> editBoardLines = ui->centralwidget->findChildren<QWidget*>(exp);
+    for (int i = 0; i < editBoardLines.size(); i++)
+    {
+        editBoardLines[i]->setVisible(isVisible);
+    }
+
+    for (int i = 0; i < 81; i++)
+    {
+        int row = i / 9;
+        int col = i % 9;
+        QLabel* editSquare = (QLabel*)ui->glEditBoard->itemAtPosition(row, col);
+
+        editSquare->setVisible(isVisible);
+    }
+
+
 }
 
 void MainWindow::cleanLayout(QLayout *layout)
@@ -118,6 +168,29 @@ void MainWindow::uiRemoveMarkup(const int &row, const int &col, const int &digit
     markup->setText(" ");
 }
 
+void MainWindow::uiFocusNextEditingSquare(EditingTableLabel* editLabel)
+{
+    int index = editLabel->objectName().mid(5,2).toInt();
+
+    this->ui->btnSolve->setEnabled(true);
+    if (index < 80)
+    {
+        EditingTableLabel* nextLabel = (EditingTableLabel*)ui->glEditBoard->itemAt(index + 1)->widget();
+        this->lastHighlighted = nextLabel;
+        nextLabel->setFocus();
+        nextLabel->uiHighlightLabel();
+    }
+}
+
+void MainWindow::uiRemoveFocusFromPrevEditingSquare(EditingTableLabel* editLabel)
+{
+    if (this->lastHighlighted != nullptr && editLabel->objectName() != this->lastHighlighted->objectName())
+    {
+        this->lastHighlighted->uiUnhighlightLabel();
+    }
+    this->lastHighlighted = editLabel;
+}
+
 void MainWindow::loadSudoku()
 {
      QWidget* buttonWidget = qobject_cast<QWidget*>(sender());
@@ -154,12 +227,67 @@ void MainWindow::finishSudoku()
 
 void MainWindow::on_btnSolve_clicked()
 {
+    if (this->ui->btnSolve->text() == "LOAD TO MAIN BOARD")
+    {
+        uiGenerateBoard();
+        transferFromEditingToMainBoard();
+    }
+
     this->sudokuBoard.toggleSlowSolve(this->ui->cbSlowSolve->isChecked());
     this->sudokuBoard.start();
-
     ui->btnSolve->setDisabled(true);
 
     ui->btnLoadEasy->setDisabled(true);
     ui->btnLoadMedium->setDisabled(true);
     ui->btnLoadHard->setDisabled(true);
+
 }
+
+void MainWindow::showDiffLoad()
+{
+    this->ui->btnLoadEasy->setVisible(true);
+    this->ui->btnLoadMedium->setVisible(true);
+    this->ui->btnLoadHard->setVisible(true);
+    setEditBoardVisibility(false);
+}
+
+void MainWindow::showCustomLoad()
+{
+    this->ui->btnLoadEasy->setVisible(false);
+    this->ui->btnLoadMedium->setVisible(false);
+    this->ui->btnLoadHard->setVisible(false);
+    setEditBoardVisibility(true);
+}
+
+void MainWindow::on_btnLoadByCustomDiff_clicked()
+{
+    if (this->lastHighlighted != nullptr)
+        this->lastHighlighted->uiUnhighlightLabel();
+    if (this->ui->btnLoadByCustomDiff->text() == "Load Custom Sudoku")    //If the program is in "Difficulty Load" mode, switch to "Custom Load" mode
+    {
+        this->ui->btnLoadByCustomDiff->setText("Load Sudoku by difficulty");
+        showCustomLoad();
+        this->ui->btnSolve->setText("LOAD TO MAIN BOARD");
+    }
+    else                                                                //If the program is in "Custom Load" mode, switch to "Difficulty Load" mode
+    {
+        this->ui->btnLoadByCustomDiff->setText("Load Custom Sudoku");
+        showDiffLoad();
+        this->ui->btnSolve->setText("SOLVE");
+    }
+}
+
+void MainWindow::transferFromEditingToMainBoard()
+{
+    int arr[81] = {0};
+    QString curr = nullptr;
+
+    for (int i = 0; i < this->ui->glEditBoard->count(); i++)
+    {
+        curr = ((EditingTableLabel*)this->ui->glEditBoard->itemAt(i)->widget())->text();
+        curr == " " ? arr[i] = 0 : arr[i] = curr.toInt();
+    }
+
+    this->sudokuBoard.initializeBoard(arr);
+}
+
