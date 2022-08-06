@@ -261,6 +261,8 @@ void MainWindow::showCustomLoad()
 
 void MainWindow::on_btnLoadByCustomDiff_clicked()
 {
+    if (this->lastHighlighted != nullptr)
+        this->lastHighlighted->uiUnhighlightLabel();
     if (this->ui->btnLoadByCustomDiff->text() == "Load Custom Sudoku")    //If the program is in "Difficulty Load" mode, switch to "Custom Load" mode
     {
         this->ui->btnLoadByCustomDiff->setText("Load Sudoku by difficulty");
