@@ -97,10 +97,7 @@ void Board::run() {
     /* Getting number of milliseconds as a double. */
     std::chrono::duration<double, std::milli> ms_double = t2 - t1;
 
-    std::cout << ms_int.count() << "ms\n";
     std::cout << ms_double.count() << "ms\n";
-
-
 }
 
 int Board::performSquareGroupCheck(const int &squareGroupRow, const int &squareGroupCol)

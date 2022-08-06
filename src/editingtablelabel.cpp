@@ -40,7 +40,6 @@ bool EditingTableLabel::event(QEvent *myEvent)
 {
     if (myEvent->type() == QEvent::MouseButtonPress)
     {
-        std::cout << "Click event!" << std::endl;
         emit this->highlightLabel();
         emit this->unhighlightPrevLabel(this);
         this->setFocus();

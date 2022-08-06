@@ -265,14 +265,12 @@ void MainWindow::on_btnLoadByCustomDiff_clicked()
         this->ui->btnLoadByCustomDiff->setText("Load Sudoku by difficulty");
         showCustomLoad();
         this->ui->btnSolve->setText("LOAD TO MAIN BOARD");
-        QObject::connect(this->ui->btnSolve, &QAbstractButton::clicked, this, &MainWindow::on_btnSolve_clicked);
     }
     else                                                                //If the program is in "Custom Load" mode, switch to "Difficulty Load" mode
     {
         this->ui->btnLoadByCustomDiff->setText("Load Custom Sudoku");
         showDiffLoad();
         this->ui->btnSolve->setText("SOLVE");
-        QObject::connect(this->ui->btnSolve, &QAbstractButton::clicked, this, &MainWindow::on_btnSolve_clicked);
     }
 }
 
