@@ -20,6 +20,17 @@ Square::Square(const int &row, const int &col, const int &digit, const bool &isP
     this->_markups[8] = {false};
 }
 
+bool operator== (const Square &s1, const Square &s2)
+{
+    for (int i = 0; i < 9; i++)
+    {
+        if (s1._markups[i] != s2._markups[i])
+        {
+            return false;
+        }
+    }
+    return true;
+}
 
 bool Square::digitMarkupExists(const int &digit) const
 {
@@ -33,6 +44,7 @@ int Square::getDigit() const
 
 void Square::setDigit(const int &digit, const bool &isPreset)
 {
+    std::fill_n(_markups, 9, false);
     _digit = digit;
     _isPreset = isPreset;
 }
@@ -55,4 +67,30 @@ int Square::getRow() const
 int Square::getCol() const
 {
     return _col;
+}
+
+int Square::amountOfMarkups() const
+{
+    int amount = 0;
+
+    for (int i = 0; i < 9; i++)
+    {
+        if (this->_markups[i])
+        {
+            amount++;
+        }
+    }
+    return amount;
+}
+
+int Square::checkSingleMarkup() const
+{
+    for (int i = 0; i < 9; i++)
+    {
+        if (this->_markups[i])
+        {
+            return i + 1;
+        }
+    }
+    return 0;
 }

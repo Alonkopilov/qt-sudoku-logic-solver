@@ -16,6 +16,10 @@ public:
     void removeMarkup(const int& digit);
     int getRow() const;
     int getCol() const;
+    int amountOfMarkups() const;
+    int checkSingleMarkup() const; // For convenience
+
+    friend bool operator== (const Square &s1, const Square &s2);
 
 private:
     bool _markups[9];

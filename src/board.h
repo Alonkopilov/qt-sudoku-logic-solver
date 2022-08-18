@@ -25,6 +25,10 @@ signals:
 
 private:
     void performInitialBoardCheck();
+
+    bool checkForUniqueRectangle();
+    bool checkForOneMarkupAppearanceOfDigit(const int &squareGroupRow, const int &squareGroupCol);
+
     int checkForFinalDigit(Square& square);
     void checkForMarkups(Square& square);
     void setBoardDigit(const int &row, const int &col, const int &digit, const bool &isPreset);
@@ -36,6 +40,7 @@ private:
 
     Square _squares[9][9];
     bool isSlowSolver;
+    bool useAdvancedRules;
 };
 
 #endif // BOARD_H

@@ -673,11 +673,11 @@ color: rgb(255, 255, 255);</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 22pt &quot;Montserrat&quot;;
+     <string notr="true">font: 700 22pt &quot;Montserrat&quot;;
 color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>Sudoku Solver - Solve your Sudoku !</string>
+     <string>sudoku.bot</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -687,14 +687,13 @@ color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>60</y>
+      <y>50</y>
       <width>1141</width>
-      <height>1</height>
+      <height>16</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">
-color: rgb(255, 255, 255);</string>
+     <string notr="true">color: rgb(193, 193, 193);</string>
     </property>
     <property name="frameShadow">
      <enum>QFrame::Plain</enum>
@@ -1181,6 +1180,7 @@ background-color: rgba(255, 255, 0, 0);</string>
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
+   <zorder>label_2</zorder>
    <zorder>line_21</zorder>
    <zorder>gridLayoutWidget</zorder>
    <zorder>btnSolve</zorder>
@@ -1206,7 +1206,6 @@ background-color: rgba(255, 255, 0, 0);</string>
    <zorder>line_14</zorder>
    <zorder>cbSlowSolve</zorder>
    <zorder>btnLoadByCustomDiff</zorder>
-   <zorder>label_2</zorder>
    <zorder>gridLayoutWidget_2</zorder>
    <zorder>line_23</zorder>
    <zorder>line_24</zorder>
