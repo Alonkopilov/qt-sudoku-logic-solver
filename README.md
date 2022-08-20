@@ -1,4 +1,6 @@
-# sudoku-solver-bot
+![Cover Image](qt-sudoku-logic-solver/assets/cover.png?raw=true)
+
+# qt-sudoku-logic-solver
 
 A **non-guessing logic based** Sudoku solver written in Qt C++
 
