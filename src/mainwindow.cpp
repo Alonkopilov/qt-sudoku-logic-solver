@@ -85,20 +85,15 @@ void MainWindow::uiGenerateEditBoard()
 
 void MainWindow::setEditBoardVisibility(const bool &isVisible)
 {
-    QRegularExpression exp("line_2[2-9]|line_3[0-9]|line_4[0-2]"); // Range of line_22 to line_42 -> edit board line IDs
+    QRegularExpression exp("line_2[3-9]|line_3[0-9]|line_4[0-2]"); // Range of line_23 to line_42 -> editboard line IDs
     QList<QWidget*> editBoardLines = ui->centralwidget->findChildren<QWidget*>(exp);
     for (int i = 0; i < editBoardLines.size(); i++)
     {
         editBoardLines[i]->setVisible(isVisible);
     }
-
     for (int i = 0; i < 81; i++)
     {
-        int row = i / 9;
-        int col = i % 9;
-        QLabel* editSquare = (QLabel*)ui->glEditBoard->itemAtPosition(row, col);
-
-        editSquare->setVisible(isVisible);
+        ui->glEditBoard->itemAt(i)->widget()->setVisible(isVisible);
     }
 
 

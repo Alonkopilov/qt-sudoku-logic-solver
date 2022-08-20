@@ -10,7 +10,7 @@ A **non-guessing logic based** Sudoku solver written in Qt C++
 - Load example problems by difficulty.
 - Dark graphical user interface.
 - Cross platform project.
-- Pretty fast.
+- Fast.
 
 ## Download and Usage
 Go to the [Releases](https://github.com/Alonkopilov/qt-sudoku-logic-solver/releases) section and download the latest release.

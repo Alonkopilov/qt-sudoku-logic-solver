@@ -666,14 +666,15 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>50</x>
+      <x>60</x>
       <y>10</y>
-      <width>1141</width>
+      <width>1121</width>
       <height>51</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 700 22pt &quot;Montserrat&quot;;
+     <string notr="true">font: 700 32pt &quot;Montserrat&quot;;
+background-color: rgba(255, 255, 255, 0);
 color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
@@ -686,14 +687,14 @@ color: rgb(255, 255, 255);</string>
    <widget class="Line" name="line_21">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>50</y>
-      <width>1141</width>
-      <height>16</height>
+      <x>750</x>
+      <y>30</y>
+      <width>431</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: rgb(193, 193, 193);</string>
+     <string notr="true">color: rgb(255, 255, 255)</string>
     </property>
     <property name="frameShadow">
      <enum>QFrame::Plain</enum>
@@ -1180,8 +1181,30 @@ background-color: rgba(255, 255, 0, 0);</string>
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
-   <zorder>label_2</zorder>
+   <widget class="Line" name="line_22">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>30</y>
+      <width>431</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255)</string>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>3</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
    <zorder>line_21</zorder>
+   <zorder>label_2</zorder>
    <zorder>gridLayoutWidget</zorder>
    <zorder>btnSolve</zorder>
    <zorder>line_7</zorder>
@@ -1230,6 +1253,7 @@ background-color: rgba(255, 255, 0, 0);</string>
    <zorder>btnLoadHard</zorder>
    <zorder>btnLoadEasy</zorder>
    <zorder>btnLoadMedium</zorder>
+   <zorder>line_22</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
