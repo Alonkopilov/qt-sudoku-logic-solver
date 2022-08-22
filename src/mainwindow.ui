@@ -370,9 +370,18 @@ background-color: rgba(255, 255, 0, 0);</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 10pt &quot;Montserrat&quot;;
-background-color: rgb(42, 46, 50);
-color: rgb(255, 255, 255);</string>
+     <string notr="true">:enabled {
+background-color: #2C2C2C;
+border: 1px solid #2188e1; 
+color: rgb(255, 255, 255);
+font: 12pt &quot;Montserrat&quot;;
+}
+:disabled {
+background-color: rgba(255, 255, 255, 0);
+border: 1px solid #505050; 
+color: #505050;
+font: 12pt &quot;Montserrat&quot;;
+}</string>
     </property>
     <property name="text">
      <string>SOLVE</string>

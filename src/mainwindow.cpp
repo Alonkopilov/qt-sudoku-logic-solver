@@ -47,7 +47,7 @@ void MainWindow::uiGenerateBoard()
 
         for (int j = 0; j < 9; j++)
         {
-            QLabel* num = new QLabel(" ");
+            QLabel* num = new QLabel("1");
 
             num->setAlignment(Qt::AlignCenter);
             num->setStyleSheet("QLabel {color: #939EAA;}");
@@ -114,7 +114,7 @@ void MainWindow::cleanLayout(QLayout *layout)
 
 QLabel *MainWindow::createFinalDigit(const int &digit, const bool &isPreset)
 {
-    QLabel* num = new QLabel(QString::number(digit));
+    QLabel* num = new QLabel(digit != 0 ? QString::number(digit): " ");
     QString fontColor = isPreset ? "#787878" : "#4D8DEC";
     num->setStyleSheet("QLabel { color : " + fontColor + "; }");
 
@@ -130,8 +130,6 @@ QLabel *MainWindow::createFinalDigit(const int &digit, const bool &isPreset)
 
 void MainWindow::uiSetBoardDigit(const int &row, const int &col, const int &digit, const bool &isPreset)
 {
-    if (digit == 0) return;
-
     QGridLayout* squareLayout = (QGridLayout*)ui->glMainBoard->itemAtPosition(row, col);
     DEBUG_PRNT(Helper::string_format("setting ui digit %d at [%d,%d]", digit, row, col));
 
@@ -140,12 +138,30 @@ void MainWindow::uiSetBoardDigit(const int &row, const int &col, const int &digi
         return;
     }
 
-    // Remove all the markup widgets from the square layout
-    this->cleanLayout(squareLayout);
+    if (digit != 0) {
+        // Remove all the markup widgets from the square layout
+        this->cleanLayout(squareLayout);
 
-    // Create the final digit widget and add it to the square
-    QLabel* digitLabel = this->createFinalDigit(digit, isPreset);
-    squareLayout->addWidget(digitLabel);
+        // Create the final digit widget and add it to the square
+        QLabel* digitLabel = this->createFinalDigit(digit, isPreset);
+        squareLayout->addWidget(digitLabel);
+    }
+    else {
+        // Remove all the markup widgets from the square layout
+        this->cleanLayout(squareLayout);
+
+        for (int j = 0; j < 9; j++)
+        {
+            QLabel* num = new QLabel(" ");
+
+            num->setAlignment(Qt::AlignCenter);
+            num->setStyleSheet("QLabel {color: #939EAA;}");
+            squareLayout->addWidget(num, j / 3, j % 3);
+        }
+
+    }
+
+
 }
 
 void MainWindow::uiAddMarkup(const int &row, const int &col, const int &digit)
@@ -189,19 +205,24 @@ void MainWindow::loadSudoku()
 {
      QWidget* buttonWidget = qobject_cast<QWidget*>(sender());
      QString chosenDifficulty = buttonWidget->accessibleName();
-     uiGenerateBoard();
+     QString newBorderColorStylesheet = "";
 
      if (chosenDifficulty == "btnLoadEasy")
      {
         this->sudokuBoard.initializeBoard(EASY_SUDOKU);
+        this->ui->btnSolve->setStyleSheet(":enabled { background-color: #2C2C2C; border: 1px solid #2188e1; color: rgb(255, 255, 255); font: 12pt \"Montserrat\"; } :disabled { background-color: rgba(255, 255, 255, 0); border: 1px solid #505050; color: #505050; font: 12pt \"Montserrat\"; }");
      }
      if (chosenDifficulty == "btnLoadMedium")
      {
         this->sudokuBoard.initializeBoard(MEDIUM_SUDOKU);
+         this->ui->btnSolve->setStyleSheet(":enabled { background-color: #2C2C2C; border: 1px solid #fd7e14; color: rgb(255, 255, 255); font: 12pt \"Montserrat\"; } :disabled { background-color: rgba(255, 255, 255, 0); border: 1px solid #505050; color: #505050; font: 12pt \"Montserrat\"; }");
+
      }
      if (chosenDifficulty == "btnLoadHard")
      {
         this->sudokuBoard.initializeBoard(HARD_SUDOKU);
+         this->ui->btnSolve->setStyleSheet(":enabled { background-color: #2C2C2C; border: 1px solid #fa5252; color: rgb(255, 255, 255); font: 12pt \"Montserrat\"; } :disabled { background-color: rgba(255, 255, 255, 0); border: 1px solid #505050; color: #505050; font: 12pt \"Montserrat\"; }");
+
      }
 
      ui->btnLoadEasy->setDisabled(chosenDifficulty == "btnLoadEasy");
@@ -217,13 +238,13 @@ void MainWindow::finishSudoku()
     ui->btnLoadEasy->setDisabled(false);
     ui->btnLoadMedium->setDisabled(false);
     ui->btnLoadHard->setDisabled(false);
+
 }
 
 void MainWindow::on_btnSolve_clicked()
 {
     if (this->ui->btnSolve->text() == "LOAD TO MAIN BOARD")
     {
-        uiGenerateBoard();
         transferFromEditingToMainBoard();
     }
 
