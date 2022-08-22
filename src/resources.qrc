@@ -3,5 +3,6 @@
         <file>icons/iconeasy.png</file>
         <file>icons/iconhard.png</file>
         <file>icons/iconmedium.png</file>
+        <file>icons/icondisabled.png</file>
     </qresource>
 </RCC>
