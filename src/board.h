@@ -22,6 +22,7 @@ signals:
     void uiSetBoardDigit(const int &row, const int &col, const int &digit, const bool &isPreset);
     void uiAddMarkup(const int& row, const int& col, const int& digit);
     void uiRemoveMarkup(const int& row, const int& col, const int& digit);
+    void uiWriteToLog(const QString& str, const bool& isErr);
 
 private:
     void performInitialBoardCheck();

@@ -3,7 +3,7 @@
 
 const int EASY_SUDOKU[81] = {0,0,4,1,0,3,8,0,0,7,0,8,0,0,0,6,0,1,0,3,0,0,8,0,0,4,0,3,9,0,0,5,0,0,6,2,0,0,5,0,3,0,9,0,0,2,8,0,0,9,0,0,7,3,0,1,0,0,6,0,0,8,0,8,0,3,0,0,0,1,0,4,0,0,7,9,0,8,3,0,0};
 const int MEDIUM_SUDOKU[81] = {0,0,0,3,0,7,4,0,0,9,0,0,0,0,4,0,0,8,3,7,0,0,0,0,0,6,0,8,2,0,9,0,0,6,0,0,0,0,1,2,0,0,9,0,4,0,4,0,0,3,8,0,5,0,2,0,8,6,9,0,7,0,0,0,9,0,0,0,0,0,0,0,7,5,0,0,0,0,0,0,6};
-const int HARD_SUDOKU[81] = {4,0,0,6,0,8,0,0,0,9,1,0,0,3,2,8,0,6,0,8,3,0,1,0,0,0,2,0,0,0,8,0,0,0,0,0,0,0,0,1,0,0,3,0,5,5,0,8,0,7,4,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,2,0,0,0,7,0,0,9,6,4,0,3};
+const int HARD_SUDOKU[81] = {0,3,0,0,5,0,4,0,7,1,0,0,0,4,0,0,0,2,9,0,0,0,7,0,0,0,0,6,0,0,0,0,8,0,0,3,0,0,0,0,0,0,9,7,1,0,9,0,0,0,2,0,6,0,0,0,5,0,2,0,0,0,6,3,0,0,0,0,1,0,0,4,0,0,0,0,0,0,0,0,0};
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -15,7 +15,8 @@ MainWindow::MainWindow(QWidget *parent)
     QObject::connect(&this->sudokuBoard, &Board::uiSetBoardDigit, this, &MainWindow::uiSetBoardDigit);
     QObject::connect(&this->sudokuBoard, &Board::uiAddMarkup, this, &MainWindow::uiAddMarkup);
     QObject::connect(&this->sudokuBoard, &Board::uiRemoveMarkup, this, &MainWindow::uiRemoveMarkup);
-    QObject::connect(&this->sudokuBoard, &QThread::finished, this, &MainWindow::finishSudoku);
+    QObject::connect(&this->sudokuBoard, &Board::uiWriteToLog, this, &MainWindow::uiWriteToLog);
+    QObject::connect(&this->sudokuBoard, &QThread::finished, this, &MainWindow::enableDifficultyButtons);
 
     QObject::connect(this->ui->btnLoadEasy, &QAbstractButton::clicked, this, &MainWindow::loadSudoku);
     QObject::connect(this->ui->btnLoadMedium, &QAbstractButton::clicked, this, &MainWindow::loadSudoku);
@@ -201,11 +202,16 @@ void MainWindow::uiRemoveFocusFromPrevEditingSquare(EditingTableLabel* editLabel
     this->lastHighlighted = editLabel;
 }
 
+void MainWindow::uiWriteToLog(const QString& str, const bool& isErr)
+{
+    isErr ? this->ui->lLog->setStyleSheet(LOG_ERR_STYLESHEET) : this->ui->lLog->setStyleSheet(LOG_MSG_STYLESHEET);
+    this->ui->lLog->setText(str);
+}
+
 void MainWindow::loadSudoku()
 {
      QWidget* buttonWidget = qobject_cast<QWidget*>(sender());
      QString chosenDifficulty = buttonWidget->accessibleName();
-     QString newBorderColorStylesheet = "";
 
      if (chosenDifficulty == "btnLoadEasy")
      {
@@ -232,13 +238,12 @@ void MainWindow::loadSudoku()
      ui->btnSolve->setDisabled(false);
 }
 
-void MainWindow::finishSudoku()
+void MainWindow::enableDifficultyButtons()
 {
-    std::cout << "--Solving Completed--" << std::endl;
+    std::cout << "--Solving Completed--" << std::endl;  
     ui->btnLoadEasy->setDisabled(false);
     ui->btnLoadMedium->setDisabled(false);
     ui->btnLoadHard->setDisabled(false);
-
 }
 
 void MainWindow::on_btnSolve_clicked()

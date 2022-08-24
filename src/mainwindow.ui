@@ -1486,6 +1486,29 @@ background-color: rgba(255, 255, 0, 0);</string>
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
+   <widget class="QLabel" name="lLog">
+    <property name="geometry">
+     <rect>
+      <x>690</x>
+      <y>680</y>
+      <width>491</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 600 10pt &quot;Montserrat&quot;;
+color: rgb(250, 82, 82);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
    <zorder>line_21</zorder>
    <zorder>label_2</zorder>
    <zorder>gridLayoutWidget</zorder>
@@ -1537,6 +1560,7 @@ background-color: rgba(255, 255, 0, 0);</string>
    <zorder>btnLoadEasy</zorder>
    <zorder>btnLoadMedium</zorder>
    <zorder>line_22</zorder>
+   <zorder>lLog</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

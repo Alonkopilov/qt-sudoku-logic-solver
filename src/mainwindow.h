@@ -22,6 +22,9 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
+#define LOG_ERR_STYLESHEET "QLabel {font: 600 10pt \"Montserrat\"; color: #FF4235;}"
+#define LOG_MSG_STYLESHEET "QLabel {font: 600 10pt \"Montserrat\"; color: #6DC43E;}"
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -29,6 +32,8 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void loadSudoku();
+
 
 public slots:
     void uiSetBoardDigit(const int &row, const int &col, const int &digit, const bool &isPreset);
@@ -36,12 +41,12 @@ public slots:
     void uiRemoveMarkup(const int& row, const int& col, const int& digit);
     void uiFocusNextEditingSquare(EditingTableLabel* editLabel);
     void uiRemoveFocusFromPrevEditingSquare(EditingTableLabel* editLabel);
-    void loadSudoku();
-    void finishSudoku();
+    void uiWriteToLog(const QString& str, const bool& isErr);
     void on_btnSolve_clicked();
     void on_btnLoadByCustomDiff_clicked();
 
 private:
+    void enableDifficultyButtons();
     void transferFromEditingToMainBoard();
     void showDiffLoad();
     void showCustomLoad();

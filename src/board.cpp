@@ -97,17 +97,25 @@ void Board::toggleSlowSolve(const bool &isSlow)
 
 
 void Board::run() {
+    QString solvingSummary = "";
     std::cout << "--Solving Started--" << std::endl;
 
     auto t1 = std::chrono::high_resolution_clock::now();
     this->performInitialBoardCheck();
     auto t2 = std::chrono::high_resolution_clock::now();
 
-    // Getting number of milliseconds as a double.
-    // ms_int = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
     std::chrono::duration<double, std::milli> ms_double = t2 - t1;
 
-    std::cout << ms_double.count() / 1000 << "s\n";
+    if (this->isBoardCompleted())
+    {
+        solvingSummary = "Solving Completed, Took " + QString::number(ms_double.count() / 1000) + "s";
+        emit this->uiWriteToLog(solvingSummary, false);
+    }
+    else
+    {
+        solvingSummary = "Invalid sudoku, has more than one solution";
+        emit this->uiWriteToLog(solvingSummary, true);
+    }
 }
 
 
