@@ -11,13 +11,18 @@ Square::Square(const int &row, const int &col)
     : _row(row), _col(col)
 {
     std::fill_n(_markups, 9, false);
+    std::fill_n(_wasOnSquareBefore, 9, false);
     this->_markups[8] = {false};
+    this->_wasOnSquareBefore[8] = {false};
 }
 
 Square::Square(const int &row, const int &col, const int &digit, const bool &isPreset)
     : _digit(digit), _isPreset(isPreset), _row(row), _col(col)
 {
+    std::fill_n(_markups, 9, false);
+    std::fill_n(_wasOnSquareBefore, 9, false);
     this->_markups[8] = {false};
+    this->_wasOnSquareBefore[8] = {false};
 }
 
 bool operator== (const Square &s1, const Square &s2)
@@ -49,14 +54,21 @@ void Square::setDigit(const int &digit, const bool &isPreset)
     _isPreset = isPreset;
 }
 
-void Square::setMarkup(const int &digit)
+bool Square::setMarkup(const int &digit)
 {
-    _markups[digit - 1] = true;
+    if (!this->_wasOnSquareBefore[digit - 1]) {
+        _markups[digit - 1] = true;
+        return true;
+    }
+    return false;
 }
 
 void Square::removeMarkup(const int &digit)
 {
-     _markups[digit - 1] = false;
+    if (this->_markups[digit - 1]) {
+        _markups[digit - 1] = false;
+        _wasOnSquareBefore[digit - 1] = true;
+    }
 }
 
 int Square::getRow() const
