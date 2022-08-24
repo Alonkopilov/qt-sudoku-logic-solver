@@ -26,6 +26,23 @@ void Board::setBoardDigit(const int &row, const int &col, const int &digit, cons
     emit this->uiSetBoardDigit(row, col, digit, isPreset); // Set in GUI
 }
 
+void Board::setBoardMarkup(const int &row, const int &col, const int &digit, const bool &remove)
+{
+    if (remove)
+    {
+        this->_squares[row][col].removeMarkup(digit);
+        emit this->uiRemoveMarkup(row, col, digit);
+    }
+    else
+    {
+        if (this->_squares[row][col].setMarkup(digit))
+        {
+            emit this->uiAddMarkup(row, col, digit);
+        }
+    }
+    this->wait();
+}
+
 int Board::getBoardDigit(const int &row, const int &col)
 {
     return this->_squares[row][col].getDigit();
@@ -42,9 +59,6 @@ void Board::performInitialBoardCheck()
         makeCheck(0, 0);
     }
 }
-
-
-
 
 
 void Board::makeCheck(int j, int i)
@@ -117,24 +131,6 @@ void Board::run() {
         emit this->uiWriteToLog(solvingSummary, true);
     }
 }
-
-
-/*
-void Board::run() {
-    std::cout << "--Solving Started--" << std::endl;
-    time_t start, end;
-
-    time(&start);
-    //std::ios_base::sync_with_stdio(false);
-    this->performInitialBoardCheck();
-    time(&end);
-
-    Getting number of milliseconds as a double.
-    double time_taken = double(end - start);
-
-    std::cout << std::fixed << std::setprecision(20) << time_taken << "ms\n";
-}
-*/
 
 int Board::performSquareGroupCheck(const int &squareGroupRow, const int &squareGroupCol)
 {
@@ -234,6 +230,7 @@ bool Board::checkForOneMarkupAppearanceOfDigit(const int &squareGroupRow, const 
 
 bool Board::checkForUniqueRectangle()
 {
+    bool recheckGroups = false;
     for (int i = 0; i < 9; i++)
     {
         for (int j = 0; j < 9; j++)
@@ -250,20 +247,20 @@ bool Board::checkForUniqueRectangle()
                     {
                         if (this->_squares[i][j].digitMarkupExists(d) && this->_squares[r][c].digitMarkupExists(d))
                         {
-                            this->_squares[r][c].removeMarkup(d);
-                            emit this->uiRemoveMarkup(r, c, d);
+                            this->setBoardMarkup(r, c, d, true);
+                            recheckGroups = true;
                         }
                     }
                     if (this->_squares[r][c].amountOfMarkups() == 1)
                     {
                         setBoardDigit(r, c, this->_squares[r][c].checkSingleMarkup(), false);
+                        recheckGroups = true;
                     }
-                    return true;
                 }
             }
         }
     }
-    return false;
+    return recheckGroups;
 }
 
 int Board::checkForFinalDigit(Square &square)
@@ -290,17 +287,13 @@ void Board::checkForMarkups(Square &square)
     {
         if (square.getDigit() == 0 && checkSafe(square, i))
         {
-            square.setMarkup(i);
-            emit this->uiAddMarkup(square.getRow(), square.getCol(), i);
-            this->wait();
+            this->setBoardMarkup(square.getRow(), square.getCol(), i, false);
         }
         else
         {
             if (square.digitMarkupExists(i))
             {
-                square.removeMarkup(i);
-                emit this->uiRemoveMarkup(square.getRow(), square.getCol(), i);
-                this->wait();
+                this->setBoardMarkup(square.getRow(), square.getCol(), i, true);
             }
         }
     }

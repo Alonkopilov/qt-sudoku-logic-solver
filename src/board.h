@@ -27,12 +27,14 @@ signals:
 private:
     void performInitialBoardCheck();
 
+    // Sudoku strategies
     bool checkForUniqueRectangle();
     bool checkForOneMarkupAppearanceOfDigit(const int &squareGroupRow, const int &squareGroupCol);
 
     int checkForFinalDigit(Square& square);
     void checkForMarkups(Square& square);
     void setBoardDigit(const int &row, const int &col, const int &digit, const bool &isPreset);
+    void setBoardMarkup(const int &row, const int &col, const int &digit, const bool &remove);
     int performSquareGroupCheck(const int& squareGroupRow, const int& squareGroupCol);
     bool checkSafe(const Square& square, const int& digitToCheck) const;
     int getBoardDigit(const int &row, const int &col);
