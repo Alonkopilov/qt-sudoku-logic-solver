@@ -228,6 +228,33 @@ bool Board::checkForOneMarkupAppearanceOfDigit(const int &squareGroupRow, const 
     return false;
 }
 
+bool Board::checkForNakedPairs(const int &i, const int &j, const int &i2, const int &j2)
+{
+    std::pair<int, int> pair = this->_squares[i][j].checkPairOfMarkups();
+    bool recheckGroups = false;
+
+    if (i == i2) // Naked pair in the same row
+    {
+        for (int c = 0; c < 9; c++)
+        {
+            if ((c != j && c != j2) && (this->_squares[i][c].removeMarkup(pair.first) || this->_squares[i][c].removeMarkup(pair.second)))
+            {
+                recheckGroups = true;
+            }
+        }
+    }
+    if (j == j2) // Naked pair in the same column
+    {
+        for (int r = 0; r < 9; r++)
+        {
+            if ((r != i && r != i2) && (this->_squares[r][j].removeMarkup(pair.first) || this->_squares[r][j].removeMarkup(pair.second))) {
+                recheckGroups = true;
+            }
+        }
+    }
+    return recheckGroups;
+}
+
 bool Board::checkForUniqueRectangle()
 {
     bool recheckGroups = false;
@@ -256,6 +283,12 @@ bool Board::checkForUniqueRectangle()
                         setBoardDigit(r, c, this->_squares[r][c].checkSingleMarkup(), false);
                         recheckGroups = true;
                     }
+                }
+                if (c < 9 && checkForNakedPairs(i, j, i, c)) { // Naked pair in the same column
+                    recheckGroups = true;
+                }
+                if (r < 9 && checkForNakedPairs(i, j, r, j)) { // Naked pair in the same row
+                    recheckGroups = true;
                 }
             }
         }

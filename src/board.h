@@ -7,6 +7,12 @@
 #include <QThread>
 #include <chrono>
 
+enum NakedPairPlacement {
+    inSameRow,
+    inSameColumn,
+    inSameSquareGroup
+};
+
 class Board : public QThread
 {
     Q_OBJECT
@@ -30,6 +36,7 @@ private:
     // Sudoku strategies
     bool checkForUniqueRectangle();
     bool checkForOneMarkupAppearanceOfDigit(const int &squareGroupRow, const int &squareGroupCol);
+    bool checkForNakedPairs(const int &i, const int &j, const int &i2, const int &j2);
 
     int checkForFinalDigit(Square& square);
     void checkForMarkups(Square& square);
