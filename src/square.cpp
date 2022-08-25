@@ -63,12 +63,14 @@ bool Square::setMarkup(const int &digit)
     return false;
 }
 
-void Square::removeMarkup(const int &digit)
+bool Square::removeMarkup(const int &digit)
 {
     if (this->_markups[digit - 1]) {
         _markups[digit - 1] = false;
         _wasOnSquareBefore[digit - 1] = true;
+        return true;
     }
+    return false;
 }
 
 int Square::getRow() const
@@ -105,4 +107,24 @@ int Square::checkSingleMarkup() const
         }
     }
     return 0;
+}
+
+std::pair<int, int> Square::checkPairOfMarkups() const
+{
+    int amount = 0;
+    int d1 = 0, d2 = 0;
+
+    for (int i = 0; i < 9; i++)
+    {
+        if (this->_markups[i])
+        {
+            amount++;
+            d1 == 0 ? d1 = i + 1 : d2 = i + 1;
+        }
+    }
+    if (amount == 2)
+    {
+        return std::make_pair(d1, d2);
+    }
+    return std::make_pair(0, 0);
 }

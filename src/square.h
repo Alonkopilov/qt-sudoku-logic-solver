@@ -13,11 +13,12 @@ public:
     int getDigit() const;
     void setDigit(const int& digit, const bool& isPreset);
     bool setMarkup(const int& digit);
-    void removeMarkup(const int& digit);
+    bool removeMarkup(const int& digit);
     int getRow() const;
     int getCol() const;
     int amountOfMarkups() const;
     int checkSingleMarkup() const; // For convenience
+    std::pair<int, int> checkPairOfMarkups() const;
 
     friend bool operator== (const Square &s1, const Square &s2);
 
