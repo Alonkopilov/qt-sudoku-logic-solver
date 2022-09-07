@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include "board.h"
-#include "helper.h"
+#include "utils/helper.h"
 #include "editingtablelabel.h"
 #include <QMainWindow>
 #include <iostream>
@@ -42,6 +42,7 @@ public slots:
     void uiFocusNextEditingSquare(EditingTableLabel* editLabel);
     void uiRemoveFocusFromPrevEditingSquare(EditingTableLabel* editLabel);
     void uiWriteToLog(const QString& str, const bool& isErr);
+    void uiWriteToStrategiesLabel(const QString& str);
     void on_btnSolve_clicked();
     void on_btnLoadByCustomDiff_clicked();
 

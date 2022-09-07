@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1238</width>
-    <height>748</height>
+    <height>751</height>
    </rect>
   </property>
   <property name="palette">
@@ -1509,6 +1509,28 @@ color: rgb(250, 82, 82);</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
+   <widget class="QLabel" name="lStrategiesUsed">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>700</y>
+      <width>1121</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Montserrat</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
    <zorder>line_21</zorder>
    <zorder>label_2</zorder>
    <zorder>gridLayoutWidget</zorder>
@@ -1561,6 +1583,7 @@ color: rgb(250, 82, 82);</string>
    <zorder>btnLoadMedium</zorder>
    <zorder>line_22</zorder>
    <zorder>lLog</zorder>
+   <zorder>lStrategiesUsed</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

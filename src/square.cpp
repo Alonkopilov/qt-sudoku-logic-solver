@@ -119,12 +119,12 @@ std::pair<int, int> Square::checkPairOfMarkups() const
         if (this->_markups[i])
         {
             amount++;
-            d1 == 0 ? d1 = i + 1 : d2 = i + 1;
+            d1 == 0 ? d1 = i : d2 = i;
         }
     }
     if (amount == 2)
     {
-        return std::make_pair(d1, d2);
+        return std::make_pair(d1 + 1, d2 + 1);
     }
     return std::make_pair(0, 0);
 }

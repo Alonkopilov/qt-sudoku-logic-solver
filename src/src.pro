@@ -13,17 +13,22 @@ DEFINES += DEBUG
 SOURCES += \
     board.cpp \
     editingtablelabel.cpp \
-    helper.cpp \
+    utils/helper.cpp \
+    logic/backtracking.cpp \
+    logic/nakedtriples.cpp \
     main.cpp \
     mainwindow.cpp \
-    square.cpp
+    square.cpp \
+    utils/helper.cpp
 
 HEADERS += \
     board.h \
     editingtablelabel.h \
-    helper.h \
+    logic/backtracking.h \
+    logic/nakedtriples.h \
     mainwindow.h \
-    square.h
+    square.h \
+    utils/helper.h
 
 FORMS += \
     mainwindow.ui
