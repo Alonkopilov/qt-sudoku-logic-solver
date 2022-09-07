@@ -58,6 +58,11 @@ void Board::performInitialBoardCheck()
         this->useAdvancedRules = true;
         makeCheck(0, 0);
     }
+    if (!this->isBoardCompleted())
+    {
+        this->strategiesUsed.insert("Backtracking");
+        Backtracking::doBacktracking(*this);
+    }
 }
 
 
@@ -111,7 +116,9 @@ void Board::toggleSlowSolve(const bool &isSlow)
 
 
 void Board::run() {
-    QString solvingSummary = "";
+    QString solvingSummary = "", strategiesSummary = "";
+
+    this->strategiesUsed = std::set<std::string>();
     std::cout << "--Solving Started--" << std::endl;
 
     auto t1 = std::chrono::high_resolution_clock::now();
@@ -123,7 +130,9 @@ void Board::run() {
     if (this->isBoardCompleted())
     {
         solvingSummary = "Solving Completed, Took " + QString::number(ms_double.count() / 1000) + "s";
+        strategiesSummary = "Solved using: " + QString::fromStdString(Helper::set_to_string(this->strategiesUsed));
         emit this->uiWriteToLog(solvingSummary, false);
+        emit this->uiWriteToStrategiesLabel(strategiesSummary);
     }
     else
     {
@@ -148,6 +157,7 @@ int Board::performSquareGroupCheck(const int &squareGroupRow, const int &squareG
 
                 if (finalDigit > 0)
                 {
+                    this->strategiesUsed.insert("Simple check");
                     this->setBoardDigit(i, j, finalDigit, false);
                     recheckGroups = 1;
                 }
@@ -157,10 +167,16 @@ int Board::performSquareGroupCheck(const int &squareGroupRow, const int &squareG
 
     if (this->useAdvancedRules) {
         if (this->checkForOneMarkupAppearanceOfDigit(squareGroupRow, squareGroupCol)) {
+            this->strategiesUsed.insert("Hidden Singles");
             recheckGroups = 1;
         }
-        if (this->checkForUniqueRectangle()) //else if
+        if (this->checkForUniqueRectangle())
         {
+            recheckGroups = 1;
+        }
+        if (NakedTriples::checkForNakedTriples(*this))
+        {
+            this->strategiesUsed.insert("Naked Triples");
             recheckGroups = 1;
         }
     }
@@ -230,6 +246,8 @@ bool Board::checkForOneMarkupAppearanceOfDigit(const int &squareGroupRow, const 
 
 bool Board::checkForNakedPairs(const int &i, const int &j, const int &i2, const int &j2)
 {
+    this->strategiesUsed.insert("Naked Pairs");
+
     std::pair<int, int> pair = this->_squares[i][j].checkPairOfMarkups();
     bool recheckGroups = false;
 
@@ -237,9 +255,18 @@ bool Board::checkForNakedPairs(const int &i, const int &j, const int &i2, const 
     {
         for (int c = 0; c < 9; c++)
         {
-            if ((c != j && c != j2) && (this->_squares[i][c].removeMarkup(pair.first) || this->_squares[i][c].removeMarkup(pair.second)))
+            if (c != j && c != j2)
             {
-                recheckGroups = true;
+                if (this->_squares[i][c].digitMarkupExists(pair.first))
+                {
+                    this->setBoardMarkup(i, c, pair.first, true);
+                    recheckGroups = true;
+                }
+                if (this->_squares[i][c].digitMarkupExists(pair.second))
+                {
+                    this->setBoardMarkup(i, c, pair.second, true);
+                    recheckGroups = true;
+                }
             }
         }
     }
@@ -247,8 +274,17 @@ bool Board::checkForNakedPairs(const int &i, const int &j, const int &i2, const 
     {
         for (int r = 0; r < 9; r++)
         {
-            if ((r != i && r != i2) && (this->_squares[r][j].removeMarkup(pair.first) || this->_squares[r][j].removeMarkup(pair.second))) {
-                recheckGroups = true;
+            if (r != i && r != i2) {
+                if (this->_squares[r][j].digitMarkupExists(pair.first))
+                {
+                    this->setBoardMarkup(r, j, pair.first, true);
+                    recheckGroups = true;
+                }
+                if (this->_squares[r][j].digitMarkupExists(pair.second))
+                {
+                    this->setBoardMarkup(r, j, pair.second, true);
+                    recheckGroups = true;
+                }
             }
         }
     }
@@ -270,6 +306,7 @@ bool Board::checkForUniqueRectangle()
                 for (r = 0; r < 9 && !(this->_squares[r][j].amountOfMarkups() == 2 && this->_squares[r][j] == this->_squares[i][j] && i != r); r++);
                 if (c < 9 && r < 9 && this->_squares[r][c].getDigit() == 0) // Found rectangle
                 {
+                    this->strategiesUsed.insert("Unique Rectangle");
                     for (int d = 1; d < 10; d++)
                     {
                         if (this->_squares[i][j].digitMarkupExists(d) && this->_squares[r][c].digitMarkupExists(d))

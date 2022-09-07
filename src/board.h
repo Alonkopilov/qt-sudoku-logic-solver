@@ -2,6 +2,9 @@
 #define BOARD_H
 
 #include "square.h"
+#include "logic/nakedtriples.h"
+#include "logic/backtracking.h"
+#include "utils/helper.h"
 #include <QObject>
 #include <iostream>
 #include <QThread>
@@ -29,6 +32,7 @@ signals:
     void uiAddMarkup(const int& row, const int& col, const int& digit);
     void uiRemoveMarkup(const int& row, const int& col, const int& digit);
     void uiWriteToLog(const QString& str, const bool& isErr);
+    void uiWriteToStrategiesLabel(const QString& str);
 
 private:
     void performInitialBoardCheck();
@@ -37,6 +41,7 @@ private:
     bool checkForUniqueRectangle();
     bool checkForOneMarkupAppearanceOfDigit(const int &squareGroupRow, const int &squareGroupCol);
     bool checkForNakedPairs(const int &i, const int &j, const int &i2, const int &j2);
+    bool checkForNakedTriples();
 
     int checkForFinalDigit(Square& square);
     void checkForMarkups(Square& square);
@@ -51,6 +56,10 @@ private:
     Square _squares[9][9];
     bool isSlowSolver;
     bool useAdvancedRules;
+    std::set<std::string> strategiesUsed;
+
+friend class NakedTriples;
+friend class Backtracking;
 };
 
 #endif // BOARD_H
