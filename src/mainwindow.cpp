@@ -1,8 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-const int EASY_SUDOKU[81] = {0,0,4,1,0,3,8,0,0,7,0,8,0,0,0,6,0,1,0,3,0,0,8,0,0,4,0,3,9,0,0,5,0,0,6,2,0,0,5,0,3,0,9,0,0,2,8,0,0,9,0,0,7,3,0,1,0,0,6,0,0,8,0,8,0,3,0,0,0,1,0,4,0,0,7,9,0,8,3,0,0};
-const int MEDIUM_SUDOKU[81] = {0,0,0,3,0,7,4,0,0,9,0,0,0,0,4,0,0,8,3,7,0,0,0,0,0,6,0,8,2,0,9,0,0,6,0,0,0,0,1,2,0,0,9,0,4,0,4,0,0,3,8,0,5,0,2,0,8,6,9,0,7,0,0,0,9,0,0,0,0,0,0,0,7,5,0,0,0,0,0,0,6};
+const int EASY_SUDOKU[81] = {0,0,0,3,0,7,4,0,0,9,0,0,0,0,4,0,0,8,3,7,0,0,0,0,0,6,0,8,2,0,9,0,0,6,0,0,0,0,1,2,0,0,9,0,4,0,4,0,0,3,8,0,5,0,2,0,8,6,9,0,7,0,0,0,9,0,0,0,0,0,0,0,7,5,0,0,0,0,0,0,6};
+const int MEDIUM_SUDOKU[81] = {0,0,4,1,0,3,8,0,0,7,0,8,0,0,0,6,0,1,0,3,0,0,8,0,0,4,0,3,9,0,0,5,0,0,6,2,0,0,5,0,3,0,9,0,0,2,8,0,0,9,0,0,7,3,0,1,0,0,6,0,0,8,0,8,0,3,0,0,0,1,0,4,0,0,7,9,0,8,3,0,0};
 const int HARD_SUDOKU[81] = {8,6,0,0,0,3,0,0,0,0,0,0,5,0,9,1,0,2,0,0,0,0,4,0,0,0,0,2,0,6,0,0,0,3,0,5,0,0,0,0,0,0,7,0,0,0,4,0,0,0,0,0,0,1,4,3,2,0,0,0,0,0,7,0,1,0,6,0,8,0,0,0,0,0,0,0,0,2,0,0,0};
 
 MainWindow::MainWindow(QWidget *parent)
@@ -49,10 +49,10 @@ void MainWindow::uiGenerateBoard()
 
         for (int j = 0; j < 9; j++)
         {
-            QLabel* num = new QLabel("1");
+            QLabel* num = new QLabel(" ");
 
             num->setAlignment(Qt::AlignCenter);
-            num->setStyleSheet("QLabel {color: #939EAA;}");
+            num->setStyleSheet(PRESET_FINAL_DIGIT_STYLESHEET);
             layout->addWidget(num, j / 3, j % 3);
         }
 
@@ -87,7 +87,9 @@ void MainWindow::uiGenerateEditBoard()
 
 void MainWindow::setEditBoardVisibility(const bool &isVisible)
 {
-    QRegularExpression exp("line_2[3-9]|line_3[0-9]|line_4[0-2]"); // Range of line_23 to line_42 -> editboard line IDs
+    QString findEditingBoardLinesRegex = "line_2[3-9]|line_3[0-9]|line_4[0-2]"; // Range of line_23 to line_42 -> editboard line IDs
+    QRegularExpression exp(findEditingBoardLinesRegex);
+
     QList<QWidget*> editBoardLines = ui->centralwidget->findChildren<QWidget*>(exp);
     for (int i = 0; i < editBoardLines.size(); i++)
     {
@@ -97,8 +99,6 @@ void MainWindow::setEditBoardVisibility(const bool &isVisible)
     {
         ui->glEditBoard->itemAt(i)->widget()->setVisible(isVisible);
     }
-
-
 }
 
 void MainWindow::cleanLayout(QLayout *layout)
@@ -157,7 +157,7 @@ void MainWindow::uiSetBoardDigit(const int &row, const int &col, const int &digi
             QLabel* num = new QLabel(" ");
 
             num->setAlignment(Qt::AlignCenter);
-            num->setStyleSheet("QLabel {color: #939EAA;}");
+            num->setStyleSheet(MARKUP_LABEL_STYLESHEET);
             squareLayout->addWidget(num, j / 3, j % 3);
         }
 
@@ -224,18 +224,18 @@ void MainWindow::loadSudoku()
      if (chosenDifficulty == "btnLoadEasy")
      {
         this->sudokuBoard.initializeBoard(EASY_SUDOKU);
-        this->ui->btnSolve->setStyleSheet(":enabled { background-color: #2C2C2C; border: 1px solid #2188e1; color: rgb(255, 255, 255); font: 12pt \"Montserrat\"; } :disabled { background-color: rgba(255, 255, 255, 0); border: 1px solid #505050; color: #505050; font: 12pt \"Montserrat\"; }");
+        this->ui->btnSolve->setStyleSheet(EASY_SUDOKU_BTN_STYLESHEET);
      }
      if (chosenDifficulty == "btnLoadMedium")
      {
         this->sudokuBoard.initializeBoard(MEDIUM_SUDOKU);
-         this->ui->btnSolve->setStyleSheet(":enabled { background-color: #2C2C2C; border: 1px solid #fd7e14; color: rgb(255, 255, 255); font: 12pt \"Montserrat\"; } :disabled { background-color: rgba(255, 255, 255, 0); border: 1px solid #505050; color: #505050; font: 12pt \"Montserrat\"; }");
+         this->ui->btnSolve->setStyleSheet(MEDIUM_SUDOKU_BTN_STYLESHEET);
 
      }
      if (chosenDifficulty == "btnLoadHard")
      {
         this->sudokuBoard.initializeBoard(HARD_SUDOKU);
-         this->ui->btnSolve->setStyleSheet(":enabled { background-color: #2C2C2C; border: 1px solid #fa5252; color: rgb(255, 255, 255); font: 12pt \"Montserrat\"; } :disabled { background-color: rgba(255, 255, 255, 0); border: 1px solid #505050; color: #505050; font: 12pt \"Montserrat\"; }");
+         this->ui->btnSolve->setStyleSheet(HARD_SUDOKU_BTN_STYLESHEET);
 
      }
 

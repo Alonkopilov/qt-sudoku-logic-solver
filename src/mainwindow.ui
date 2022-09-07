@@ -893,7 +893,7 @@ font: 12pt &quot;Montserrat&quot;;
 
 
 
-Load Hard</string>
+Load Expert</string>
     </property>
     <property name="checkable">
      <bool>false</bool>
