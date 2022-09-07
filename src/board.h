@@ -19,6 +19,8 @@ enum NakedPairPlacement {
     inSameSquareGroup
 };
 
+#define N 9
+
 class Board : public QThread
 {
     Q_OBJECT
@@ -38,13 +40,7 @@ signals:
     void uiWriteToStrategiesLabel(const QString& str);
 
 private:
-    void performInitialBoardCheck();
-
-    // Sudoku strategies
-    bool checkForUniqueRectangle();
-    bool checkForOneMarkupAppearanceOfDigit(const int &squareGroupRow, const int &squareGroupCol);
-    bool checkForNakedPairs(const int &i, const int &j, const int &i2, const int &j2);
-    bool checkForNakedTriples();
+    void solve();
 
     int checkForFinalDigit(Square& square);
     void checkForMarkups(Square& square);

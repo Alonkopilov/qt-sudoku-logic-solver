@@ -3,6 +3,7 @@
 void Backtracking::doBacktracking(Board &board)
 {
     Backtracking::solve(board);
+    Backtracking::syncBoardWithGui(board);
 }
 
 bool Backtracking::solve(Board &board)
@@ -10,7 +11,7 @@ bool Backtracking::solve(Board &board)
         int row = 0;
         int col = 0;
         std::pair<int,int> square = Backtracking::findEmpty(board);
-        if (square.first == 0 && square.second == 0)
+        if (square.first == -1 && square.second == -1)
         {
             return true;
         }
@@ -24,10 +25,10 @@ bool Backtracking::solve(Board &board)
         {
             if (board.checkSafe(board._squares[row][col], num))
             {
-                board.setBoardDigit(row, col, num, false);
+                board.isSlowSolver ? board.setBoardDigit(row, col, num, false) : board._squares[row][col].setDigit(num, false); // Set digit
                 if (solve(board))
                     return true;
-                board._squares[row][col].setDigit(0, false); // Using setBoardDigit will notify and UI and will slow down the program considerably
+                board.isSlowSolver ? board.setBoardDigit(row, col, 0, false) : board._squares[row][col].setDigit(0, false); // Remove digit
             }
         }
         return false;
@@ -45,5 +46,16 @@ std::pair<int,int> Backtracking::findEmpty(Board &board)
             }
         }
     }
-    return std::make_pair(0,0);
+    return std::make_pair(-1,-1);
+}
+
+void Backtracking::syncBoardWithGui(Board &board)
+{
+    for (int i = 0; i < 9; i++)
+    {
+        for (int j = 0; j < 9; j++)
+        {
+            emit board.uiSetBoardDigit(i, j,  board._squares[i][j].getDigit(), board._squares[i][j].isPreset());
+        }
+    }
 }

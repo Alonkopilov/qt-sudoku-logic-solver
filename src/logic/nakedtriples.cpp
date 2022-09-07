@@ -9,6 +9,7 @@ bool NakedTriples::checkForNakedTriples(Board &board)
         // Start algorithm on each row and column
         if (NakedTriples::checkNakedTripleInUnit(board, i, Units::ROW) || NakedTriples::checkNakedTripleInUnit(board, i, Units::COL))
         {
+            board.strategiesUsed.insert("Naked Triples");
             recheckGroups = true;
         }
     }

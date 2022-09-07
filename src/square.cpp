@@ -83,6 +83,11 @@ int Square::getCol() const
     return _col;
 }
 
+bool Square::isPreset() const
+{
+    return _isPreset;
+}
+
 int Square::amountOfMarkups() const
 {
     int amount = 0;

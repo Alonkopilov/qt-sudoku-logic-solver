@@ -10,7 +10,11 @@ bool HiddenSingles::checkForHiddenSingles(Board &board)
         for (int groupCol = 0; groupCol < 3; groupCol++)
         {
             if (checkSquareGroup(board, groupRow, groupCol))
+            {
+                board.strategiesUsed.insert("Hidden Singles");
                 recheckGroups = true;
+            }
+
         }
     }
     return recheckGroups;

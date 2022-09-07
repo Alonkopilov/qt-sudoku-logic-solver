@@ -16,6 +16,7 @@ public:
     bool removeMarkup(const int& digit);
     int getRow() const;
     int getCol() const;
+    bool isPreset() const;
     int amountOfMarkups() const;
     int checkSingleMarkup() const; // For convenience
     std::pair<int, int> checkPairOfMarkups() const;

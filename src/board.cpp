@@ -6,9 +6,9 @@ Board::Board()
 
 bool Board::isBoardCompleted() const
 {
-    for (int i = 0; i < 9; i++)
+    for (int i = 0; i < N; i++)
     {
-        for (int j = 0; j < 9; j++)
+        for (int j = 0; j < N; j++)
         {
             if (this->_squares[i][j].getDigit() == 0)
             {
@@ -49,16 +49,20 @@ int Board::getBoardDigit(const int &row, const int &col)
     return this->_squares[row][col].getDigit();
 }
 
-void Board::performInitialBoardCheck()
+void Board::solve()
 {
+    // Simple check - check all possibilities for each square
     this->useAdvancedRules = false;
     makeCheck(0, 0);
 
+    // Check for advanced strategies
     if (!this->isBoardCompleted())
     {
         this->useAdvancedRules = true;
         makeCheck(0, 0);
     }
+
+    // The existing strategies were not enough, finish with backtracking
     if (!this->isBoardCompleted())
     {
         this->strategiesUsed.insert("Backtracking");
@@ -102,8 +106,8 @@ void Board::initializeBoard(const int arr[81])
 {
     for (int i = 0; i < 81; i++)
     {
-        int row = i / 9;
-        int col = i % 9;
+        int row = i / N;
+        int col = i % N;
         int digit = arr[i];
         this->_squares[row][col] = Square(row, col);
         this->setBoardDigit(row, col, digit, true);
@@ -123,7 +127,7 @@ void Board::run() {
     std::cout << "--Solving Started--" << std::endl;
 
     auto t1 = std::chrono::high_resolution_clock::now();
-    this->performInitialBoardCheck();
+    this->solve();
     auto t2 = std::chrono::high_resolution_clock::now();
 
     std::chrono::duration<double, std::milli> ms_double = t2 - t1;
@@ -168,7 +172,6 @@ int Board::performSquareGroupCheck(const int &squareGroupRow, const int &squareG
 
     if (this->useAdvancedRules) {
         if (HiddenSingles::checkForHiddenSingles(*this)) {
-            this->strategiesUsed.insert("Hidden Singles");
             recheckGroups = 1;
         }
         if (UniqueRectangle::checkForUniqueRectangle(*this))
@@ -177,7 +180,6 @@ int Board::performSquareGroupCheck(const int &squareGroupRow, const int &squareG
         }
         if (NakedTriples::checkForNakedTriples(*this))
         {
-            this->strategiesUsed.insert("Naked Triples");
             recheckGroups = 1;
         }
     }
@@ -191,7 +193,7 @@ int Board::checkForFinalDigit(Square &square)
     int markupsFound = 0;
     int markup = 0;
 
-    for (int i = 1; i < 10; i++)
+    for (int i = 1; i < N + 1; i++)
     {
         if (square.digitMarkupExists(i)) {
             markupsFound++;
@@ -206,7 +208,7 @@ int Board::checkForFinalDigit(Square &square)
 
 void Board::checkForMarkups(Square &square)
 {
-    for (int i = 1; i < 10; i++)
+    for (int i = 1; i < N + 1; i++)
     {
         if (square.getDigit() == 0 && checkSafe(square, i))
         {
@@ -224,7 +226,7 @@ void Board::checkForMarkups(Square &square)
 
 bool Board::checkSafe(const Square &square, const int &digitToCheck) const
 {
-    for (int i = 0; i < 9; i++) //Check row
+    for (int i = 0; i < N; i++) //Check row
     {
         if (_squares[square.getRow()][i].getDigit() == digitToCheck)
         {
@@ -232,7 +234,7 @@ bool Board::checkSafe(const Square &square, const int &digitToCheck) const
         }
     }
 
-    for (int i = 0; i < 9; i++) //Check column
+    for (int i = 0; i < N; i++) //Check column
     {
         if (_squares[i][square.getCol()].getDigit() == digitToCheck)
         {

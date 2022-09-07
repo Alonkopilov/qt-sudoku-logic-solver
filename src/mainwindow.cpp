@@ -22,6 +22,8 @@ MainWindow::MainWindow(QWidget *parent)
     QObject::connect(this->ui->btnLoadEasy, &QAbstractButton::clicked, this, &MainWindow::loadSudoku);
     QObject::connect(this->ui->btnLoadMedium, &QAbstractButton::clicked, this, &MainWindow::loadSudoku);
     QObject::connect(this->ui->btnLoadHard, &QAbstractButton::clicked, this, &MainWindow::loadSudoku);
+    QObject::connect(this->ui->btnSolve, &QAbstractButton::clicked, this, &MainWindow::solveOrLoadBoard);
+    QObject::connect(this->ui->btnLoadByCustomDiff, &QAbstractButton::clicked, this, &MainWindow::loadByCustomOrByDiff);
 
     uiGenerateBoard();
     uiGenerateEditBoard();
@@ -229,14 +231,13 @@ void MainWindow::loadSudoku()
      if (chosenDifficulty == "btnLoadMedium")
      {
         this->sudokuBoard.initializeBoard(MEDIUM_SUDOKU);
-         this->ui->btnSolve->setStyleSheet(MEDIUM_SUDOKU_BTN_STYLESHEET);
+        this->ui->btnSolve->setStyleSheet(MEDIUM_SUDOKU_BTN_STYLESHEET);
 
      }
      if (chosenDifficulty == "btnLoadHard")
      {
         this->sudokuBoard.initializeBoard(HARD_SUDOKU);
-         this->ui->btnSolve->setStyleSheet(HARD_SUDOKU_BTN_STYLESHEET);
-
+        this->ui->btnSolve->setStyleSheet(HARD_SUDOKU_BTN_STYLESHEET);
      }
 
      ui->btnLoadEasy->setDisabled(chosenDifficulty == "btnLoadEasy");
@@ -254,13 +255,14 @@ void MainWindow::enableDifficultyButtons()
     ui->btnLoadHard->setDisabled(false);
 }
 
-void MainWindow::on_btnSolve_clicked()
+void MainWindow::solveOrLoadBoard()
 {
     if (this->ui->btnSolve->text() == "LOAD TO MAIN BOARD")
     {
         transferFromEditingToMainBoard();
     }
 
+    this->ui->lStrategiesUsed->setText("Solved using: ");
     this->sudokuBoard.toggleSlowSolve(this->ui->cbSlowSolve->isChecked());
     this->sudokuBoard.start();
     ui->btnSolve->setDisabled(true);
@@ -287,7 +289,7 @@ void MainWindow::showCustomLoad()
     setEditBoardVisibility(true);
 }
 
-void MainWindow::on_btnLoadByCustomDiff_clicked()
+void MainWindow::loadByCustomOrByDiff()
 {
     if (this->lastHighlighted != nullptr)
         this->lastHighlighted->uiUnhighlightLabel();

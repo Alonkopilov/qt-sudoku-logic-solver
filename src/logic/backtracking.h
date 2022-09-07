@@ -13,6 +13,7 @@ public:
 private:
     static bool solve(Board &board);
     static std::pair<int,int> findEmpty(Board &board);
+    static void syncBoardWithGui(Board &board);
 };
 
 #endif // BACKTRACKING_H
