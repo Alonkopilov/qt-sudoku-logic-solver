@@ -8,11 +8,14 @@ CONFIG += c++17
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-DEFINES += DEBUG
+#DEFINES += DEBUG
 
 SOURCES += \
     board.cpp \
     editingtablelabel.cpp \
+    logic/hiddensingles.cpp \
+    logic/nakedpairs.cpp \
+    logic/uniquerectangle.cpp \
     utils/helper.cpp \
     logic/backtracking.cpp \
     logic/nakedtriples.cpp \
@@ -25,7 +28,10 @@ HEADERS += \
     board.h \
     editingtablelabel.h \
     logic/backtracking.h \
+    logic/hiddensingles.h \
+    logic/nakedpairs.h \
     logic/nakedtriples.h \
+    logic/uniquerectangle.h \
     mainwindow.h \
     square.h \
     utils/helper.h

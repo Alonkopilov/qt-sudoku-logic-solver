@@ -24,6 +24,7 @@ void Board::setBoardDigit(const int &row, const int &col, const int &digit, cons
 {
     this->_squares[row][col].setDigit(digit, isPreset); // Set in memory
     emit this->uiSetBoardDigit(row, col, digit, isPreset); // Set in GUI
+    this->wait();
 }
 
 void Board::setBoardMarkup(const int &row, const int &col, const int &digit, const bool &remove)
@@ -166,11 +167,11 @@ int Board::performSquareGroupCheck(const int &squareGroupRow, const int &squareG
     }
 
     if (this->useAdvancedRules) {
-        if (this->checkForOneMarkupAppearanceOfDigit(squareGroupRow, squareGroupCol)) {
+        if (HiddenSingles::checkForHiddenSingles(*this)) {
             this->strategiesUsed.insert("Hidden Singles");
             recheckGroups = 1;
         }
-        if (this->checkForUniqueRectangle())
+        if (UniqueRectangle::checkForUniqueRectangle(*this))
         {
             recheckGroups = 1;
         }
@@ -182,154 +183,6 @@ int Board::performSquareGroupCheck(const int &squareGroupRow, const int &squareG
     }
 
 
-    return recheckGroups;
-}
-
-bool Board::checkForOneMarkupAppearanceOfDigit(const int &squareGroupRow, const int &squareGroupCol)
-{
-    int markupAmount = 0;
-    int markupAmountOnSquareGroup = 0;
-    int markupPosition = 0;
-
-    // Go through all digits
-    for (int d = 1; d < 10; d++)
-    {
-        markupAmountOnSquareGroup = 0;
-        for (int i = squareGroupRow * 3; i < squareGroupRow * 3 + 3; i++)
-        {
-            for (int j = squareGroupCol * 3; j < squareGroupCol * 3 + 3; j++)
-            {
-                if (getBoardDigit(i, j) == 0 && this->_squares[i][j].digitMarkupExists(d))
-                {
-                    markupAmountOnSquareGroup++;
-                    markupPosition = i * 10 + j;
-
-                    markupAmount = 0;
-                    for (int m = 0; m < 9; m++) //Check row
-                    {
-                        if (getBoardDigit(i, m) == 0 && _squares[i][m].digitMarkupExists(d))
-                        {
-                            markupAmount++;
-                        }
-                    }
-                    if (markupAmount == 1 && checkSafe(this->_squares[i][j], d))
-                    {
-                        setBoardDigit(i, j, d, false);
-                        return true;
-                    }
-
-                    markupAmount = 0;
-                    for (int m = 0; m < 9; m++) //Check column
-                    {
-                        if (getBoardDigit(m, j) == 0 && _squares[m][j].digitMarkupExists(d))
-                        {
-                             markupAmount++;
-                        }
-                    }
-                    if (markupAmount == 1 && checkSafe(this->_squares[i][j], d))
-                    {
-                        setBoardDigit(i, j, d, false);
-                        return true;
-                    }
-
-                }
-            }
-        }
-        if (markupAmountOnSquareGroup == 1 && checkSafe(this->_squares[markupPosition / 10][markupPosition % 10], d))
-        {
-            setBoardDigit(markupPosition / 10, markupPosition % 10, d, false);
-            return true;
-        }
-    }
-    return false;
-}
-
-bool Board::checkForNakedPairs(const int &i, const int &j, const int &i2, const int &j2)
-{
-    this->strategiesUsed.insert("Naked Pairs");
-
-    std::pair<int, int> pair = this->_squares[i][j].checkPairOfMarkups();
-    bool recheckGroups = false;
-
-    if (i == i2) // Naked pair in the same row
-    {
-        for (int c = 0; c < 9; c++)
-        {
-            if (c != j && c != j2)
-            {
-                if (this->_squares[i][c].digitMarkupExists(pair.first))
-                {
-                    this->setBoardMarkup(i, c, pair.first, true);
-                    recheckGroups = true;
-                }
-                if (this->_squares[i][c].digitMarkupExists(pair.second))
-                {
-                    this->setBoardMarkup(i, c, pair.second, true);
-                    recheckGroups = true;
-                }
-            }
-        }
-    }
-    if (j == j2) // Naked pair in the same column
-    {
-        for (int r = 0; r < 9; r++)
-        {
-            if (r != i && r != i2) {
-                if (this->_squares[r][j].digitMarkupExists(pair.first))
-                {
-                    this->setBoardMarkup(r, j, pair.first, true);
-                    recheckGroups = true;
-                }
-                if (this->_squares[r][j].digitMarkupExists(pair.second))
-                {
-                    this->setBoardMarkup(r, j, pair.second, true);
-                    recheckGroups = true;
-                }
-            }
-        }
-    }
-    return recheckGroups;
-}
-
-bool Board::checkForUniqueRectangle()
-{
-    bool recheckGroups = false;
-    for (int i = 0; i < 9; i++)
-    {
-        for (int j = 0; j < 9; j++)
-        {
-            // Start rec check
-            if (this->_squares[i][j].getDigit() == 0 && this->_squares[i][j].amountOfMarkups() == 2)
-            {
-                int r = 0, c = 0;
-                for (c = 0; c < 9 && !(this->_squares[i][c].amountOfMarkups() == 2 && this->_squares[i][c] == this->_squares[i][j] && j != c); c++);
-                for (r = 0; r < 9 && !(this->_squares[r][j].amountOfMarkups() == 2 && this->_squares[r][j] == this->_squares[i][j] && i != r); r++);
-                if (c < 9 && r < 9 && this->_squares[r][c].getDigit() == 0) // Found rectangle
-                {
-                    this->strategiesUsed.insert("Unique Rectangle");
-                    for (int d = 1; d < 10; d++)
-                    {
-                        if (this->_squares[i][j].digitMarkupExists(d) && this->_squares[r][c].digitMarkupExists(d))
-                        {
-                            this->setBoardMarkup(r, c, d, true);
-                            recheckGroups = true;
-                        }
-                    }
-                    if (this->_squares[r][c].amountOfMarkups() == 1)
-                    {
-                        setBoardDigit(r, c, this->_squares[r][c].checkSingleMarkup(), false);
-                        recheckGroups = true;
-                    }
-                }
-                if (c < 9 && checkForNakedPairs(i, j, i, c)) { // Naked pair in the same column
-                    recheckGroups = true;
-                }
-                if (r < 9 && checkForNakedPairs(i, j, r, j)) { // Naked pair in the same row
-                    recheckGroups = true;
-                }
-            }
-        }
-    }
     return recheckGroups;
 }
 

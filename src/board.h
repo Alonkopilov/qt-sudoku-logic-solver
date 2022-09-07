@@ -4,6 +4,9 @@
 #include "square.h"
 #include "logic/nakedtriples.h"
 #include "logic/backtracking.h"
+#include "logic/uniquerectangle.h"
+#include "logic/nakedpairs.h"
+#include "logic/hiddensingles.h"
 #include "utils/helper.h"
 #include <QObject>
 #include <iostream>
@@ -58,8 +61,11 @@ private:
     bool useAdvancedRules;
     std::set<std::string> strategiesUsed;
 
+friend class HiddenSingles;
+friend class NakedPairs;
 friend class NakedTriples;
 friend class Backtracking;
+friend class UniqueRectangle;
 };
 
 #endif // BOARD_H

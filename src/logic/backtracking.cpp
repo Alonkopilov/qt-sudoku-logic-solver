@@ -27,7 +27,7 @@ bool Backtracking::solve(Board &board)
                 board.setBoardDigit(row, col, num, false);
                 if (solve(board))
                     return true;
-                board._squares[row][col].setDigit(0, false);
+                board._squares[row][col].setDigit(0, false); // Using setBoardDigit will notify and UI and will slow down the program considerably
             }
         }
         return false;
