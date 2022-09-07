@@ -2,7 +2,10 @@
 
 # Qt Sudoku Logic Solver
 
-A **non-guessing logic based** Sudoku solver written in Qt C++
+A **logic based** Sudoku solver written in Qt C++
+
+Updating new strategies every once in a while. the program will use backtracking
+in case the current existing strategies are not enough
 
 ## Features
 - Load a custom Sudoku comfortably using only your keyboard.
