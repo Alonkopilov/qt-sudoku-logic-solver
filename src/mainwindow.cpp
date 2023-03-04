@@ -164,8 +164,6 @@ void MainWindow::uiSetBoardDigit(const int &row, const int &col, const int &digi
         }
 
     }
-
-
 }
 
 void MainWindow::uiAddMarkup(const int &row, const int &col, const int &digit)
@@ -211,6 +209,7 @@ void MainWindow::uiWriteToLog(const QString& str, const bool& isErr)
 {
     isErr ? this->ui->lLog->setStyleSheet(LOG_ERR_STYLESHEET) : this->ui->lLog->setStyleSheet(LOG_MSG_STYLESHEET);
     this->ui->lLog->setText(str);
+    this->sudokuBoard.toggleSlowSolve(false);
 }
 
 void MainWindow::uiWriteToStrategiesLabel(const QString &str)
@@ -249,7 +248,6 @@ void MainWindow::loadSudoku()
 
 void MainWindow::enableDifficultyButtons()
 {
-    std::cout << "--Solving Completed--" << std::endl;  
     ui->btnLoadEasy->setDisabled(false);
     ui->btnLoadMedium->setDisabled(false);
     ui->btnLoadHard->setDisabled(false);
