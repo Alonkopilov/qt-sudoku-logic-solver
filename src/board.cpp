@@ -2,6 +2,7 @@
 
 Board::Board()
 {
+    this->isSlowSolver = false;
 }
 
 bool Board::isBoardCompleted() const
@@ -130,20 +131,21 @@ void Board::run() {
     this->solve();
     auto t2 = std::chrono::high_resolution_clock::now();
 
+    std::cout << "--Solving Completed--" << std::endl;
     std::chrono::duration<double, std::milli> ms_double = t2 - t1;
 
     if (this->isBoardCompleted())
     {
         solvingSummary = "Solving Completed, Took " + QString::number(ms_double.count() / 1000) + "s";
         strategiesSummary = "Solved using: " + QString::fromStdString(Helper::set_to_string(this->strategiesUsed));
-        emit this->uiWriteToLog(solvingSummary, false);
         emit this->uiWriteToStrategiesLabel(strategiesSummary);
     }
     else
     {
         solvingSummary = "Invalid sudoku, has more than one solution";
-        emit this->uiWriteToLog(solvingSummary, true);
     }
+    emit this->uiWriteToLog(solvingSummary, false);
+
 }
 
 int Board::performSquareGroupCheck(const int &squareGroupRow, const int &squareGroupCol)
