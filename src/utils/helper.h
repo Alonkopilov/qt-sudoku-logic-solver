@@ -11,6 +11,11 @@
 class Helper
 {
 public:
+    /// @brief Provides a convenient string formatting for debug printing.
+    /// @tparam ...Args Argument template to provide injection of several data types such as integer, floats, strings...
+    /// @param format The string to inject arguments into.
+    /// @param ...args The arguments to inject into the string.
+    /// @return The final formatted string.
     template<typename ... Args>
     static std::string string_format( const std::string& format, Args ... args )    // Provided from code snippet licensed under CC0 1.0
     {
@@ -22,6 +27,9 @@ public:
         return std::string( buf.get(), buf.get() + size - 1 ); // We don't want the '\0' inside
     }
 
+    /// @brief Converts a given set to a string delimited with commas.
+    /// @param s Set to convert.
+    /// @return The final string.
     static std::string set_to_string(const std::set<std::string> s)
     {
         if (s.empty()) {return "";}
