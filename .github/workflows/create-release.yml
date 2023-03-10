@@ -8,13 +8,16 @@ on:
 
 jobs:
   deploy-win64:
-    runs-on: ubuntu-20.04 
+    runs-on: ubuntu-20.04
     container:
       image: alonkop/qtlogicsolver:win64
+      credentials:
+         username: ${{ secrets.DOCKERHUB_USERNAME }}
+         password: ${{ secrets.DOCKERHUB_TOKEN }}
     steps:
     - uses: actions/checkout@v3
     - name: check
-      run: ls -a
+      run: ls -a /
       
   deploy-linux:
     runs-on: ubuntu-20.04 
