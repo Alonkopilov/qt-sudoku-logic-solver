@@ -1,0 +1,33 @@
+name: C/C++ Qt CI
+
+on:
+  push:
+    branches: [ "test_workflows" ]
+  pull_request:
+    branches: [ "test_workflows" ]
+
+jobs:
+  deploy-win64:
+    runs-on: ubuntu-20.04 
+    container:
+      image: alonkop/qtlogicsolver:win64
+    steps:
+    - uses: actions/checkout@v3
+    - name: check
+      run: ls -a
+      
+  deploy-linux:
+    runs-on: ubuntu-20.04 
+    container:
+      image: alonkop/qtlogicsolver:linux
+    steps:
+    - uses: actions/checkout@v3
+    - name: configure
+      run: ./configure
+    - name: make
+      run: make
+    - name: make check
+      run: make check
+    - name: make distcheck
+      run: make distcheck
+
