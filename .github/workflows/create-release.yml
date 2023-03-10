@@ -25,6 +25,10 @@ jobs:
        qmake
        make -j$(nproc)
        ls -a release
+    - uses: actions/upload-artifact@v3
+      with:
+        name: qt-logic-solver-Windows
+        path: /__w/qt-sudoku-logic-solver/qt-sudoku-logic-solver/src/release/src.exe
       
   deploy-linux:
     runs-on: ubuntu-20.04
@@ -43,4 +47,8 @@ jobs:
        cd /__w/qt-sudoku-logic-solver/qt-sudoku-logic-solver/src
        qmake
        make -j$(nproc)
-       ls -a release
+       ls
+    - uses: actions/upload-artifact@v3
+      with:
+        name: qt-logic-solver-Linux
+        path: /__w/qt-sudoku-logic-solver/qt-sudoku-logic-solver/src/src
