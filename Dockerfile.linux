@@ -1,0 +1,40 @@
+FROM ubuntu:22.04
+
+RUN \
+    export DEBIAN_FRONTEND=noninteractive && \
+    apt -y update && \
+    apt -y upgrade && \
+    apt -y install \
+        build-essential cmake freeglut3-dev gdb git iputils-ping libgl1-mesa-dev \
+        libglu1-mesa-dev libjpeg-dev libmysqlclient-dev libnss3-dev libopus-dev \
+        libpng-dev libsqlite3-dev libssl-dev libx11-xcb-dev libxcb-xinerama0-dev \
+        libxcb-xkb-dev libxcb1-dev libxcursor-dev libxi-dev libxml2-dev libxrender-dev \
+        libxslt-dev lzip mesa-common-dev nano perl python-is-python3 valgrind wget zlib1g-dev \
+        libxcb* libxcb-* libx11* '^libxcb.*-dev' libxkbcommon-dev libxkbcommon-x11-dev libgl-dev \
+        qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools && \
+    apt -y autoremove && \
+    apt -y autoclean && \
+    apt -y clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    exit 0
+
+RUN \
+    set -eux && \
+    cd /opt && \
+    wget -q https://download.qt.io/official_releases/qt/6.3/6.3.1/single/qt-everywhere-src-6.3.1.tar.xz && \
+    tar xf qt-everywhere-src-6.3.1.tar.xz && \
+    rm qt-everywhere-src-6.3.1.tar.xz && \
+    exit 0
+
+RUN \
+    cd /opt/qt-everywhere-src-6.3.1 && \
+    ./configure -opensource -confirm-license -release -static -nomake tests -nomake examples -skip qtwebengine \
+    -qt-zlib -qt-libjpeg -qt-libpng -xcb -qt-freetype -qt-pcre -qt-harfbuzz && \
+    make -j $(($(nproc)+4)) && \
+    make install && \
+    cd /opt && \
+    rm -rf qt-everywhere-src-6.3.1.tar.xz && \
+    exit 0
+
+ENV PATH="${PATH}:/usr/local/Qt-5.15.3/bin"
+ENTRYPOINT ["/bin/bash"]
