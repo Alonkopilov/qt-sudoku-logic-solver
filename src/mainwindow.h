@@ -9,6 +9,7 @@
 #include <QLabel>
 #include <QLine>
 #include <QRegularExpression>
+#include <QFontDatabase>
 
 #ifdef DEBUG
 #define DEBUG_PRNT(str) do { std::cout << "[debug] " + str << std::endl; } while( false )
