@@ -5,13 +5,8 @@ on:
     branches: [ "test_workflows" ]
   pull_request:
     branches: [ "test_workflows" ]
-
-env:
-  RELEASE_VERSION: ${GITHUB_REF#refs/*/}
   
 jobs:
-
-
   deploy-win64:
     runs-on: ubuntu-20.04
     container:
@@ -21,19 +16,17 @@ jobs:
          password: ${{ secrets.DOCKERHUB_TOKEN }}
     steps:
     - uses: actions/checkout@v3
-    - name: Print release version
-      run: echo $RELEASE_VERSION
     - name: compile
       run: |
        echo "Compiling project..."
        cd /__w/qt-sudoku-logic-solver/qt-sudoku-logic-solver/src
        qmake
        make -j$(nproc)
-       mv release/src.exe release/qt-sudoku-logic-solver.exe
-    - uses: actions/upload-artifact@v3
+       mv release/src.exe /qt-sudoku-logic-solver-${{github.ref_name}}.exe
+    - name: Release
+      uses: softprops/action-gh-release@v1
       with:
-        name: qt-logic-solver-Windows
-        path: /__w/qt-sudoku-logic-solver/qt-sudoku-logic-solver/src/release/src.exe
+        files: /qt-sudoku-logic-solver-${{github.ref_name}}.exe
       
   deploy-linux:
     runs-on: ubuntu-20.04
@@ -50,8 +43,8 @@ jobs:
        cd /__w/qt-sudoku-logic-solver/qt-sudoku-logic-solver/src
        qmake
        make -j$(nproc)
-       mv src qt-sudoku-logic-solver
-    - uses: actions/upload-artifact@v3
+       mv src /qt-sudoku-logic-solver-${{github.ref_name}}
+    - name: Release
+      uses: softprops/action-gh-release@v1
       with:
-        name: qt-logic-solver-Linux
-        path: /__w/qt-sudoku-logic-solver/qt-sudoku-logic-solver/src/src
+        files: /qt-sudoku-logic-solver-${{github.ref_name}}
