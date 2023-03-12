@@ -5,4 +5,12 @@
         <file>icons/iconmedium.png</file>
         <file>icons/icondisabled.png</file>
     </qresource>
+    <qresource prefix="/fonts">
+        <file>fonts/Montserrat-Regular.ttf</file>
+        <file>fonts/Montserrat-Bold.ttf</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>fonts/Montserrat-Bold.ttf</file>
+        <file>fonts/Montserrat-Regular.ttf</file>
+    </qresource>
 </RCC>
