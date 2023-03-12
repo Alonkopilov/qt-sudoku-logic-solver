@@ -7,6 +7,9 @@ on:
     branches: [ "test_workflows" ]
 
 jobs:
+  env:
+    RELEASE_VERSION: ${GITHUB_REF#refs/*/}
+
   deploy-win64:
     runs-on: ubuntu-20.04
     container:
@@ -16,21 +19,37 @@ jobs:
          password: ${{ secrets.DOCKERHUB_TOKEN }}
     steps:
     - uses: actions/checkout@v3
-    - name: check
-      run: ls -a /
+    - name: Print release version
+      run: echo $RELEASE_VERSION
+    - name: compile
+      run: |
+       echo "Compiling project..."
+       cd /__w/qt-sudoku-logic-solver/qt-sudoku-logic-solver/src
+       qmake
+       make -j$(nproc)
+       mv release/src.exe release/qt-sudoku-logic-solver.exe
+    - uses: actions/upload-artifact@v3
+      with:
+        name: qt-logic-solver-Windows
+        path: /__w/qt-sudoku-logic-solver/qt-sudoku-logic-solver/src/release/src.exe
       
   deploy-linux:
-    runs-on: ubuntu-20.04 
+    runs-on: ubuntu-20.04
     container:
       image: alonkop/qtlogicsolver:linux
+      credentials:
+         username: ${{ secrets.DOCKERHUB_USERNAME }}
+         password: ${{ secrets.DOCKERHUB_TOKEN }}
     steps:
     - uses: actions/checkout@v3
-    - name: configure
-      run: ./configure
-    - name: make
-      run: make
-    - name: make check
-      run: make check
-    - name: make distcheck
-      run: make distcheck
-
+    - name: compile
+      run: |
+       echo "Compiling project..."
+       cd /__w/qt-sudoku-logic-solver/qt-sudoku-logic-solver/src
+       qmake
+       make -j$(nproc)
+       mv src qt-sudoku-logic-solver
+    - uses: actions/upload-artifact@v3
+      with:
+        name: qt-logic-solver-Linux
+        path: /__w/qt-sudoku-logic-solver/qt-sudoku-logic-solver/src/src
