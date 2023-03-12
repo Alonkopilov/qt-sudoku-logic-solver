@@ -15,7 +15,7 @@ jobs:
          password: ${{ secrets.DOCKERHUB_TOKEN }}
     steps:
     - name: Checkout code
-    - uses: actions/checkout@v3
+      uses: actions/checkout@v3
     - name: Compile project for Windows
       run: |
        echo "Compiling project..."
@@ -39,7 +39,7 @@ jobs:
          password: ${{ secrets.DOCKERHUB_TOKEN }}
     steps:
     - name: Checkout code
-    - uses: actions/checkout@v3
+      uses: actions/checkout@v3
     - name: Compile project for Linux
       run: |
        echo "Compiling project..."
