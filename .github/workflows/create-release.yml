@@ -2,9 +2,8 @@ name: C/C++ Qt CI
 
 on:
   push:
-    branches: [ "test_workflows" ]
-  pull_request:
-    branches: [ "test_workflows" ]
+    tags:
+      - "v*.*.*"
   
 jobs:
   deploy-win64:
