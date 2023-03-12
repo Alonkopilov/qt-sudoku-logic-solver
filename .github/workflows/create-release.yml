@@ -14,17 +14,20 @@ jobs:
          username: ${{ secrets.DOCKERHUB_USERNAME }}
          password: ${{ secrets.DOCKERHUB_TOKEN }}
     steps:
+    - name: Checkout code
     - uses: actions/checkout@v3
-    - name: compile
+    - name: Compile project for Windows
       run: |
        echo "Compiling project..."
        cd /__w/qt-sudoku-logic-solver/qt-sudoku-logic-solver/src
        qmake
        make -j$(nproc)
        mv release/src.exe /qt-sudoku-logic-solver-${{github.ref_name}}.exe
-    - name: Release
+    - name: Publish release
       uses: softprops/action-gh-release@v1
       with:
+        name: Qt Sudoku Logic Solver ${{github.ref_name}}
+        body_path: ./.github/CHANGELOG.md
         files: /qt-sudoku-logic-solver-${{github.ref_name}}.exe
       
   deploy-linux:
@@ -35,15 +38,18 @@ jobs:
          username: ${{ secrets.DOCKERHUB_USERNAME }}
          password: ${{ secrets.DOCKERHUB_TOKEN }}
     steps:
+    - name: Checkout code
     - uses: actions/checkout@v3
-    - name: compile
+    - name: Compile project for Linux
       run: |
        echo "Compiling project..."
        cd /__w/qt-sudoku-logic-solver/qt-sudoku-logic-solver/src
        qmake
        make -j$(nproc)
        mv src /qt-sudoku-logic-solver-${{github.ref_name}}
-    - name: Release
+    - name: Publish release
       uses: softprops/action-gh-release@v1
       with:
+        name: Qt Sudoku Logic Solver ${{github.ref_name}}
+        body_path: ./.github/CHANGELOG.md
         files: /qt-sudoku-logic-solver-${{github.ref_name}}
